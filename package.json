@@ -1,0 +1,19 @@
+{
+  "name": "whitecollar-network",
+  "version": "1.0.0",
+  "description": "A professional social network",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/attainu/eagle-symmetrical-goggles.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/attainu/eagle-symmetrical-goggles/issues"
+  },
+  "homepage": "https://github.com/attainu/eagle-symmetrical-goggles#readme"
+}
