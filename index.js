@@ -13,8 +13,9 @@ const hbs = exphbs.create({
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
+app.use(express.static('public'))
 
-app.get('/', function(req,res) {
+app.get('/profile', function(req,res) {
 	res.render('home');
 })
 
