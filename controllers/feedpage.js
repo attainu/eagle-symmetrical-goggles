@@ -23,7 +23,7 @@ FeedController.postStatus = function (request, response) {
 FeedController.postFiles = function (request, response) {
     dataArr = request.files['imageFile'][0];
     //console.log(dataArr);
-    console.log("imageFiles:",dataArr.path);
+    //console.log("imageFiles:",dataArr.path);
 
     return response.render('feedPage',{
         data: dataArr,

@@ -55,7 +55,7 @@
                                 <i class="fa fa-camera fa-2x" aria-hidden="true"></i>
                             </label>
                             <input style="display: none;" type="file" name="imageFile" id="image-input"
-                                accept="image/jpeg, image/jpg, image/png, image/*"/>
+                                accept="image/jpeg, image/jpg, image/png, image/*" />
 
                             {{!--displaying video icon--}}
                             <label for="video-input" class="mx-4">
@@ -98,8 +98,7 @@
                     <p id="user-post">
                         {{post}}
                     </p>
-
-                    <img src="/{{data.path}}" alt="" />
+                    <img src="/{{data.path}}" alt=""/>
                 </div>
                 <div class="border round">
                     <span class="mx-4"><i class="far fa-thumbs-up">20</i></span>
@@ -109,7 +108,7 @@
                 <div class="border round">
                     {{!-- like button --}}
                     <button type="submit">
-                        <span class="mx-4"><i class="far fa-thumbs-up" id="like-button"></i></span>
+                        <span class="mx-4"><i class="far fa-thumbs-up" id="likeButton"></i></span>
                     </button>
 
                     {{!-- comment-button --}}
