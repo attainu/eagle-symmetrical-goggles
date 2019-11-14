@@ -16,7 +16,7 @@ app.set('view engine', '.hbs');
 app.use(express.static('public'))
 
 app.get('/profile', function(req,res) {
-	res.render('home');
+	res.render('profile');
 })
 
 // Start the app on pre defined port number
