@@ -1,5 +1,6 @@
 <div class="container">
     <div class="row mt-5">
+        {{!--profile section in feedpost starts here--}}
         <div class="col-md-3 border rounded mr-2">
             <div>
                 <p>profile section</p>
@@ -23,63 +24,82 @@
                     <li>friends suggestion 2</li>
                     <hr>
                     <li>friends suggestion 3</li>
-                    <hr>
-                    <li>friends suggestion 4</li>
                 </ul>
             </div>
         </div>
+        {{!--profile section ends here--}}
 
+        {{!--post section in feed post starts here--}}
         <div class="col-md-5 mx-2">
             <div class="row border rounded">
-                <form action="/myPost" method="post" enctype="multipart/form-data" class="form-group">
-                    <div>
-                        <textarea title="text" name="users-post-messages" class="form-control" id="post-message" cols="30" rows=""
-                            placeholder="Write your thoughts here...">
+                <div class="">
+                    <form action="/myPost" method="post" enctype="multipart/form-data" class="form-group">
+                        <div class="">
+                            <textarea title="text" name="user" class="form-control" id="post-message" cols="30" rows=""
+                                placeholder="Write your thoughts here...">
                         </textarea>
-                        <button class="btn btn-success btn-sm form-control" id="post-button">Post</button>
-                        <hr>
-                        <!--<span class="mx-4"><input type="file" name="avatar" class="form-control" id=""></span>-->
-                    </div>
 
-                    <div>
-                        <button class="btn">
-                            <span class="mx-4">
+                            <button class="btn btn-success btn-sm form-control" type="submit"
+                                id="post-button">Post</button>
+                            <!--<span class="mx-4"><input type="file" name="avatar" class="form-control" id=""></span>-->
+                        </div>
+                    </form>
+                </div>
+
+                {{!--inserting image/video/file through icons--}}
+                <div class="row mx-4 mt-2">
+                    <div class="mx-5">
+                        <form action="/uploadFiles" method="post" enctype="multipart/form-data" class="form-group">
+                            {{!--displaying image icon--}}
+                            <label for="image-input" class="mx-4">
                                 <i class="fa fa-camera fa-2x" aria-hidden="true"></i>
-                            </span>
-                        </button>
-                        
-                        <button class="btn">
-                            <span class="mx-4"><i class="fas fa-photo-video fa-2x"></i></span>
-                        </button>
-                        <button class="btn">
-                            <span class="mx-4"><i class="far fa-file fa-2x"></i></span>
-                        </button>
+                            </label>
+                            <input style="display: none;" type="file" name="imageFile" id="image-input"
+                                accept="image/jpeg, image/jpg, image/png, image/*"/>
+
+                            {{!--displaying video icon--}}
+                            <label for="video-input" class="mx-4">
+                                <i class="fas fa-photo-video fa-2x"></i>
+                            </label>
+                            <input style="display: none;" type="file" name="videoFile" id="video-input"
+                                accept="video/mp4, video/x-m4v, video/*" />
+
+                            {{!--displaying file icon--}}
+                            <label for="file-input" class="mx-4">
+                                <i class="far fa-file fa-2x"></i>
+                            </label>
+                            <input style="display: none;" type="file" name="pdfFile" id="file-input"
+                                accept="application/pdf" />
+
+                            {{!-- <input type="file" name="picture" class="form-control" id=""> --}}
+
+                            <button style="float: right;" type="submit" class="btn btn-dark btn-sm mx-2">Post</button>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
+            {{!--post section in feed post ends here--}}
+
             <!--post-->
             <div class="border rounded mt-5">
                 <div class="border round">
-                    <img src="#" alt="img"><br>
+
+                    <img src="#" alt=""><br>
                     <span style="float: right;">
                         <button class="btn btn-primary btn-sm">Follow</button>
                     </span>
+
                     <div>
-                        <span>profile name</span>
+                        <span>User Name</span>
                         <span>{{feedtime}}</span>
                     </div>
                 </div>
                 <div class="border round">
                     <p id="user-post">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum.....
+                        {{post}}
                     </p>
-                    <img src="#" alt="img" id="image-post">
+
+                    <img src="/{{data.path}}" alt="" />
                 </div>
                 <div class="border round">
                     <span class="mx-4"><i class="far fa-thumbs-up">20</i></span>
@@ -87,9 +107,20 @@
                 </div>
 
                 <div class="border round">
-                    <span class="mx-4"><i class="far fa-thumbs-up" id="like-button"></i></span>
-                    <span class="mx-4"><i class="far fa-comments" i="comment-button"></i></span>
-                    <span class="mx-4"><i class="fas fa-share" id="share-button" ></i></span>
+                    {{!-- like button --}}
+                    <button type="submit">
+                        <span class="mx-4"><i class="far fa-thumbs-up" id="like-button"></i></span>
+                    </button>
+
+                    {{!-- comment-button --}}
+                    <button type="submit">
+                        <span class="mx-4"><i class="far fa-comments" i="comment-button"></i></span>
+                    </button>
+
+                    {{!-- share button --}}
+                    <button type="submit">
+                        <span class="mx-4"><i class="fas fa-share" id="share-button"></i></span>
+                    </button>
                 </div>
             </div>
         </div>
