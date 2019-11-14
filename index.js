@@ -5,6 +5,7 @@ const PORT = 9090;
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017';
 const authRoute = require('./controllers/auth.js');
+const searchRoute = require('./controllers/search.js');
 var session = require('express-session')
 
 //middlewares
@@ -57,6 +58,7 @@ app.get('/about', function(req,res) {
 app.use(authRoute.checkIfLoggedIn);
 app.post('/login', authRoute.login);
 app.post('/logout', authRoute.logout);
+app.get('/search/:term', searchRoute.search);
 
 
 

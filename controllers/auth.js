@@ -16,7 +16,7 @@ AuthController.login = function(req, res) {
 			);
         }
         req.session.loggedIn = true;
-        req.session.user = data.username;
+        req.session.user = data.email;
         if(!req.session.loggedIn) {
             return res.status(500).json(
 				{
@@ -52,8 +52,6 @@ AuthController.logout = function(req, res) {
 
 AuthController.checkIfLoggedIn = function(req, res, next) {
     var url = req.originalUrl;
-    console.log(url);
-    console.log(req.session);
     var userSession = req.session.user;
     
     Model.checkIfLoggedIn(url, userSession, function(error, data) {
