@@ -13,10 +13,14 @@ const hbs = exphbs.create({
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 app.get('/profile', function(req,res) {
-	res.render('profile');
+	res.render('profile', {title: "Profile"});
+})
+
+app.get('/about', function(req,res) {
+	res.render('about', {title: 'About Us'});
 })
 
 // Start the app on pre defined port number
