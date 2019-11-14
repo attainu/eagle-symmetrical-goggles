@@ -18,6 +18,9 @@ app.use(express.static('public'));
 app.get('/profile', function(req,res) {
 	res.render('profile', {title: "Profile"});
 })
+app.get('/signup', function(req,res) {
+	res.render('Signup', {title: "Signup"});
+})
 
 app.get('/about', function(req,res) {
 	res.render('about', {title: 'About Us'});
