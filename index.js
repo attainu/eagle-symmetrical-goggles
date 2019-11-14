@@ -10,14 +10,13 @@ var session = require('express-session')
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(authRoute.checkIfLoggedIn);
 app.use(express.static('public'))
 
 //session config
 app.use(session({
 	name: 'Somename',
 	secret: 'adfasdfas',
-	resave : false,
+	resave : true,
 	saveUninitialized: true,
 	cookie: {
 		httpOnly: true,
@@ -52,8 +51,11 @@ app.get('/profile', function(req,res) {
 app.get('/about', function(req,res) {
 	res.render('about', {title: 'About Us'});
 });
+app.use(authRoute.checkIfLoggedIn);
 app.post('/login', authRoute.login);
 app.post('/logout', authRoute.logout);
+
+
 
 // Start the app on pre defined port number
 app.listen(PORT, function() {
