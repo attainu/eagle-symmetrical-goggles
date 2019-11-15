@@ -58,8 +58,9 @@ app.get('/about', function(req,res) {
 app.use(authRoute.checkIfLoggedIn);
 app.post('/login', authRoute.login);
 app.post('/logout', authRoute.logout);
-app.get('/search/:term', searchRoute.search);
-
+app.get('/search/posts/:term', searchRoute.search);
+app.get('/search/jobs/:term', searchRoute.jobSearch);
+app.get('/search/users/:term', searchRoute.userSearch);
 
 
 // Start the app on pre defined port number

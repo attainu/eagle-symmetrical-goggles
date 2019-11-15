@@ -135,3 +135,77 @@ posts:[ {
     "comment_count":"0",
 }
 ]
+
+-----------------------------------------Job data
+[
+    {
+    "post_id":"01",
+    "userName":"alpha",
+    "title":"Wanted MERN developers",
+    "description":" Full Stack developer ",
+    "domain": "MERN",
+    "company_name":"alpha tech",
+    "address":
+    [{
+        "city":"Mumbai",
+        "state":"Maharashtra",
+        "country":"India"
+    }]
+    },
+    {
+    "post_id":"02",
+    "userName":"beta",
+    "title":"MEAN",
+    "description":"Wanted MEAN developers ",
+    "domain": "MEAN",
+    "company_name":"beta tech",
+    "address":
+    [{
+        "city":"Delhi",
+        "state":"Delii",
+        "country":"India"
+    }]
+    },
+    {
+    "post_id":"03",
+    "userName":"alpha",
+    "title":"MEAN",
+    "description":"FUllstack ",
+    "domain": "MEAN",
+    "company_name":"alpha tech",
+    "address":
+    [{
+        "city":"",
+        "state":"",
+        "country":""
+    }]
+    },
+    {
+    "post_id":"",
+    "user_id":"",
+    "title":"",
+    "description":" ",
+    "domain": " ",
+    "company_name":"",
+    "address":
+    [{
+        "city":"",
+        "state":"",
+        "country":""
+    }]
+    },
+    {
+    "post_id":"",
+    "user_id":"",
+    "title":"",
+    "description":" ",
+    "domain": " ",
+    "company_name":"",
+    "address":
+    [{
+        "city":"",
+        "state":"",
+        "country":""
+    }]
+    },
+]
