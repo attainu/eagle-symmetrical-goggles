@@ -45,79 +45,31 @@
         </div>
     </nav>
 
-<!-- Main -->
-<div class="row mt-3">
-     <div class="col-md-1"></div>
-    <div class="col-md-3" style="background-color: #9ad4d6 ;">
-        <ul class="nav ml-5 mt-5">
-          <li class="nav-item ml-5">
-                <img src="./../images/Penguins.jpg" class="rounded" alt="Image" width="100px" height="100px"> <br>
-                <h4> Name</h4>
-                <h6><a href="#">Email</a></h6>
-                <h6>Summary</h6>
-          </li>
-        </ul>
+<main role="main" class="container">
+  <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
+    <div class="lh-100">
+      <h6 class="mb-0 text-white lh-100">Results for {{term}}</h6>
     </div>
-    <div class="col-md-6">
-        <main role="main" class="" style="background-color: #f2fdff ;">
-        <h1 class="h2">Dashboard</h1><br>
-        <div class="row text-center">
-            <div class="col-md-3 ml-2 card bg-light">
-                <div class="card-body">
-
-                <h6>Followers</h6><br>
-                24
-                </div>
-            </div>
-            <div class="col-md-3 ml-2 card bg-light">
-                <div class="card-body">
-
-                <h6>Following</h6><br>
-                24
-                </div>
-            </div>
+  </div>
+  {{#each data}}
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <div class="media text-muted pt-3">
+      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <strong class="text-gray-dark">{{title}}</strong>
+          <a href="#">Follow</a>
         </div>
-        <hr>
-        <h4>Skills</h4>
-        <div class="row">
-            <div class="col-md-4">
-                <ul>
-                    <li>JavaScript</li>
-                    <li>Node.js</li>
-                    <li>Express js</li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <ul>
-                    <li>React</li>
-                    <li>Mongo</li>
-                    <li>HTML/CSS</li>
-                </ul>
-            </div>
-        
-        </div>
-    
-        <hr>
-        <div class="row">
-            <div class="col-md-4">
-
-            <h4 style="float: left;">Work Experience</h4><br>
-            <ul>
-            <li>Student | Full Stack Web Development</li>
-            <i>AttainU</i>
-            </ul>
-            </div>
-            <div class="col-md-4 ml-5">    
-            <h4>Projects</h4>
-            <ul>
-            <li>White Collar | A Professional social Network</li>
-            <i>Project for Shallow Dive @ AttainU</i>
-            </ul>
-            </div>
-        </div>
-        </main>
+        <span class="d-block">{{domain}}</span>
+        <span class="d-block">{{description}}</span>
+      </div>
     </div>
-    <div class="col-md-1"></div>
-</div>
-
-<link rel="stylesheet" href="css/profile.css">
+  </div>
+  {{/each}}
+</main> 
+{{!-- {{#each data}}
+    <p>{{username}}</p>
+    <p>{{title}}</p>
+    <p>{{description}}</p>
+    <p>{{company_name}}</p>
+{{/each}} --}}

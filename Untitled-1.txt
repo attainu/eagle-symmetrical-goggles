@@ -156,8 +156,8 @@ posts:[ {
     "post_id":"02",
     "userName":"beta",
     "title":"MEAN",
-    "description":"Wanted MEAN developers ",
-    "domain": "MEAN",
+    "description":"Wanted MERN developers ",
+    "domain": "MERN",
     "company_name":"beta tech",
     "address":
     [{
@@ -169,9 +169,9 @@ posts:[ {
     {
     "post_id":"03",
     "userName":"alpha",
-    "title":"MEAN",
+    "title":"MERN",
     "description":"FUllstack ",
-    "domain": "MEAN",
+    "domain": "MERN",
     "company_name":"alpha tech",
     "address":
     [{

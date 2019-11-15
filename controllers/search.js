@@ -35,13 +35,16 @@ SearchController.jobSearch = function(req, res) {
 				}
 			);
         }
-        return res.status(200).json(
+        /* return res.status(200).json(
 			{
 				status: true,
 				data
             }
-        )
-
+        ) */
+            return res.render('search', {
+                term,
+                data
+            })
     })
 }
 SearchController.userSearch = function(req, res) {
@@ -54,7 +57,7 @@ SearchController.userSearch = function(req, res) {
 					status: false,
 					error
 				}
-			);
+            );    
         }
         return res.status(200).json(
 			{

@@ -55,7 +55,7 @@ app.get('/signup', function(req,res) {
 app.get('/about', function(req,res) {
 	res.render('about', {title: 'About Us'});
 });
-app.use(authRoute.checkIfLoggedIn);
+//app.use(authRoute.checkIfLoggedIn);
 app.post('/login', authRoute.login);
 app.post('/logout', authRoute.logout);
 app.get('/search/posts/:term', searchRoute.search);
