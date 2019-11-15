@@ -13,10 +13,13 @@ const hbs = exphbs.create({
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
+var UpdateRoute = require('./controllers/settings.js');
 
 app.get('/', function(req,res) {
 	res.render('home');
 })
+
+app.put('/settings', UpdateRoute.edit);
 
 // Start the app on pre defined port number
 app.listen(PORT, function() {
