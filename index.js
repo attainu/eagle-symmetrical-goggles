@@ -7,7 +7,7 @@ var url = 'mongodb://localhost:27017';
 const authRoute = require('./controllers/auth.js');
 const searchRoute = require('./controllers/search.js');
 var UpdateRoute = require('./controllers/settings.js');
-var session = require('express-session')
+var session = require('express-session');
 
 //middlewares
 app.use(express.json());
@@ -50,16 +50,19 @@ app.get('/profile', function(req,res) {
 	res.render('profile', {title: "Profile"});
 })
 
-app.put('/settings', UpdateRoute.edit);
+app.get('/settings', function(req,res){
+	res.render('settings',{title:"Settings"});
+})
+app.post('/settings', UpdateRoute.edit);
+
 app.get('/about', function(req,res) {
 	res.render('about', {title: 'About Us'});
 });
+
 app.use(authRoute.checkIfLoggedIn);
 app.post('/login', authRoute.login);
 app.post('/logout', authRoute.logout);
 app.get('/search/:term', searchRoute.search);
-
-
 
 // Start the app on pre defined port number
 app.listen(PORT, function() {

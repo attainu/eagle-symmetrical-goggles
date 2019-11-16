@@ -6,7 +6,7 @@ UpdateProfile.edit = function(userDetails, password, callback) {
 		return callback("Password required");
 	}
 
-	if(!userDetails.password===password) {
+	if(!userDetails.password!==password) {
 		return callback("Error! Password not matched");
 	}
 
@@ -14,7 +14,7 @@ UpdateProfile.edit = function(userDetails, password, callback) {
 	setTimeout(function() {
 		return callback(null, {
             status: true,
-            message: "Success! Book has been stored"});		
+            message: "Success! updated"});		
 	}, 500);
 }
 
