@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
 const PORT = 9090;
-var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017';
+const db = require('./models/index.js');
+const controllers = require('./controllers/index.js');
+
 const authRoute = require('./controllers/auth.js');
 const searchRoute = require('./controllers/search.js');
 var session = require('express-session')
@@ -35,14 +36,6 @@ const hbs = exphbs.create({
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
-//mongodb setup 
-MongoClient.connect(url, function(error, client) {
-	if(error){
-		throw error;
-	}
-	app.locals.db = client.db('whitecollardb');
-	console.log("Connection successfull");
-});
 
 //routes
 app.get('/profile', function(req,res) {
@@ -56,6 +49,7 @@ app.get('/about', function(req,res) {
 	res.render('about', {title: 'About Us'});
 });
 //app.use(authRoute.checkIfLoggedIn);
+app.post('/signup/create', controllers.SignupController.create);
 app.post('/login', authRoute.login);
 app.post('/logout', authRoute.logout);
 app.get('/search/posts/:term', searchRoute.search);
@@ -64,8 +58,15 @@ app.get('/search/users/:term', searchRoute.userSearch);
 
 
 // Start the app on pre defined port number
-app.listen(PORT, function() {
-	console.log("Application has started and running on port: ", PORT);
-}).on('error', function(error) {
-	console.log("Unable to start app. Error >>>>", error);
-});
+db.connect()
+.then(function() {
+	app.listen(PORT, function() {
+		console.log("Application has started and running on port: ", PORT);
+	}).on('error', function(error) {
+		console.log("Unable to start app. Error >>>>", error);
+	});
+})
+.catch(function(error){
+	console.log("Failed to setup connecton with database.", error);
+})
+
