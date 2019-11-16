@@ -25,7 +25,7 @@ appModel.post = function(data,db,callback){
     })
   }
 
-
+}
 
 
 module.exports = appModel;
