@@ -1,5 +1,5 @@
 const SearchController =  {};
-const Model = require('./../models/Search.js');
+const Model = require('./../models/index');
 
 SearchController.search = function(req, res) {
     var term = req.params.term;
