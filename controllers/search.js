@@ -1,10 +1,26 @@
 const SearchController =  {};
-const Model = require('./../models/index');
+const jobController = require('./../models/Jobs.js');
 
 SearchController.search = function(req, res) {
     var term = req.params.term;
-    var db = req.app.locals.db;
-    Model.search(term, db, function(error, data) {
+    jobController.find({"domain": term}, function(error, result) {
+        if(error){
+            res.send({
+                status: false,
+                message: error
+            })
+        }
+        res.send({
+            status:true,
+            data: result
+        })
+    })
+}    
+    
+    
+    
+/*     
+    (term, db, function(error, data) {
         if(error) {
 			return res.status(500).json(
 				{
@@ -41,7 +57,7 @@ SearchController.jobSearch = function(req, res) {
 				data
             }
         ) */
-            return res.render('search', {
+           /* return res.render('search', {
                 term,
                 data
             })
@@ -67,6 +83,6 @@ SearchController.userSearch = function(req, res) {
         )
 
     })
-}
+} */
 
 module.exports = SearchController;

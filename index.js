@@ -52,9 +52,9 @@ app.get('/about', function(req,res) {
 app.post('/signup/create', controllers.SignupController.create);
 app.post('/login', authRoute.login);
 app.post('/logout', authRoute.logout);
-app.get('/search/posts/:term', searchRoute.search);
-app.get('/search/jobs/:term', searchRoute.jobSearch);
-app.get('/search/users/:term', searchRoute.userSearch);
+//app.get('/search/posts/:term', searchRoute.search);
+app.get('/search/jobs/:term', controllers.SearchController.search);
+//app.get('/search/users/:term', searchRoute.userSearch);
 
 
 // Start the app on pre defined port number

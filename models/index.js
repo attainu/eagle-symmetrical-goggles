@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Auth = require('./Auth');
-const Search = require('./Search');
+//const Search = require('./Search');
 const Signup = require('./Signup');
 
 function connect() {
@@ -13,7 +13,7 @@ function connect() {
 module.exports = {
     models : {
         Auth : Auth,
-        Search: Search,
+        //Search: Search,
         Signup: Signup
     },
     connect: connect
