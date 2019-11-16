@@ -3,6 +3,12 @@ const SignupController = {};
 
 SignupController.create = function(req, res) {
 	var data = req.body;
+	if(data.password !== data.confirmPassword){
+		return res.send({
+			status: false,
+			message: "password and confirmPassword needs to be same"
+		})
+	}
 	Signup.create({
 		username: data.username,
 		firstname: data.firstname,

@@ -16,15 +16,15 @@
         <div class="container">
             <h3 class="Heading">Sign Up Form </h3>
             <!-- <hr> -->
-            <form>
+            <form action='/signup/create' method="POST">
                 <div class="form-row ">
                     <div class="form-group col">
                         <!-- <label for="first-name">First Name</label> -->
-                        <input type="text" class="form-control" id="firstname" placeholder="Enter First Name">
+                        <input type="text" name='firstname' class="form-control" id="firstname" placeholder="Enter First Name">
                     </div>
                     <div class="form-group col">
                         <!-- <label for="exampleInputPassword1">Last Name</label> -->
-                        <input type="text" class="form-control" id="last-name" placeholder="Enter Last Name">
+                        <input type="text" class="form-control" name='lastname' id="last-name" placeholder="Enter Last Name">
                     </div>
                 </div>
 
@@ -40,23 +40,23 @@
                         <div class="form-group col">
                             <!-- <label for="InputEmail">Email Mobile Number</label> -->
                             <input type="text" class="form-control" id="Mobile-number"
-                                placeholder="Enter Mobile Number">
+                                placeholder="Enter Mobile Number" name='mobileNumber'>
                         </div>
                         <div class="form-group col">
                             <!-- <label for="InputEmail">Email address</label> -->
                             <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
-                                placeholder="Enter email">
+                                placeholder="Enter email" name='email'>
                         </div>
                     </div><br>
                     <div class="form-row">
                         <div class="form-group col">
                             <!-- <label for="password">Password</label> -->
-                            <input type="Password" class="form-control" id="password" placeholder="Enter Password">
+                            <input type="Password" class="form-control" id="password" placeholder="Enter Password" name='password'>
                         </div>
                         <div class="form-group col">
                             <!-- <label for="confirm-password">Confirm Password</label> -->
                             <input type="Password" class="form-control" id="confirm-password"
-                                placeholder="Confirm Password">
+                                placeholder="Confirm Password" name='confirmPassword'>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-secondary" id="Agreeandjoin">Agree and Join</button>
