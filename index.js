@@ -6,7 +6,6 @@ const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
 
 const authRoute = require('./controllers/auth.js');
-const searchRoute = require('./controllers/search.js');
 var session = require('express-session')
 
 //middlewares
@@ -52,9 +51,9 @@ app.get('/about', function(req,res) {
 app.post('/signup/create', controllers.SignupController.create);
 app.post('/login', authRoute.login);
 app.post('/logout', authRoute.logout);
-//app.get('/search/posts/:term', searchRoute.search);
+app.get('/search/posts/:term', controllers.SearchController.postSearch);
 app.get('/search/jobs/:term', controllers.SearchController.search);
-//app.get('/search/users/:term', searchRoute.userSearch);
+
 
 
 // Start the app on pre defined port number

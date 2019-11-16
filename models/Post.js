@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const postSchema = new Schema({
+const postSchema = new mongoose.Schema({
 	body  : {type:String,trim:true},
 	image : {type:String,trim:true},
 	likes : Array,
