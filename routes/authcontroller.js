@@ -1,5 +1,5 @@
 
-const dbcontroller = require('./../controller/db_cntrl');
+const dbcontroller = require('./../controllers/db_cntrl');
 const authRoute = {};
 
 authRoute.sendlogin = function(req, res){
@@ -13,7 +13,6 @@ authRoute.sendlogin = function(req, res){
 
 authRoute.dologin = function(req, res){
     res.send(req.body);
-    
 }
 
 module.exports = authRoute;

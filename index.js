@@ -31,7 +31,9 @@ const authRoute = require('./routes/authcontroller');
 //app.get('/', routeController.homepage); //this is the homepage of user
 app.get('/login', authRoute.sendlogin);
 //app.get('/signup', authRoute.sendsignup);
-//app.get('/profile', routeController.sendprofile);
+app.get('/profile', routeController.sendprofile);
+app.get('/aboutus', routeController.sendaboutus);
+//app.get('/searchquery', routeController.sendsearch);
 
 app.post('/login', authRoute.dologin);
 //app.post('/signup', authRoute.dosignup);

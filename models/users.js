@@ -7,7 +7,7 @@ var userSchema = new mongoose.Schema({
     password: {
         type: String
     },
-    createdat: Date
+    createdate: Date
 });
 
 var user = mongoose.model('myuser', userSchema);
