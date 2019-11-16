@@ -1,72 +1,37 @@
 const SearchController =  {};
-const Model = require('./../models/Search.js');
+const jobController = require('./../models/Jobs.js');
+const postController = require('./../models/Post.js');
 
 SearchController.search = function(req, res) {
     var term = req.params.term;
-    var db = req.app.locals.db;
-    Model.search(term, db, function(error, data) {
-        if(error) {
-			return res.status(500).json(
-				{
-					status: false,
-					error
-				}
-			);
-        }
-        return res.status(200).json(
-			{
-				status: true,
-				data
-            }
-        )
-
-    })
-}
-
-SearchController.jobSearch = function(req, res) {
-    var term = req.params.term;
-    var db = req.app.locals.db;
-    Model.jobSearch(term, db, function(error, data) {
-        if(error) {
-			return res.status(500).json(
-				{
-					status: false,
-					error
-				}
-			);
-        }
-        /* return res.status(200).json(
-			{
-				status: true,
-				data
-            }
-        ) */
-            return res.render('search', {
-                term,
-                data
+    jobController.find({"domain": term}, function(error, data) {
+        if(error){
+            res.send({
+                status: false,
+                message: error
             })
-    })
-}
-SearchController.userSearch = function(req, res) {
-    var term = req.params.term;
-    var db = req.app.locals.db;
-    Model.userSearch(term, db, function(error, data) {
-        if(error) {
-			return res.status(500).json(
-				{
-					status: false,
-					error
-				}
-            );    
         }
-        return res.status(200).json(
-			{
-				status: true,
-				data
-            }
-        )
-
+        res.render('search',{
+            term,
+            data
+        })
     })
-}
+}    
+SearchController.postSearch = function(req, res) {
+    var term = req.params.term;
+    postController.find({"firstname": term}, function(error, data) {
+        if(error){
+            res.send({
+                status: false,
+                message: error
+            })
+        }
+        console.log(data);
+        res.render('search',{
+            term,
+            data
+        })
+    })
+}    
 
 module.exports = SearchController;
