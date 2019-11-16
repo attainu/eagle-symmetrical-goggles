@@ -1,26 +1,44 @@
 const express = require('express');
+const hbs = require('express-handlebars');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const PORT = 6969;
+
 const app = express();
-const exphbs = require('express-handlebars');
-const PORT = 9090;
 
-app.use(express.json());
-app.use(express.urlencoded())
+app.engine('handlebars', hbs());
+app.set('view engine', 'handlebars');
+app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended : true }));
+app.use(session({
+    saveUninitialized:true,
+    resave:false,
+    secret:'io2jej9ji9ruri09i3k2po2k394kyE%YE%TYF&^F^E&*U',
+    cookie:{
+        httpOnly: true,
+        maxAge: 30000, //30sec for testing purposes
+        path: '/',
+        sameSite: true,
+        secure: false
+    }
+}));
 
-// Configure Handlebars
-const hbs = exphbs.create({
-	extname: '.hbs'
-});
-app.engine('.hbs', hbs.engine);
-app.set('view engine', '.hbs');
+const routeController = require('./routes/routecontroller');
+const authRoute = require('./routes/authcontroller');
 
+// user will routed to either loginpage or homepage depending upon his session 
+//app.get('/', routeController.homepage); //this is the homepage of user
+app.get('/login', authRoute.sendlogin);
+//app.get('/signup', authRoute.sendsignup);
+//app.get('/profile', routeController.sendprofile);
 
-app.get('/', function(req,res) {
-	res.render('home');
-})
+app.post('/login', authRoute.dologin);
+//app.post('/signup', authRoute.dosignup);
+//app.post('/profile', routeController.updateprofile);
 
-// Start the app on pre defined port number
-app.listen(PORT, function() {
-	console.log("Application has started and running on port: ", PORT);
-}).on('error', function(error) {
-	console.log("Unable to start app. Error >>>>", error);
+app.listen(PORT, function(){
+    console.log('shuru hogya');
+}).on('error', function(error){
+    console.log(error);
 });
