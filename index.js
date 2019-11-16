@@ -30,13 +30,13 @@ const authRoute = require('./routes/authcontroller');
 // user will routed to either loginpage or homepage depending upon his session 
 //app.get('/', routeController.homepage); //this is the homepage of user
 app.get('/login', authRoute.sendlogin);
-//app.get('/signup', authRoute.sendsignup);
+app.get('/signup', authRoute.sendsignup);
 app.get('/profile', routeController.sendprofile);
 app.get('/aboutus', routeController.sendaboutus);
 //app.get('/searchquery', routeController.sendsearch);
 
 app.post('/login', authRoute.dologin);
-//app.post('/signup', authRoute.dosignup);
+//app.post('/signup', routeController.dosignup);
 //app.post('/profile', routeController.updateprofile);
 
 app.listen(PORT, function(){

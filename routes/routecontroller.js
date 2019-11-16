@@ -1,5 +1,7 @@
 
+
 const pageFetcher = require('./../controllers/nav_cntrl');
+const dbController = require('./../controllers/db_cntrl');
 const routeController = {};
 
 routeController.homepage = function(req, res){
@@ -35,10 +37,11 @@ routeController.sendsearch = function(req, res){
         if(error){
             return res.status(400).send(error);
         }
-        return res.status(200).render('about', {
+        return res.status(200).render('searcher', {
             title: data.title,
             css_file_ref: data.css
         })
     })
 }
+
 module.exports = routeController;

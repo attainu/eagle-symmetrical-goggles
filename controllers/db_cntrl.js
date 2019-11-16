@@ -1,7 +1,8 @@
 
 DatabaseController = {}
 
-var loggedin = false;
+var loggedin = false; //logic yet to add
+var usernameexists = false; //logic remaining with mongoose
 
 DatabaseController.login = function(cb){
     if(loggedin){
@@ -9,6 +10,15 @@ DatabaseController.login = function(cb){
     }
     else{
         return cb(null, 'please login');
+    }
+}
+
+DatabaseController.adduser = function(res, cb){
+    if(usernameexists){
+        return cb("username already exists");
+    }
+    else{
+        return cb(null, 'Cool');
     }
 }
 
