@@ -20,6 +20,11 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.17.0",
+<<<<<<< HEAD
     "mongodb": "^3.3.4"
+=======
+    "mongodb": "^3.3.4",
+    "mongoose": "^5.7.11"
+>>>>>>> e491225149924a7f78ed1a41d7d509d5e8c27934
   }
 }
