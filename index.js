@@ -1,29 +1,35 @@
 const express = require('express');
 const app = express();
-const exphbs = require('express-handlebars');
 const PORT = 9090;
 const moment = require('moment');
 
-//importing multer
-const multer = require('multer');
+//importing body parser
+var bodyParser = require('body-parser');
 
-//middleware
-app.use(express.json());
-app.use(express.urlencoded());
-app.use('/public', express.static('public'));
+// create application/json parser
+var jsonParser = bodyParser.json();
+
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+
+app.use('/public',express.static('public'));
+
+//importing express handlebars
+const exphbs = require('express-handlebars');
 
 // Configure Handlebars
-const hbs = exphbs.create({
-	extname: '.hbs'
-});
+const hbs = exphbs.create({ extname: '.hbs' });
 
 //setting view engine
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
 
+//importing multer
+const multer = require('multer');
 
-//setting multer
+//setting multer to disk storage
 const fileStorage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		//console.log("file",file);
@@ -46,15 +52,61 @@ app.get('/', function (req, res) {
 	res.render('home');
 });
 
-app.get('/feed', feedController.getFeed);
+/*
+//mongodb setup starts here
+const MongoClient = require('mongodb').MongoClient;
+var db = null;
+var url = 'mongodb://localhost:27017';
+MongoClient.connect( url,{ useUnifiedTopology: true },function ( error, client ) {
+    if(error){
+        return console.log(error);
+    }
+    //console.log(client);
+    db = client.db('mydb');
+    db.createCollection("LikeEvent", function(err, res) {
+        if (err){
+            throw err;
+        }
+    });
+});
+// add a document to the DB collection recording the click event
+app.post('/clicked', function (req, res){
+    var click = {
+        clickTime: new Date()
+    };
+    console.log(click);
+  
+    db.collection('likes').save(click, (err, result) => {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("click added to db");
+        res.sendStatus(201);
+    });
+});
+// getting the click data from the database
+app.get('/clicks', (req, res) => {
+    db.collection('likes').find().toArray( (err, result) => {
+
+        if (err) {
+            return console.log(err);
+        }
+        res.send(result);
+    });
+});
+//mongodb setup ends here
+*/
+
+app.get('/feed',feedController.getFeed);
 
 var cpUpload = upload.fields([
 	{ name: 'imageFile', maxCount: 1 },
 	{ name: 'videoFile', maxCount: 1 },
 	{ name: 'pdfFile', maxCount: 1 }
 ]);
+app.post('/feed',urlencodedParser, feedController.addPost);
 
-app.post('/myPost', upload.none(), feedController.postStatus);
+//app.post('/myPost', upload.none(), feedController.postStatus);
 app.post('/uploadFiles', cpUpload, feedController.postFiles);
 
 // Start the app on pre defined port number
