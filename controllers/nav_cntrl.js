@@ -1,5 +1,3 @@
-
-
 var loggedin = true;
 const fetchPage = {}
 
@@ -38,6 +36,13 @@ fetchPage.jobsearch = function(req, res, cb){
     return cb(null, {
         title: 'search',
         css: 'css/search.css'
+    })
+}
+
+fetchPage.profileEdit = function(req, res, cb){
+    return cb(null, {
+        title: 'Profile Edit',
+        css: 'css/profileEdit.css'
     })
 }
 

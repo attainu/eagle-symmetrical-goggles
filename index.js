@@ -2,9 +2,9 @@ const express = require('express');
 const hbs = require('express-handlebars');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-
+const db = require('./models/db');
 const PORT = 6969;
-
+console.log(db);
 const app = express();
 
 app.engine('handlebars', hbs());
@@ -25,6 +25,7 @@ app.use(session({
     }
 }));
 
+const dbController = require('./controllers/db_cntrl');
 const routeController = require('./routes/routecontroller');
 const authRoute = require('./routes/authcontroller');
 
@@ -36,13 +37,22 @@ app.get('/profile', routeController.sendprofile);
 app.get('/aboutus', routeController.sendaboutus);
 app.get('/searchquery', routeController.sendsearch);
 app.get('/jobsearch', routeController.sendjobsearch);
+app.get('/profileEdit', routeController.sendprofileEdit);
 
 app.post('/login', authRoute.dologin);
 app.post('/signup', routeController.dosignup);
+app.post('/profileEdit', dbController.edituser);//checkinggg now..
 //app.post('/profile', routeController.updateprofile);
 
-app.listen(PORT, function(){
-    console.log('shuru hogya');
-}).on('error', function(error){
-    console.log(error);
-});
+
+db.connect()
+.then(function(){
+    app.listen(PORT, function(){
+        console.log('shuru hogya isme>>', PORT);
+    }).on('error', function(error){
+        console.log(error);
+    });
+})
+.catch(function(error){
+    console.log("Failed to connect with db", error);
+})

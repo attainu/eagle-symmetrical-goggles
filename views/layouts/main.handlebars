@@ -15,10 +15,8 @@
 			}
 			nav.navbar{
 				background-color: #101935;
-			}
-
-			#brand-pic{
-				margin-left: 150px;
+				padding-top: 0px;
+    			padding-bottom: 0px;
 			}
 
 			a{
@@ -32,7 +30,7 @@
 				padding-bottom: 0px;
 			}
 
-			a:hover {
+			.nav-link>a:hover {
 				color: white;
 			}
 
@@ -40,7 +38,7 @@
 				margin-left: 40px;
 			}
 
-			button.btn.btn-outline-success.my-2.my-sm-0 {
+			#searchbar{
 				color: #9ad4d6;
 				border-color: #9ad4d6;
 				border-radius: 5px;
@@ -48,21 +46,28 @@
 				margin-right: 30px;
 			}
 
-			#profile-pic{
-				margin-left: 0px;
-				border-radius: 5px;
-			}
-
-			span{
+			.nav-link> span{
 				font-size:10px;
 				padding:0px 0px 0px 0px;
 				display:block;
 				text-transform:uppercase;
 				text-align: center;
 			}
+
 			.footer{
-				color: #9ad4d6;
-				background: #101935;
+    			background-color: #101935;
+    			left: 0;
+    			bottom: 0;
+    			width: 99%;
+    			color: white;
+    			margin-bottom: 0px;
+    			margin-top: 50px;
+    			padding: 10px 0px 10px 0px;
+			}
+			
+			.footer>span{
+    			margin-left: 10%;
+    			margin-right: 6%;
 			}
 		</style>
 	</head>
@@ -98,7 +103,7 @@
               </li>
             </ul>
         </div>
-        <form action='/searchquery' method="GET" class="form-inline">
+        <form action='/searchquery' method="GET" class="form-inline" id="searchbar">
             <input class="form-control mr-sm-2" name='query' type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
@@ -108,7 +113,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="/profile">View Profile</a>
-                <a class="dropdown-item" href="#">Settings</a>
+                <a class="dropdown-item" href="/profileEdit">Edit Profile</a>
                 <a class="dropdown-item" href="#">Sign out</a>
             </div>
         </div>

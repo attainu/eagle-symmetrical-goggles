@@ -1,10 +1,16 @@
-
 const mongoose = require('mongoose');
+const Myuser = require("./users_model");
 
-mongoose.connect('mongodb://localhost:27017',{ useNewUrlParser: true, useUnifiedTopology: true }, function(error){
-    if(!error){
-        console.log('connected successfully')
-    }else{
-        console.log(error)
-    }
-});
+function connect(){
+    return mongoose.connect('mongodb+srv://r4id:khuljasimsim@r4id-cluster-fwjpl.mongodb.net/test?retryWrites=true&w=majorit',{
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+}
+
+module.exports = {
+    models:{
+        User: Myuser
+    },
+    connect: connect
+};

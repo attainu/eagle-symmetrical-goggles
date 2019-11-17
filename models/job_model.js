@@ -1,14 +1,22 @@
 var mongoose = require('mongoose');
 var userSchema = new mongoose.Schema({
-    username: {
+    jobid: {
         type: String,
         unique: true
     },
-    postid: {
-        type: String,
-        unique: true
+    title: {
+        type: String
     },
-    content:{
+    companyname:{
+        type: String
+    },
+    designation:{
+        type: String
+    },
+    experience: {
+        type: Number
+    },
+    summary:{
         type: String
     },
     createdate: Date
