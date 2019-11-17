@@ -54,6 +54,18 @@ routeController.sendsearch = function(req, res){
         if(error){
             return res.status(400).send(error);
         }
+        return res.status(200).render('search', {
+            title: data.title,
+            css_file_ref: data.css
+        })
+    })
+}
+
+routeController.sendjobsearch = function(req, res){
+    pageFetcher.jobsearch(req, res, function(error, data){
+        if(error){
+            return res.status(400).send(error);
+        }
         return res.status(200).render('jobsearch', {
             title: data.title,
             css_file_ref: data.css

@@ -35,6 +35,7 @@ app.get('/signup', authRoute.sendsignup);
 app.get('/profile', routeController.sendprofile);
 app.get('/aboutus', routeController.sendaboutus);
 app.get('/searchquery', routeController.sendsearch);
+app.get('/jobsearch', routeController.sendjobsearch);
 
 app.post('/login', authRoute.dologin);
 app.post('/signup', routeController.dosignup);

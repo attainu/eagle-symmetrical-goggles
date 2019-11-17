@@ -34,4 +34,11 @@ fetchPage.search = function(req, res, cb){
     })
 }
 
+fetchPage.jobsearch = function(req, res, cb){
+    return cb(null, {
+        title: 'search',
+        css: 'css/search.css'
+    })
+}
+
 module.exports = fetchPage;
