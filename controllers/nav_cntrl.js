@@ -20,4 +20,18 @@ fetchPage.aboutus = function(res, cb){
     })
 }
 
+fetchPage.home = function(res, cb){
+    return cb(null, {
+        title: 'Sobrad',
+        css: 'css/home.css'
+    })
+}
+
+fetchPage.search = function(req, res, cb){
+    return cb(null, {
+        title: 'search',
+        css: 'css/search.css'
+    })
+}
+
 module.exports = fetchPage;

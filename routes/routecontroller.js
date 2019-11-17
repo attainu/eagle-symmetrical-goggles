@@ -5,7 +5,24 @@ const dbController = require('./../controllers/db_cntrl');
 const routeController = {};
 
 routeController.homepage = function(req, res){
-    console.log(req);
+    pageFetcher.home(res, function(error, data){
+        if(error){
+            return res.status(400).send(error);
+        }
+        return res.status(200).render('homepage', {
+            title: data.title,
+            css_file_ref: data.css
+        })
+    })    
+}           
+
+routeController.dosignup = function(req, res){
+    dbController.adduser(req, res, function(error, data){
+        if(error){
+            return res,status(500).send(error);
+        }
+        return res.status(200).send(data);
+    })
 }
 
 routeController.sendprofile = function(req, res){
@@ -37,7 +54,7 @@ routeController.sendsearch = function(req, res){
         if(error){
             return res.status(400).send(error);
         }
-        return res.status(200).render('searcher', {
+        return res.status(200).render('search', {
             title: data.title,
             css_file_ref: data.css
         })
