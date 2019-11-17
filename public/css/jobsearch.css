@@ -55,3 +55,7 @@ h4 {
 body {
     background-color: aliceblue;
 }
+.col-md-5 {
+    margin-top: 20px;
+    text-align: center;
+}
