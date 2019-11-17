@@ -1,0 +1,57 @@
+/* Navbar css */
+nav.navbar{
+    background-color: #101935;
+}
+a.nav-link{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+a:hover {
+    color: white;
+}
+
+a.nav-link.item-1{
+    margin-left: 40px;
+} 
+/* Main content/body css */
+.col-md-6 {
+    margin-top: 20px;
+}
+
+input#Job-title {
+    width: 275px;
+    margin-left: 125px;
+}
+
+input#State {
+    width: 275px;
+    margin-top: 15px;
+    margin-left: 125px;
+}
+button.btn.btn-secondary {
+    margin-left: 323px;
+    margin-top: 15px;
+}
+.vl {
+    border-left: 1px solid #516151;
+    height: 535px;
+    margin-top: 14px;
+}
+  input#Company-Name {
+    width: 277px;
+    margin-left: 123px;
+    margin-top: 15px;
+}
+
+input#Experience {
+    width: 277px;
+    margin-left: 122px;
+    margin-top: 15px;
+}
+h4 {
+    margin-left: 122px;
+}
+body {
+    background-color: aliceblue;
+}
