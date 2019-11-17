@@ -3,7 +3,7 @@ const hbs = require('express-handlebars');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const controllers = require('./controllers/index');
-const db = mongoose.connection
+const db = require('./models/index.js');
 
 const PORT = 6969;
 
