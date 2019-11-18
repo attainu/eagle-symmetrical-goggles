@@ -50,8 +50,7 @@ app.get('/about', function(req,res) {
 //app.use(authRoute.checkIfLoggedIn);
 app.post('/signup/create', controllers.SignupController.create);
 app.post('/login', authRoute.login);
-app.post('/logout', authRoute.logout);
-app.get('/search/posts/:term', controllers.SearchController.postSearch);
+app.get('/logout', authRoute.logout);
 app.get('/search/*', controllers.SearchController.search);
 
 
