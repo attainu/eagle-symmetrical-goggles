@@ -25,18 +25,13 @@ SignupController.create = function(req, res) {
 		}
 	
 		Signup.Login.create({
-			email: data.username,
+			email: data.email,
 			password: data.password
 		}, function(error, response) {
 			if(error) {
-				/* return res.status(500).send({
-					status: false,
-					message: "Failed to save login details"
-				}); */
 				console.error(error);
 			}
 		})
-		console.log(data.username);
 		return res.status(200).send({
 			status: true,
 			message: "User created Successfully and login details saved"
