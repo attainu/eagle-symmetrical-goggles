@@ -4,6 +4,7 @@ const exphbs = require('express-handlebars');
 const PORT = 9090;
 const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
+const path = require("path");
 
 const authRoute = require('./controllers/auth.js');
 var session = require('express-session')
@@ -11,7 +12,9 @@ var session = require('express-session')
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(express.static('public'))
+// app.use(express.static('public'))
+// app.use("static",express.static("public"));
+app.use(express.static(path.join(__dirname, '/public')));
 
 //session config
 app.use(session({
@@ -47,11 +50,15 @@ app.get('/signup', function(req,res) {
 app.get('/about', function(req,res) {
 	res.render('about', {title: 'About Us'});
 });
+app.get('/search/jobs', function(req,res) {
+	res.render('Jobsearch', {title: "Search"});
+})
 //app.use(authRoute.checkIfLoggedIn);
 app.post('/signup/create', controllers.SignupController.create);
 app.post('/login', authRoute.login);
 app.get('/logout', authRoute.logout);
 app.get('/search/*', controllers.SearchController.search);
+
 
 
 
