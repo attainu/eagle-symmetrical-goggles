@@ -1,10 +1,11 @@
 const SearchController =  {};
 const jobController = require('./../models/Jobs.js');
 const postController = require('./../models/Post.js');
+const Signup = require('./../models/Signup.js');
 
 SearchController.search = function(req, res) {
-    var term = req.params.term;
-    jobController.find({"domain": term}, function(error, data) {
+    var term = req.query.term;
+    Signup.find({"firstname": term}, function(error, data) {
         if(error){
             res.send({
                 status: false,
