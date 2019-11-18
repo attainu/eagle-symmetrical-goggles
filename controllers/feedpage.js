@@ -21,7 +21,7 @@ FeedController.getFeed = function (req, res) {
         console.log(data);
         return res.render('feedPage.hbs', {
             status: true,
-            userData: data
+            userData: data.reverse()
         });
     });
 };
