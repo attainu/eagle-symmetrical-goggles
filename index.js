@@ -2,11 +2,12 @@ const express = require('express');
 const hbs = require('express-handlebars');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const controllers = require('./controllers/index');
-const db = require('./models/index.js');
+
+const routeController = require('./routes/routecontroller');
+const authRoute = require('./routes/authcontroller');
+const db = require('./models/db');
 
 const PORT = 6969;
-
 const app = express();
 
 app.engine('handlebars', hbs());
@@ -27,9 +28,6 @@ app.use(session({
     }
 }));
 
-const routeController = require('./routes/routecontroller');
-const authRoute = require('./routes/authcontroller');
-
 // user will routed to either loginpage or homepage depending upon his session 
 app.get('/', routeController.homepage); //this is the homepage of user
 app.get('/login', authRoute.sendlogin);
@@ -40,40 +38,19 @@ app.get('/searchquery', routeController.sendsearch);
 app.get('/jobsearch', routeController.sendjobsearch);
 
 app.post('/login', authRoute.dologin);
-app.post('/signup', routeController.dosignup);
+app.post('/signup', authRoute.dosignup);
+app.post('/create-job', authRoute.addjob);
 //app.post('/profile', routeController.updateprofile);
 
 
-//routes
-app.get('/profile', function(req,res) {
-	res.render('profile', {title: "Profile"});
-})
-app.get('/signup', function(req,res) {
-	res.render('Signup', {title: "Signup"});
-})
-
-app.get('/about', function(req,res) {
-	res.render('about', {title: 'About Us'});
-});
-//app.use(authRoute.checkIfLoggedIn);
-//app.post('/signup/create', controllers.SignupController.create);
-
-//app.post('/logout', authRoute.logout);
-app.get('/search/posts/:term', controllers.SearchController.postSearch);
-app.get('/search/jobs/:term', controllers.SearchController.search);
-
-
-
-// Start the app on pre defined port number
 db.connect()
-.then(function() {
-	app.listen(PORT, function() {
-		console.log("Application has started and running on port: ", PORT);
-	}).on('error', function(error) {
-		console.log("Unable to start app. Error >>>>", error);
-	});
-})
-.catch(function(error){
-	console.log("Failed to setup connecton with database.", error);
-})
-
+            .then(function(){
+                app.listen(PORT, function(){
+                    console.log('shuru hogya');
+                }).on('error', function(error){
+                    console.log(error);
+                });
+            })
+            .catch(function(error){
+                return console.log(error);
+            })

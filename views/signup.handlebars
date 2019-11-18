@@ -30,15 +30,15 @@
                             <div class="container">
                                 <h3 class="Heading">Sign Up Form </h3>
                                 <!-- <hr> -->
-                                <form>
+                                <form action="/signup" method="post">
                                     <div class="form-row ">
                                         <div class="form-group col">
                                             <!-- <label for="first-name">First Name</label> -->
-                                            <input type="text" class="form-control" id="firstname" placeholder="Enter First Name">
+                                            <input type="text" class="form-control" id="firstname" name="full_name" placeholder="Enter Your Full Name">
                                         </div>
                                         <div class="form-group col">
                                             <!-- <label for="exampleInputPassword1">Last Name</label> -->
-                                            <input type="text" class="form-control" id="last-name" placeholder="Enter Last Name">
+                                            <input type="text" class="form-control" id="last-name" name="username" placeholder="Choose a Username">
                                         </div>
                                     </div>
 
@@ -47,28 +47,25 @@
                                             <p>Please select your gender:</p>
                                             <input type="radio" name="gender" value="male"> Male
                                             <input type="radio" name="gender" value="female"> Female
-                                            <input type="radio" name="gender" value="other"> Other
                                         </div>
 
                                         <div class="form-row">
                                             <div class="form-group col">
                                                 <!-- <label for="InputEmail">Email Mobile Number</label> -->
-                                                <input type="text" class="form-control" id="Mobile-number"
-                                                    placeholder="Enter Mobile Number">
+                                                <input type="text" class="form-control" id="Mobile-number" name="phone_number" placeholder="Enter Mobile Number">
                                             </div>
                                             <div class="form-group col">
                                                 <!-- <label for="InputEmail">Email address</label> -->
-                                                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
-                                                    placeholder="Enter email">
+                                                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" name="email" placeholder="Enter email">
                                             </div>
                                         </div><br>
                                         <div class="form-row">
                                             <div class="form-group col">
                                                 <!-- <label for="password">Password</label> -->
-                                                <input type="Password" class="form-control" id="password" placeholder="Enter Password">
+                                                <input type="Password" class="form-control" id="password" name="password" placeholder="Enter Password">
                                             </div>
                                             <div class="form-group col">
-                                                <!-- <label for="confirm-password">Confirm Password</label> -->
+                                                <!-- <label for="confirm-password">Confirm Password Code needs a javascript validator for both</label> -->
                                                 <input type="Password" class="form-control" id="confirm-password"
                                                     placeholder="Confirm Password">
                                             </div>

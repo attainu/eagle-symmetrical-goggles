@@ -16,11 +16,24 @@ authRoute.dologin = function(req, res){
 }
 
 authRoute.sendsignup = function(req, res){
-    dbcontroller.adduser(res, function(error, data){
+    return res.status(200).render('signup', {layout:false});
+}
+
+authRoute.dosignup = function(req, res){
+    dbcontroller.adduser(req, res, function(error, data){
         if(error){
             return res.status(400).send(error);
         }
-        return res.status(200).render('signup', {layout:false});
+        return res.status(200).send(data);
+    })
+}
+
+authRoute.addjob = function(req, res){
+    dbcontroller.createnewjob(req, res, function(error, data){
+        if(error){
+            return res.status(400).send(error);
+        }
+        return res.status(200).send(data);
     })
 }
 
