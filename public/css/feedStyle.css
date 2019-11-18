@@ -1,6 +1,11 @@
+
 /* Left section starts*/
 #profileSection1{
     background-color: seashell;
+    
+}
+#height1 {
+    height: 600px;
 }
 #profileImageL {
     width: 50px;

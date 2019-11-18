@@ -1,35 +1,64 @@
 const FeedController = {};
-const moment = require('moment');
-//const FeedModel = require('./../models/Feedpage.js');
-var data = [
-    {
-        userName: "afroz",
-        post: "Hey white collor! This is my first post!",
-        time: moment( 1573368600000 ).format('LLL')
-    }
-];
+const FeedModel = require('./../models/Feedpage.js');
 
-FeedController.getFeed = function (request, response) {
-    return response.render('feedPage.hbs', {
-        status: true,
-        userData: data
+// var data = [
+//     {
+//         userName: "afroz",
+//         post: "Hey white collar! This is my first post!",
+//         time: moment( 1573368600000 ).format('LLL')
+//     }
+// ];
+
+
+FeedController.getFeed = function (req, res) {
+    FeedModel.find( {}, function (error, data) {
+        if (error) {
+            res.status(500).send({
+                status: false,
+                message: error
+            });
+        }
+        console.log(data);
+        return res.render('feedPage.hbs', {
+            status: true,
+            userData: data
+        });
     });
 };
 
-FeedController.addPost = function (request, response) {
-    var userData = request.body;
+FeedController.addPost = function (req, res) {
+    var userData = req.body;
     console.log("POST>>", userData);
-    data.unshift(userData);
-    console.log(data);
-    return response.json(data);
+
+    var newPost = FeedModel(
+        {
+            name: userData.userName,
+            post: userData.post,
+            date: userData.time
+        }).save(
+        function (error, data) {
+            if (error) {
+                return res.status(500).send({
+                    status: false,
+                    message: "FAiled to create User"
+                });
+            }
+            return res.json(data);
+        });
+    // var imageUrl = req.files['imageFile'][0].path;
+    // console.log("url", imageUrl);
+    // console.log(req.files['imageFile'][0]);
+
+    // data.unshift(userData);
+    // console.log(data);
 };
 
-FeedController.postFiles = function (request, response) {
-    var imageUrl = request.files['imageFile'][0].path;
-    console.log("url",imageUrl);
-    console.log(request.files['imageFile'][0]);
+FeedController.postFiles = function (req, res) {
+    var imageUrl = req.files['imageFile'][0].path;
+    console.log("url", imageUrl);
+    console.log(req.files['imageFile'][0]);
 
-    return response.render('feedPage',{
+    return res.render('feedPage', {
         data: imageUrl,
         status: true,
         message: "Media posted successfully!",

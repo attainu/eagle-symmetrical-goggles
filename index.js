@@ -3,6 +3,10 @@ const app = express();
 const PORT = 9090;
 const moment = require('moment');
 
+// Importing database mongoose Schemas from models
+const db = require('./models/index.js');
+// console.log("db",db);
+
 //importing body parser
 var bodyParser = require('body-parser');
 
@@ -44,8 +48,8 @@ const upload = multer({
 	storage: fileStorage
 });
 
-//importing Feed controller
-var feedController = require('./controllers/feedpage.js');
+// Import controllers
+var controllers = require('./controllers/index.js');
 
 
 app.get('/', function (req, res) {
@@ -97,21 +101,25 @@ app.get('/clicks', (req, res) => {
 //mongodb setup ends here
 */
 
-app.get('/feed',feedController.getFeed);
+app.get('/feed', controllers.UserController.getFeed);
 
 var cpUpload = upload.fields([
 	{ name: 'imageFile', maxCount: 1 },
 	{ name: 'videoFile', maxCount: 1 },
 	{ name: 'pdfFile', maxCount: 1 }
 ]);
-app.post('/feed',urlencodedParser, feedController.addPost);
+app.post('/feed', urlencodedParser, controllers.UserController.addPost);
 
 //app.post('/myPost', upload.none(), feedController.postStatus);
-app.post('/uploadFiles', cpUpload, feedController.postFiles);
+app.post('/uploadFiles', cpUpload, controllers.UserController.postFiles);
 
-// Start the app on pre defined port number
-app.listen(PORT, function () {
-	console.log("Application has started and running on port: ", PORT);
-}).on('error', function (error) {
-	console.log("Unable to start app. Error >>>>", error);
+// Start the app on pre defined port number on connection with database
+db.connect().then( function () {
+	app.listen(PORT, function () {
+		console.log("Application has started and running on port: ", PORT);
+	}).on('error', function (error) {
+		console.log("Unable to start app. Error >>>>", error);
+	});
+}).catch( function (error) {
+	console.log("Failed to setup a connection with database",error);
 });

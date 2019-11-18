@@ -1,14 +1,39 @@
-// const Feedpage = {};
+//importing mongoose
+const mongoose = require('mongoose');
 
-// Feedpage.getFeed = function (callback) {
-//     retutn callback(null, "feedpage retrieved");
-// }
+//Schema
+const userSchema = new mongoose.Schema(
+    {
+        name: String,
+        username: String,
+        post: String,
+        likes: {
+            type: Number,
+            default: 0
+        },
+        comments: [{
+            user: Object,
+            fullname: String,
+            username: String,
+            comment: String
+        }],
+        imageUrl: String,
+        image: {
+            data: Buffer,
+            contentType: String
+        },
+        // body  : {type:String,trim:true},
+        // image : {type:String,trim:true},
+        date: {
+            type: Date,
+            default: Date.now()
+        }
+    },
+    {
+        collection: 'posts'
+    }
+);
 
-// Feedpage.postStatus = function (data, callback) {
-    
-// }
-// Feedpage.postFiles = function (file1,file2,file3,callback) {
-    
-// }
+const UserPost = mongoose.model('UserPost', userSchema);
 
-// module.export = Feedpage;
+module.exports = UserPost;
