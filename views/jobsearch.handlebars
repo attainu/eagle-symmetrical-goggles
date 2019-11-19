@@ -1,0 +1,44 @@
+
+<br><br>
+<div id="body">
+    <div class="form-row">
+        <div class="col-md-6">
+            <div id="Job-Search">
+                <form action="/jobsearch" method="get">
+                    <h4>Job Search</h4>
+                    <div>
+                        <input type="text" class="form-control" id="Job-title" placeholder="Search Jobs" name='Job-title'>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" id="State" placeholder="Enter State" name='place'>
+                    </div>
+                    <button type="button" class="btn btn-secondary">Search</button>
+                </form>
+            </div>
+            <hr>
+            <div>
+                <form action="/create-job" method="post">
+                    <h4>Job Post</h4>
+                    <div>
+                        <input type="text" class="form-control" id="Job-title" placeholder="Search Jobs" name='title'>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" id="State" placeholder="Enter State" name='place'>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" id="Company-Name" placeholder="Company-Name" name='company'>
+                    </div>
+                    <div>
+                        <input type="number" class="form-control" id="Experience" placeholder="Experience-Required" name='experience'>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Post</button>
+                </form>
+            </div>
+        </div>
+        <div class="vl"></div>
+        <div class="col-md-5">
+            <h4>Search Result</h4>
+        </div>
+
+    </div>
+</div>

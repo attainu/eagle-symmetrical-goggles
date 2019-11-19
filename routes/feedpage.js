@@ -1,14 +1,6 @@
 const FeedController = {};
 const FeedModel = require('./../models/Feedpage.js');
 
-// var data = [
-//     {
-//         userName: "afroz",
-//         post: "Hey white collar! This is my first post!",
-//         time: moment( 1573368600000 ).format('LLL')
-//     }
-// ];
-
 
 FeedController.getFeed = function (req, res) {
     FeedModel.find( {}, function (error, data) {
@@ -19,7 +11,7 @@ FeedController.getFeed = function (req, res) {
             });
         }
         console.log(data);
-        return res.render('feedPage.hbs', {
+        return res.render('feedPage.handlebars', {
             status: true,
             userData: data.reverse()
         });
@@ -45,12 +37,6 @@ FeedController.addPost = function (req, res) {
             }
             return res.json(data);
         });
-    // var imageUrl = req.files['imageFile'][0].path;
-    // console.log("url", imageUrl);
-    // console.log(req.files['imageFile'][0]);
-
-    // data.unshift(userData);
-    // console.log(data);
 };
 
 FeedController.postFiles = function (req, res) {

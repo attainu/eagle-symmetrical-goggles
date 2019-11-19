@@ -1,15 +1,9 @@
-
-/* Left section starts*/
 #profileSection1{
     background-color: seashell;
-    
-}
-#height1 {
-    height: 600px;
 }
 #profileImageL {
-    width: 50px;
-    height: 50px;
+    width: 90px;
+    height: 90px;
     margin: 5px 5px 0px 50px;
     border-radius: 20px;
 }
@@ -50,8 +44,10 @@
     border-radius: 10px;
 }
 
-#followButton {
+#postMessage {
+
 }
+
 #myUserName {
     font-weight: 900;
 }
@@ -65,7 +61,6 @@
 }
 #likeButton{
     width: 30px;
-    height: 30px;
     text-align: center;
     margin-left: 10px;
     margin-right: 20px;
@@ -73,7 +68,6 @@
 }
 #commentButton{
     width: 30px;
-    height: 30px;
     text-align: center;
     margin-left: 20px;
     margin-right: 20px;
@@ -81,7 +75,6 @@
 }
 #shareButton {
     width: 30px;
-    height: 30px;
     text-align: center;
     margin-left: 20px;
     margin-right: 10px;
@@ -117,9 +110,6 @@
 a:link {
     color:  gray;
 }
-  
-  
-  
   /* mouse over link */
 a:hover {
     color: snow;

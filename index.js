@@ -1,125 +1,87 @@
 const express = require('express');
+const hbs = require('express-handlebars');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+
+// Import routes
+const postRoute = require('./routes/feedpage.js');
+
+const routeController = require('./routes/routecontroller');
+const authRoute = require('./routes/authcontroller');
+const db = require('./models/db');
+
+const PORT = 6969;
 const app = express();
-const PORT = 9090;
-const moment = require('moment');
 
-// Importing database mongoose Schemas from models
-const db = require('./models/index.js');
-// console.log("db",db);
-
-//importing body parser
-var bodyParser = require('body-parser');
-
-// create application/json parser
-var jsonParser = bodyParser.json();
-
-// create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-
-app.use('/public',express.static('public'));
-
-//importing express handlebars
-const exphbs = require('express-handlebars');
-
-// Configure Handlebars
-const hbs = exphbs.create({ extname: '.hbs' });
-
-//setting view engine
-app.engine('.hbs', hbs.engine);
-app.set('view engine', '.hbs');
-
+app.engine('handlebars', hbs());
+app.set('view engine', 'handlebars');
 
 //importing multer
 const multer = require('multer');
-
 //setting multer to disk storage
 const fileStorage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		//console.log("file",file);
 		cb(null, 'public/uploads/');
 	},
 	filename: function (req, file, cb) {
 		cb(null, Date.now() + '-' + file.originalname);
 	}
 });
-
 const upload = multer({
 	storage: fileStorage
 });
-
-// Import controllers
-var controllers = require('./controllers/index.js');
-
-
-app.get('/', function (req, res) {
-	res.render('home');
-});
-
-/*
-//mongodb setup starts here
-const MongoClient = require('mongodb').MongoClient;
-var db = null;
-var url = 'mongodb://localhost:27017';
-MongoClient.connect( url,{ useUnifiedTopology: true },function ( error, client ) {
-    if(error){
-        return console.log(error);
-    }
-    //console.log(client);
-    db = client.db('mydb');
-    db.createCollection("LikeEvent", function(err, res) {
-        if (err){
-            throw err;
-        }
-    });
-});
-// add a document to the DB collection recording the click event
-app.post('/clicked', function (req, res){
-    var click = {
-        clickTime: new Date()
-    };
-    console.log(click);
-  
-    db.collection('likes').save(click, (err, result) => {
-        if (err) {
-            return console.log(err);
-        }
-        console.log("click added to db");
-        res.sendStatus(201);
-    });
-});
-// getting the click data from the database
-app.get('/clicks', (req, res) => {
-    db.collection('likes').find().toArray( (err, result) => {
-
-        if (err) {
-            return console.log(err);
-        }
-        res.send(result);
-    });
-});
-//mongodb setup ends here
-*/
-
-app.get('/feed', controllers.UserController.getFeed);
-
+// Setting fields for  upload using multer
 var cpUpload = upload.fields([
 	{ name: 'imageFile', maxCount: 1 },
 	{ name: 'videoFile', maxCount: 1 },
 	{ name: 'pdfFile', maxCount: 1 }
 ]);
-app.post('/feed', urlencodedParser, controllers.UserController.addPost);
+// app.use('/public',express.static('public'));
+app.use(express.static('public'));
 
-//app.post('/myPost', upload.none(), feedController.postStatus);
-app.post('/uploadFiles', cpUpload, controllers.UserController.postFiles);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-// Start the app on pre defined port number on connection with database
-db.connect().then( function () {
-	app.listen(PORT, function () {
-		console.log("Application has started and running on port: ", PORT);
-	}).on('error', function (error) {
-		console.log("Unable to start app. Error >>>>", error);
-	});
-}).catch( function (error) {
-	console.log("Failed to setup a connection with database",error);
-});
+app.use(session({
+    saveUninitialized: true,
+    resave: false,
+    secret: 'io2jej9ji9ruri09i3k2po2k394kyE%YE%TYF&^F^E&*U',
+    cookie: {
+        httpOnly: true,
+        maxAge: 30000, //30sec for testing purposes
+        path: '/',
+        sameSite: true,
+        secure: false
+    }
+}));
+
+// user will routed to either loginpage or homepage depending upon his session 
+app.get('/', routeController.homepage); //this is the homepage of user
+app.get('/login', authRoute.sendlogin);
+app.get('/signup', authRoute.sendsignup);
+app.get('/profile', routeController.sendprofile);
+app.get('/aboutus', routeController.sendaboutus);
+app.get('/searchquery', routeController.sendsearch);
+app.get('/jobsearch', routeController.sendjobsearch);
+
+//
+app.get('/feed', postRoute.getFeed);
+app.post('/feed', postRoute.addPost);
+
+app.post('/login', authRoute.dologin);
+app.post('/signup', authRoute.dosignup);
+app.post('/create-job', authRoute.addjob);
+//app.post('/profile', routeController.updateprofile);
+
+
+db.connect()
+    .then(function () {
+        app.listen(PORT, function () {
+            console.log('shuru hogya');
+        }).on('error', function (error) {
+            console.log(error);
+        });
+    })
+    .catch(function (error) {
+        return console.log(error);
+    })
