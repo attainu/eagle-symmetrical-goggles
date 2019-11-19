@@ -5,7 +5,7 @@ var job_model = require('./jobs_model');
 
 
 function mongodbconnect(){
-    return mongoose.connect('mongodb://localhost:27017/sobrad',{ 
+    return mongoose.connect('mongodb://localhost:27017/whitecollardb',{ 
         useNewUrlParser: true, 
         useUnifiedTopology: true }, 
         function(error){

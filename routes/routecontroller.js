@@ -79,4 +79,16 @@ routeController.sendprofileEdit = function(req, res){
     })
 }
 
+routeController.sendForgotPassword = function(req, res) {
+    pageFetcher.forgotPassword(req, res, function(error, data) {
+        if(error){
+            return res.status(400).send(error);
+        }
+        return res.status(200).render('forgot', {
+            title: data.title,
+            css_file_ref: data.css
+        })
+    })
+}
+
 module.exports = routeController;

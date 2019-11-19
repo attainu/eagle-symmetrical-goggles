@@ -27,7 +27,7 @@ app.use(session({
         secure: false
     }
 }));
-
+//app.use(authRoute.checkIfLoggedIn);
 // user will routed to either loginpage or homepage depending upon his session 
 app.get('/', routeController.homepage); //this is the homepage of user
 app.get('/login', authRoute.sendlogin);
@@ -37,7 +37,11 @@ app.get('/aboutus', routeController.sendaboutus);
 app.get('/searchquery', routeController.sendsearch);
 app.get('/jobsearch', routeController.sendjobsearch);
 app.get('/profile/edit', routeController.sendprofileEdit);
+app.get('/forgotpassword', routeController.sendForgotPassword);
+app.get('/logout', authRoute.logout);
 
+app.post('/setpassword', authRoute.setPassword);
+app.post('/forgotpassword', authRoute.forgotPassword);
 app.post('/login', authRoute.dologin);
 // app.post('/signup', routeController.dosignup);
 app.post('/profile/edit', authRoute.edituser);//checkinggg now..

@@ -12,7 +12,33 @@ authRoute.sendlogin = function(req, res){
 }
 
 authRoute.dologin = function(req, res){
-    res.send(req.body);
+   // res.send(req.body);
+    var email = req.body.username;
+    var password = req.body.password;
+    dbcontroller.doLogin(email, password, function(error, data){
+        if(error){
+            return res.status(400).send(error);
+        }
+        //req.session.loggedIn = true;
+       // req.session.user = data.email;
+        //console.log(data.email);
+        if(!data) {
+            return res.status(500).json(
+				{
+					status: false,
+					message: "Invalid Credentials"
+				}
+			);
+        } else{
+        req.session.user = data.email;   
+        return res.status(200).json(
+			{
+				status: true,
+				message: "Login successfull"
+			}
+        );
+    }
+    })
 }
 
 authRoute.sendsignup = function(req, res){
@@ -36,6 +62,32 @@ authRoute.addjob = function(req, res){
         return res.status(200).send(data);
     })
 }
+authRoute.forgotPassword = function(req, res) {
+    dbcontroller.findUser(req, res, function(error, data) {
+        if(error){
+            return res.status(400).send(error);
+        }
+        return res.status(200).send(data);
+    })
+}
+authRoute.setPassword = function(req, res) {
+    dbcontroller.setPassword(req, res, function(error, data) {
+        if(error){
+            return res.status(400).send(error);
+        }
+        return res.status(200).send(data);
+    })
+}
+
+authRoute.logout = function(req, res) {
+    var session = req.session;
+    session.destroy();
+    res.clearCookie('Somename');
+    return res.send({
+        status: true,
+        message: "Logged out"
+    });
+};
 
 authRoute.searchjob = function(req, res){
     dbcontroller.retrievejob(req, res, function(error, data){
@@ -55,4 +107,28 @@ authRoute.edituser = function(req, res){
     });
 }
 
+authRoute.checkIfLoggedIn = function(req, res, next) {
+    var url = req.originalUrl;
+    var userSession = req.session.user;
+    
+    /* Model.checkIfLoggedIn(url, userSession, function(error, data) {
+        if(error) {
+            return res.json({
+                status: false,
+                message: error
+            })
+        }
+        return next();
+    }); */
+    if(url === '/login') {
+        return next(); //callback(null, "Next");
+    }
+    if(typeof userSession === "undefined") {
+        return res.json({
+            status: false,
+            message: "Unauthorised Request"
+        }) //callback("Unauthorised Request");
+    }
+    return next();//callback(null, "Next");
+}; 
 module.exports = authRoute;

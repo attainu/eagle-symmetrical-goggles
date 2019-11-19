@@ -13,7 +13,19 @@ DatabaseController.login = function(cb){
     }
     else{
         return cb(null, 'please login');
-    }
+    } 
+}
+DatabaseController.doLogin = function(email, password, cb) {
+    User.findOne({"email":email, "password": password}, function(error, data){
+        if(error) {
+            return cb(error);
+        }
+        //console.log(data);
+        if(data == []) {
+            return cb("USer not found")
+        }
+        return cb(null, data);
+    })
 }
 
 DatabaseController.adduser = function(req, res, cb){
@@ -116,6 +128,47 @@ DatabaseController.retrievejob = function(req, res, cb){
             data: response
         })
     })
+}
+var email = null;
+DatabaseController.findUser = function(req, res, cb) {
+    email = req.body.email;
+   User.find({"email":email}, function(error, data) {
+    if(error){
+        return res.send({
+            status: false,
+            message: error
+        })
+    }
+    if(data == []){
+        return res.send({message: "User not found"})
+    }
+    return res.render('setpassword')
+    })
+}
+
+DatabaseController.setPassword = function(req, res, cb){
+    var password = req.body.password;
+    var confirmPassword = req.body.confirmPassword;
+    if(password === confirmPassword){
+        User.findOneAndUpdate({"email" : email}, {"password": password}, function(error, data){
+            if(error){
+                return  res.send({
+                    status: false,
+                    message: error
+                })
+            } else{
+                return res.send({
+                    status: true,
+                    message: "Password changed successfully. Please Login"
+                })
+            }
+        })
+    }
+    else{
+        return res.send({
+            message: "Password and confirm password are not same"
+        })
+    }
 }
 
 
