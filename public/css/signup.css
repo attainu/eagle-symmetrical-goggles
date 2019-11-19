@@ -64,21 +64,30 @@ button.btn.btn-secondary {
     color: aliceblue;
 }
 input#last-name {
-    margin-left: -12px;
+    margin-left: -14px;
 }
-
+input#firstname {
+    margin-left: 2px;
+}
 .form-group.col {
     margin-top: 11px;
 }
 input#inputEmail {
-    margin-left: 12px;
+    margin-left: 5px;
 }
 
 input#confirm-password {
-    margin-left: 12px;
+    margin-left: 5px;
 }
 body{
     background-image: url("./../images/Background.jpeg");
     opacity: 0.8;
    
+}
+input#Mobile-number {
+    margin-left: 5px;
+}
+
+input#password {
+    margin-left: 5px;
 }
