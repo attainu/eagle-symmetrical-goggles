@@ -36,5 +36,21 @@ authRoute.addjob = function(req, res){
         return res.status(200).send(data);
     })
 }
+authRoute.forgotPassword = function(req, res) {
+    dbcontroller.findUser(req, res, function(error, data) {
+        if(error){
+            return res.status(400).send(error);
+        }
+        return res.status(200).send(data);
+    })
+}
+authRoute.setPassword = function(req, res) {
+    dbcontroller.setPassword(req, res, function(error, data) {
+        if(error){
+            return res.status(400).send(error);
+        }
+        return res.status(200).send(data);
+    })
+}
 
 module.exports = authRoute;

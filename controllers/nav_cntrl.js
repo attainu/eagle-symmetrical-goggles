@@ -40,5 +40,11 @@ fetchPage.jobsearch = function(req, res, cb){
         css: 'css/search.css'
     })
 }
+fetchPage.forgotPassword = function(req, res, cb){
+    return cb(null, {
+        title: 'forgot password',
+        css: 'css/forgot.css'
+    })
+}
 
 module.exports = fetchPage;
