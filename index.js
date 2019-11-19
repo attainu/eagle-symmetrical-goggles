@@ -37,6 +37,7 @@ app.get('/aboutus', routeController.sendaboutus);
 app.get('/searchquery', routeController.sendsearch);
 app.get('/jobsearch', routeController.sendjobsearch);
 app.get('/forgotpassword', routeController.sendForgotPassword);
+app.get('/logout', authRoute.logout);
 
 app.post('/setpassword', authRoute.setPassword);
 app.post('/forgotpassword', authRoute.forgotPassword);
