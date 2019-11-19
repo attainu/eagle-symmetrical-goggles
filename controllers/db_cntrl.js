@@ -71,7 +71,6 @@ DatabaseController.findUser = function(req, res, cb) {
             message: error
         })
     }
-    console.log(data);
     if(data == []){
         return res.send({message: "User not found"})
     }
