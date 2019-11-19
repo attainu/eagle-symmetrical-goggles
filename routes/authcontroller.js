@@ -30,6 +30,7 @@ authRoute.dologin = function(req, res){
 				}
 			);
         } else{
+        req.session.user = data.email;   
         return res.status(200).json(
 			{
 				status: true,
