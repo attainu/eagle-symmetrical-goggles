@@ -27,7 +27,7 @@ app.use(session({
         secure: false
     }
 }));
-
+//app.use(authRoute.checkIfLoggedIn);
 // user will routed to either loginpage or homepage depending upon his session 
 app.get('/', routeController.homepage); //this is the homepage of user
 app.get('/login', authRoute.sendlogin);

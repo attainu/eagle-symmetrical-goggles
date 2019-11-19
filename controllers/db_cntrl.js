@@ -13,7 +13,19 @@ DatabaseController.login = function(cb){
     }
     else{
         return cb(null, 'please login');
-    }
+    } 
+}
+DatabaseController.doLogin = function(email, password, cb) {
+    User.findOne({"email":email, "password": password}, function(error, data){
+        if(error) {
+            return cb(error);
+        }
+        //console.log(data);
+        if(data == []) {
+            return cb("USer not found")
+        }
+        return cb(null, data);
+    })
 }
 
 DatabaseController.adduser = function(req, res, cb){
