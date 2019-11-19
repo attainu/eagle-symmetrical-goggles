@@ -1,26 +1,32 @@
-
-<br><br>
+<br>
 <div id="body">
     <div class="form-row">
         <div class="col-md-6">
-            <div id="Job-Search">
+            <div class="card" id="Job-Search">
                 <form action="/jobsearch" method="get">
-                    <h4>Job Search</h4>
-                    <div>
-                        <input type="text" class="form-control" id="Job-title" placeholder="Search Jobs" name='Job-title'>
+                    <div class="card-header">
+                        Job Search
                     </div>
-                    <div>
-                        <input type="text" class="form-control" id="State" placeholder="Enter State" name='place'>
+                    <div class="card-body">
+                        <div>
+                            <input type="text" class="form-control" id="Job-title" placeholder="Search Jobs" name='Job-title'>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" id="State" placeholder="Enter State" name='place'>
+                        </div>
+                        <button type="submit" class="btn btn-secondary" id="Search">Search</button>
                     </div>
-                    <button type="button" class="btn btn-secondary">Search</button>
                 </form>
             </div>
             <hr>
-            <div>
-                <form action="/create-job" method="post">
-                    <h4>Job Post</h4>
+            <div class="card" id="Job-Post">
+                 <form action="/create-job" method="post">
+                    <div class="card-header">
+                        Job Post
+                    </div>
+                    <div class="card-body">
                     <div>
-                        <input type="text" class="form-control" id="Job-title" placeholder="Search Jobs" name='title'>
+                        <input type="text" class="form-control" id="Job-title" placeholder="Designation" name='title'>
                     </div>
                     <div>
                         <input type="text" class="form-control" id="State" placeholder="Enter State" name='place'>
@@ -31,7 +37,8 @@
                     <div>
                         <input type="number" class="form-control" id="Experience" placeholder="Experience-Required" name='experience'>
                     </div>
-                    <button type="submit" class="btn btn-secondary">Post</button>
+                    <button type="submit" class="btn btn-secondary" id="Post">Post</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -39,6 +46,5 @@
         <div class="col-md-5">
             <h4>Search Result</h4>
         </div>
-
     </div>
 </div>
