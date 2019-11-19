@@ -37,7 +37,7 @@ fetchPage.search = function(req, res, cb){
 fetchPage.jobsearch = function(req, res, cb){
     return cb(null, {
         title: 'search',
-        css: 'css/search.css'
+        css: 'css/jobsearch.css'
     })
 }
 fetchPage.forgotPassword = function(req, res, cb){
