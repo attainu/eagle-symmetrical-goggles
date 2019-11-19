@@ -1,3 +1,4 @@
+/* Main content/body css */
 /* Navbar css */
 nav.navbar{
     background-color: #101935;
@@ -21,32 +22,41 @@ a.nav-link.item-1{
 
 input#Job-title {
     width: 275px;
-    margin-left: 125px;
+    margin-left: 63px;
 }
 
 input#State {
     width: 275px;
     margin-top: 15px;
-    margin-left: 125px;
+    margin-left: 63px;
 }
-button.btn.btn-secondary {
-    margin-left: 323px;
-    margin-top: 15px;
-}
+    
 .vl {
     border-left: 1px solid #516151;
-    height: 535px;
+    height: 655px;
     margin-top: 14px;
 }
   input#Company-Name {
     width: 277px;
-    margin-left: 123px;
+    margin-left: 63px;
     margin-top: 15px;
 }
+button#Post {
+    width: 157px;
+    margin-left: 116px;
+    margin-top: 15px;
+    background-color: #101935
+}
 
+button#Search {
+    width: 157px;
+    margin-left: 116px;
+    margin-top: 15px;
+    background-color: #101935
+}
 input#Experience {
     width: 277px;
-    margin-left: 122px;
+    margin-left: 63px;
     margin-top: 15px;
 }
 h4 {
@@ -58,4 +68,17 @@ body {
 .col-md-5 {
     margin-top: 20px;
     text-align: center;
+}
+div#Job-Search {
+    width: 472px;
+    margin-left: 107px;
+}
+
+div#Job-Post {
+    width: 472px;
+    margin-left: 107px;
+}
+.card-header {
+    color: #101935;
+    font-size: 18px;
 }
