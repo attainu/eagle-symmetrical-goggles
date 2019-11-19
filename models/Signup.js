@@ -30,6 +30,22 @@ const profileSchema = new mongoose.Schema({
     collection: 'profiles'
 }); 
 
+const loginSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true,
+    }
+},
+{
+    collection: 'loginDetails'
+})
 const Profile = mongoose.model('Profile', profileSchema);
-
-module.exports = Profile;
+const Login = mongoose.model('Login', loginSchema);
+module.exports = {
+    Profile,
+    Login
+}

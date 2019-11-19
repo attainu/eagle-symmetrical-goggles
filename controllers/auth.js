@@ -1,20 +1,19 @@
 const AuthController = {};
 const Model = require('./../models/Auth.js');
+const Login = require('./../models/Signup.js').Login;
 
 AuthController.login = function(req, res) {
     var email = req.body.email;
     var password = req.body.password;
-    var db = req.app.locals.db;
     
-    Model.login(email, password, db, function(error, data) {
-        if(error) {
-			return res.status(500).json(
-				{
-					status: false,
-					error
-				}
-			);
+    Login.find({"email": email, "password": password},function(error, data){
+        if (error) {
+            res.send({
+                status: false,
+                message: error
+            })
         }
+        console.log(data);
         req.session.loggedIn = true;
         req.session.user = data.email;
         if(!req.session.loggedIn) {
@@ -31,14 +30,17 @@ AuthController.login = function(req, res) {
 				message: "Login successfull"
 			}
         );
+    
+    })
+}
+    
        /* When login.hbs and home.hbs is ready uncomment this code and comment res.status block
         if (!req.session.loggedIn) {
             res.render('login.hbs', { alert: "Invalid Credentials"});
         } else {
             res.redirect('/home');
         } */
-    });
-}
+
 
 AuthController.logout = function(req, res) {
     var session = req.session;
