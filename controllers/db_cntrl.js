@@ -1,7 +1,8 @@
-const Myuser = require('./../models/users_model');
-const ProfileEditModel = require('./../models/Settings.js');
+const User = require('../models/users_model');
+const Job = require('./../models/jobs_model');
+const Posts = require('./../models/posts_model');
 
-DatabaseController = {}
+const DatabaseController = {}
 
 var loggedin = false; //logic yet to add
 var usernameexists = false; //logic remaining with mongoose
@@ -15,40 +16,51 @@ DatabaseController.login = function(cb){
     }
 }
 
-DatabaseController.adduser = function(res, cb){
-    if(usernameexists){
-        return cb("username already exists");
-    }
-    else{
-        return cb(null, 'Cool');
-    }
+DatabaseController.adduser = function(req, res, cb){
+    User.create({
+        username: req.body.username,
+        password: req.body.password,
+        fullname: req.body.full_name,
+        gender: req.body.gender,
+        phone: req.body.phone_number,
+        email: req.body.email,
+        datecreated: Date.now()
+    }, function(error, response){
+        if(error){
+            return cb({
+                status: false,
+                message: "unable to write this data",
+                error: error
+            })
+        }
+        return cb(null, {
+            status: true,
+            message: "Success",
+            data: response
+        })
+    })
 }
 
-DatabaseController.edituser = function(request, response){
+DatabaseController.edituser = function(request, response, cb){
     var email = request.body.email;
     var password = request.body.password;
     var dataFromUser = request.body;
-    console.log(email);
-    var userDetails = [];
-    Myuser.find({"email": email},function(error, doc){
+    User.find({"email": email},function(error, doc){
         if(error){
-            return res.send({
+            console.log(error);
+            return cb({
                 status: false,
-                message: "Failed to load data"
+                message: "failed to load data"
             });
         }
-        userDetails = doc;
-    });
-
-	ProfileEditModel.edit(userDetails, password, function(error, data) {
-		if(error) {
-			return response.status(500).json({
-                success: false,
-                message: error
+        console.log(doc[0].password);
+        if(doc[0].password!==password){
+            return cb({
+                status: false,
+                message: "Error! Password not matched"
             });
         }
-
-        Myuser.updateMany({
+        User.updateMany({
             "email" : email
         }, {
             "$set": dataFromUser
@@ -56,10 +68,55 @@ DatabaseController.edituser = function(request, response){
             if(error){
                 return console.log("error");
             }
-            console.log(userDetails);
-            return response.status(200).json(data);
+            return cb({
+                status: true,
+                message: res
+            });
         });
-	});
+    });
 }
+
+DatabaseController.createnewjob = function(req, res, cb){
+    Job.create({
+        title: req.body.title,
+        place: req.body.place,
+        company: req.body.company,
+        location: req.body.location,
+        experience: req.body.experience,
+        datecreated: Date.now()
+    }, function(error, response){
+        if(error){
+            return cb({
+                status: false,
+                message: "unable to write this data"
+            })
+        }
+        return cb(null, {
+            status: true,
+            message: "Success",
+            data: response
+        });
+    });
+}
+
+DatabaseController.retrievejob = function(req, res, cb){
+    Job.find({
+        title: req.body.title,
+        location: req.body.location
+    }, function(error, response){
+        if(error){
+            return cb({
+                status: false,
+                message: "unable to get jobs data"
+            })
+        }
+        return cb(null, {
+            status: true,
+            message: "Success",
+            data: response
+        })
+    })
+}
+
 
 module.exports = DatabaseController;

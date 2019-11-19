@@ -1,16 +1,27 @@
 const mongoose = require('mongoose');
-const Myuser = require("./users_model");
+var user_model = require('./users_model');
+var post_model = require('./posts_model');
+var job_model = require('./jobs_model');
 
-function connect(){
-    return mongoose.connect('mongodb+srv://r4id:khuljasimsim@r4id-cluster-fwjpl.mongodb.net/test?retryWrites=true&w=majorit',{
-        useNewUrlParser: true,
-        useUnifiedTopology: true
+
+function mongodbconnect(){
+    return mongoose.connect('mongodb://localhost:27017/sobrad',{ 
+        useNewUrlParser: true, 
+        useUnifiedTopology: true }, 
+        function(error){
+            if(!error){
+                console.log('connected successfully')
+            }else{
+                console.log(error)
+            }
     });
 }
 
 module.exports = {
     models:{
-        User: Myuser
+        Post: post_model,
+        User: user_model,
+        Job: job_model
     },
-    connect: connect
-};
+    connect: mongodbconnect
+}

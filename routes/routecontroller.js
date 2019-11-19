@@ -1,7 +1,8 @@
 
 
 const pageFetcher = require('./../controllers/nav_cntrl');
-const dbController = require('./../controllers/db_cntrl');
+
+
 const routeController = {};
 
 routeController.homepage = function(req, res){
@@ -15,15 +16,6 @@ routeController.homepage = function(req, res){
         })
     })    
 }           
-
-routeController.dosignup = function(req, res){
-    dbController.adduser(req, res, function(error, data){
-        if(error){
-            return res,status(500).send(error);
-        }
-        return res.status(200).send(data);
-    })
-}
 
 routeController.sendprofile = function(req, res){
     pageFetcher.profile(res, function(error, data){
@@ -80,7 +72,9 @@ routeController.sendprofileEdit = function(req, res){
         }
         return res.status(200).render('profileEdit', {
             title: data.title,
-            css_file_ref: data.css
+            css_file_ref: data.css,
+            firstname: data.firstname,
+            lastname: data.lastname
         })
     })
 }

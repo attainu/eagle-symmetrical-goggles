@@ -42,7 +42,9 @@ fetchPage.jobsearch = function(req, res, cb){
 fetchPage.profileEdit = function(req, res, cb){
     return cb(null, {
         title: 'Profile Edit',
-        css: 'css/profileEdit.css'
+        css: 'css/profileEdit.css',
+        firstname: 'Shubham',
+        lastname: 'Ambastha'
     })
 }
 

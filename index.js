@@ -2,9 +2,12 @@ const express = require('express');
 const hbs = require('express-handlebars');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+
+const routeController = require('./routes/routecontroller');
+const authRoute = require('./routes/authcontroller');
 const db = require('./models/db');
+
 const PORT = 6969;
-console.log(db);
 const app = express();
 
 app.engine('handlebars', hbs());
@@ -25,10 +28,6 @@ app.use(session({
     }
 }));
 
-const dbController = require('./controllers/db_cntrl');
-const routeController = require('./routes/routecontroller');
-const authRoute = require('./routes/authcontroller');
-
 // user will routed to either loginpage or homepage depending upon his session 
 app.get('/', routeController.homepage); //this is the homepage of user
 app.get('/login', authRoute.sendlogin);
@@ -37,22 +36,24 @@ app.get('/profile', routeController.sendprofile);
 app.get('/aboutus', routeController.sendaboutus);
 app.get('/searchquery', routeController.sendsearch);
 app.get('/jobsearch', routeController.sendjobsearch);
-app.get('/profileEdit', routeController.sendprofileEdit);
+app.get('/profile/edit', routeController.sendprofileEdit);
 
 app.post('/login', authRoute.dologin);
-app.post('/signup', routeController.dosignup);
-app.post('/profileEdit', dbController.edituser);//checkinggg now..
+// app.post('/signup', routeController.dosignup);
+app.post('/profile/edit', authRoute.edituser);//checkinggg now..
+app.post('/signup', authRoute.dosignup);
+app.post('/create-job', authRoute.addjob);
 //app.post('/profile', routeController.updateprofile);
 
 
 db.connect()
-.then(function(){
-    app.listen(PORT, function(){
-        console.log('shuru hogya isme>>', PORT);
-    }).on('error', function(error){
-        console.log(error);
-    });
-})
-.catch(function(error){
-    console.log("Failed to connect with db", error);
-})
+            .then(function(){
+                app.listen(PORT, function(){
+                    console.log('shuru hogya');
+                }).on('error', function(error){
+                    console.log(error);
+                });
+            })
+            .catch(function(error){
+                return console.log(error);
+            });
