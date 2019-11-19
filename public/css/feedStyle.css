@@ -65,6 +65,7 @@
 }
 #likeButton{
     width: 30px;
+    height: 30px;
     text-align: center;
     margin-left: 10px;
     margin-right: 20px;
@@ -72,6 +73,7 @@
 }
 #commentButton{
     width: 30px;
+    height: 30px;
     text-align: center;
     margin-left: 20px;
     margin-right: 20px;
@@ -79,6 +81,7 @@
 }
 #shareButton {
     width: 30px;
+    height: 30px;
     text-align: center;
     margin-left: 20px;
     margin-right: 10px;
