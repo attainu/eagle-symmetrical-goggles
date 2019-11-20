@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Auth = require('./Auth');
-//const Search = require('./Search');
+const Jobs = require('./Jobs');
 const Signup = require('./Signup');
 const Feedpage = require('./Feedpage.js');
 
@@ -15,7 +15,8 @@ module.exports = {
     models : {
         Auth : Auth,
         Feedpage : Feedpage,
-        Signup: Signup
+        Signup: Signup,
+        Jobs: Jobs
     },
     connect: connect
 };
