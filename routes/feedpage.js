@@ -11,7 +11,7 @@ FeedController.getFeed = function (req, res) {
             });
         }
         console.log(data);
-        return res.render('feedPage.handlebars', {
+        return res.render('homepage.handlebars', {
             status: true,
             userData: data.reverse()
         });
@@ -32,7 +32,7 @@ FeedController.addPost = function (req, res) {
             if (error) {
                 return res.status(500).send({
                     status: false,
-                    message: "FAiled to create User"
+                    message: "FAiled to add post"
                 });
             }
             return res.json(data);

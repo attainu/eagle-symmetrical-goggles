@@ -9,13 +9,14 @@ $(document).ready(function () {
             post: item.val(),
             time: (new Date(new Date - 1))
         };
-        //console.log(post);
+        // console.log(post);
         $.ajax({
             type: 'post',
-            url: '/feed',
+            url: '/',
             data: post,
             success: function (data) {
                 location.reload();
+                console.log(data);
             },
             error: function (error) {
                 console.log("Error", error);

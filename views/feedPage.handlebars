@@ -1,11 +1,11 @@
-{{!-- css link --}}
-<link rel="stylesheet" href="/public/css/feedStyle.css">
+{{!-- css link
+<link rel="stylesheet" href="/public/css/feedStyle.css"> --}}
 <div class="container">
     <div class="row mt-5">
         {{!--profile section in feedpost starts here--}}
         <div class="col-md-3 border rounded" id="profileSection1">
             <div class="mt-4 py-2 sticky-top" id="height1">
-                <span><img id="profileImageL" src="/public/images/profile.jpeg" alt="img"></span>
+                <span><img id="profileImageL" src="/images/profile.jpeg" alt="img"></span>
                 <p id="userProfileName">Mohd. Afroz</p>
 
                 <span id="skillText"><b>Skills: </b></span>
@@ -69,7 +69,7 @@
             {{#each userData}}
             <div class="border rounded mt-5">
                 <div class="border round">
-                    <span> <img id="profileImage" src="/public/assets/profile.jpeg" alt=""></span>
+                    <span> <img id="profileImage" src="/images/profile.jpeg" alt=""></span>
                     <span id="myUserName"> {{this.name}} </span><br>
                     <span id="postTime">{{this.date}}</span>
                 </div>
