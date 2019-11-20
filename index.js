@@ -4,23 +4,22 @@ const exphbs = require('express-handlebars');
 const PORT = 9090;
 const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
-const path = require("path");
 
 const authRoute = require('./controllers/auth.js');
 var session = require('express-session')
 
 //middlewares
 app.use(express.json());
-app.use(express.urlencoded());
-// app.use(express.static('public'))
+app.use(express.urlencoded({ extended : true }));
+app.use(express.static('public'))
 // app.use("static",express.static("public"));
-app.use(express.static(path.join(__dirname, '/public')));
+
 
 //session config
 app.use(session({
 	name: 'Somename',
 	secret: 'adfasdfas',
-	resave : true,
+	resave : false,
 	saveUninitialized: true,
 	cookie: {
 		httpOnly: true,
@@ -40,24 +39,38 @@ app.set('view engine', '.hbs');
 
 
 //routes
+app.get('/login', function(req, res) {
+	res.render('login',{layout: false});
+});
 app.get('/profile', function(req,res) {
 	res.render('profile', {title: "Profile"});
 })
 app.get('/signup', function(req,res) {
-	res.render('Signup', {title: "Signup"});
+	res.render('Signup', {title: "Signup", css_file_ref: 'css/signup.css'});
 })
 
 app.get('/about', function(req,res) {
-	res.render('about', {title: 'About Us'});
+	res.render('about', {title: 'About Us', css_file_ref: 'css/about.css'});
 });
 app.get('/search/jobs', function(req,res) {
 	res.render('Jobsearch', {title: "Search"});
 })
+app.get('/forgotpassword', function(req, res) {
+	res.render('forgot', {title: "Forgot Password?"})
+});
 //app.use(authRoute.checkIfLoggedIn);
 app.post('/signup/create', controllers.SignupController.create);
 app.post('/login', authRoute.login);
 app.get('/logout', authRoute.logout);
 app.get('/search/*', controllers.SearchController.search);
+app.post('/setpassword', controllers.ForgotPasswordController.setPassword);
+app.post('/forgotpassword', controllers.ForgotPasswordController.findUser);
+
+//These routes are to be handled
+//app.get('/jobsearch', controllers.);
+//app.get('/profile/edit', routeController.sendprofileEdit);
+//app.post('/create-job', authRoute.addjob);
+
 
 
 

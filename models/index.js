@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Auth = require('./Auth');
 //const Search = require('./Search');
 const Signup = require('./Signup');
-const Post = require('./Post.js');
+const Feedpage = require('./Feedpage.js');
 
 function connect() {
     return mongoose.connect('mongodb://localhost:27017/whitecollardb', {
@@ -14,7 +14,7 @@ function connect() {
 module.exports = {
     models : {
         Auth : Auth,
-        Post : Post,
+        Feedpage : Feedpage,
         Signup: Signup
     },
     connect: connect

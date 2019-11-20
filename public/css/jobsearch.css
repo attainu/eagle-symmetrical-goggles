@@ -1,36 +1,15 @@
-/* Main content/body css */
-/* Navbar css */
-nav.navbar{
-    background-color: #101935;
-}
-a.nav-link{
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-
-a:hover {
-    color: white;
-}
-
-a.nav-link.item-1{
-    margin-left: 40px;
-} 
-/* Main content/body css */
 .col-md-6 {
     margin-top: 20px;
 }
-
 input#Job-title {
     width: 275px;
     margin-left: 63px;
 }
-
 input#State {
     width: 275px;
     margin-top: 15px;
     margin-left: 63px;
 }
-    
 .vl {
     border-left: 1px solid #516151;
     height: 655px;
@@ -47,7 +26,6 @@ button#Post {
     margin-top: 15px;
     background-color: #101935
 }
-
 button#Search {
     width: 157px;
     margin-left: 116px;
@@ -73,12 +51,11 @@ div#Job-Search {
     width: 472px;
     margin-left: 107px;
 }
-
 div#Job-Post {
     width: 472px;
     margin-left: 107px;
 }
 .card-header {
-    color: #101935;
-    font-size: 18px;
+    background-color: #101935;
+    color: white;
 }

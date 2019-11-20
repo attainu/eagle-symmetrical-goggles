@@ -1,16 +1,19 @@
 const Auth = {};
-
-Auth.login = function(email, password, db, callback) {
+const User = require('./../models/Signup.js');
+Auth.login = function(email, password, db, cb) {
    // var user = null;
-    db.collection('loginDetails').findOne({ email: email, password: password }, function(err, result){
-        if (err){
-            return callback(err);
+   User.findOne({"email":email, "password": password}, function(error, data){
+        if(error) {
+            return cb(error);
         }
-        if (result) {
-            return callback(null, result)
+        //console.log(data);
+        if(data == []) {
+            return cb("User not found")
         }
-        
-    });
+        return cb(null, data);
+    })
+   
+   
     /* if(!user){
         return callback("Invalid username or password");
     }

@@ -1,19 +1,6 @@
 const mongoose = require('mongoose');
 const profileSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    firstname: {
-        type: String,
-        required: true
-    },
-    lastname: {
-        type: String,
-        required: true
-    },
-    mobileNumber: {
+    username: {
         type: String,
         required: true,
         unique: true
@@ -22,30 +9,39 @@ const profileSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    username: {
+    fullname:{
         type: String,
+        required: true
+    },
+    gender: {
+        type: String
+    },
+    phone: {
+        type: Number,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
         unique: true
+    },
+    skills: {
+        type: Array
+    },
+    projects: {
+        type: Array
+    },
+    job: {
+        type: Array
+    },
+    datecreated: {
+        type: Date,
+        default: new Date()
     }
 }, {
     collection: 'profiles'
 }); 
 
-const loginSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true,
-    }
-},
-{
-    collection: 'loginDetails'
-})
+
 const Profile = mongoose.model('Profile', profileSchema);
-const Login = mongoose.model('Login', loginSchema);
-module.exports = {
-    Profile,
-    Login
-}
+module.exports = Profile
