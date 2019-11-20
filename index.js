@@ -7,6 +7,10 @@ const routeController = require('./routes/routecontroller');
 const authRoute = require('./routes/authcontroller');
 const db = require('./models/db');
 
+// Import routes
+const postRoute = require('./routes/feedpage.js');
+
+
 const PORT = 6969;
 const app = express();
 
@@ -29,7 +33,7 @@ app.use(session({
 }));
 //app.use(authRoute.checkIfLoggedIn);
 // user will routed to either loginpage or homepage depending upon his session 
-app.get('/', routeController.homepage); //this is the homepage of user
+//app.get('/', routeController.homepage); //this is the homepage of user
 app.get('/login', authRoute.sendlogin);
 app.get('/signup', authRoute.sendsignup);
 app.get('/profile', routeController.sendprofile);
@@ -39,6 +43,11 @@ app.get('/jobsearch', routeController.sendjobsearch);
 app.get('/profile/edit', routeController.sendprofileEdit);
 app.get('/forgotpassword', routeController.sendForgotPassword);
 app.get('/logout', authRoute.logout);
+
+//
+app.get('/', postRoute.getFeed);
+app.post('/', postRoute.addPost);
+
 
 app.post('/setpassword', authRoute.setPassword);
 app.post('/forgotpassword', authRoute.forgotPassword);
