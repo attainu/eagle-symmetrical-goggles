@@ -64,5 +64,31 @@ routeController.sendjobsearch = function(req, res){
         })
     })
 }
+// for now checking profile edit option
+routeController.sendprofileEdit = function(req, res){
+    pageFetcher.profileEdit(req, res, function(error, data){
+        if(error){
+            return res.status(400).send(error);
+        }
+        return res.status(200).render('profileEdit', {
+            title: data.title,
+            css_file_ref: data.css,
+            firstname: data.firstname,
+            lastname: data.lastname
+        })
+    })
+}
+
+routeController.sendForgotPassword = function(req, res) {
+    pageFetcher.forgotPassword(req, res, function(error, data) {
+        if(error){
+            return res.status(400).send(error);
+        }
+        return res.status(200).render('forgot', {
+            title: data.title,
+            css_file_ref: data.css
+        })
+    })
+}
 
 module.exports = routeController;

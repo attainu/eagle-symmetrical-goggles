@@ -1,5 +1,3 @@
-
-
 var loggedin = true;
 const fetchPage = {}
 
@@ -37,7 +35,22 @@ fetchPage.search = function(req, res, cb){
 fetchPage.jobsearch = function(req, res, cb){
     return cb(null, {
         title: 'search',
-        css: 'css/search.css'
+        css: 'css/jobsearch.css'
+    })
+}
+fetchPage.forgotPassword = function(req, res, cb){
+    return cb(null, {
+        title: 'forgot password',
+        css: 'css/forgot.css'
+    })
+}
+
+fetchPage.profileEdit = function(req, res, cb){
+    return cb(null, {
+        title: 'Profile Edit',
+        css: 'css/profileEdit.css',
+        firstname: 'Shubham',
+        lastname: 'Ambastha'
     })
 }
 

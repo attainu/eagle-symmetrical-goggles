@@ -13,14 +13,26 @@ DatabaseController.login = function(cb){
     }
     else{
         return cb(null, 'please login');
-    }
+    } 
+}
+DatabaseController.doLogin = function(email, password, cb) {
+    User.findOne({"email":email, "password": password}, function(error, data){
+        if(error) {
+            return cb(error);
+        }
+        //console.log(data);
+        if(data == []) {
+            return cb("USer not found")
+        }
+        return cb(null, data);
+    })
 }
 
 DatabaseController.adduser = function(req, res, cb){
     User.create({
         username: req.body.username,
         password: req.body.password,
-        name: req.body.full_name,
+        fullname: req.body.full_name,
         gender: req.body.gender,
         phone: req.body.phone_number,
         email: req.body.email,
@@ -29,7 +41,8 @@ DatabaseController.adduser = function(req, res, cb){
         if(error){
             return cb({
                 status: false,
-                message: "unable to write this data"
+                message: "unable to write this data",
+                error: error
             })
         }
         return cb(null, {
@@ -40,11 +53,47 @@ DatabaseController.adduser = function(req, res, cb){
     })
 }
 
+DatabaseController.edituser = function(request, response, cb){
+    var email = request.body.email;
+    var password = request.body.password;
+    var dataFromUser = request.body;
+    User.find({"email": email},function(error, doc){
+        if(error){
+            console.log(error);
+            return cb({
+                status: false,
+                message: "failed to load data"
+            });
+        }
+        console.log(doc[0].password);
+        if(doc[0].password!==password){
+            return cb({
+                status: false,
+                message: "Error! Password not matched"
+            });
+        }
+        User.updateMany({
+            "email" : email
+        }, {
+            "$set": dataFromUser
+        }, function(error, res){
+            if(error){
+                return console.log("error");
+            }
+            return cb({
+                status: true,
+                message: res
+            });
+        });
+    });
+}
+
 DatabaseController.createnewjob = function(req, res, cb){
     Job.create({
         title: req.body.title,
         place: req.body.place,
         company: req.body.company,
+        location: req.body.location,
         experience: req.body.experience,
         datecreated: Date.now()
     }, function(error, response){
@@ -58,8 +107,68 @@ DatabaseController.createnewjob = function(req, res, cb){
             status: true,
             message: "Success",
             data: response
+        });
+    });
+}
+
+DatabaseController.retrievejob = function(req, res, cb){
+    Job.find({
+        title: req.body.title,
+        location: req.body.location
+    }, function(error, response){
+        if(error){
+            return cb({
+                status: false,
+                message: "unable to get jobs data"
+            })
+        }
+        return cb(null, {
+            status: true,
+            message: "Success",
+            data: response
         })
     })
+}
+var email = null;
+DatabaseController.findUser = function(req, res, cb) {
+    email = req.body.email;
+   User.find({"email":email}, function(error, data) {
+    if(error){
+        return res.send({
+            status: false,
+            message: error
+        })
+    }
+    if(data == []){
+        return res.send({message: "User not found"})
+    }
+    return res.render('setpassword')
+    })
+}
+
+DatabaseController.setPassword = function(req, res, cb){
+    var password = req.body.password;
+    var confirmPassword = req.body.confirmPassword;
+    if(password === confirmPassword){
+        User.findOneAndUpdate({"email" : email}, {"password": password}, function(error, data){
+            if(error){
+                return  res.send({
+                    status: false,
+                    message: error
+                })
+            } else{
+                return res.send({
+                    status: true,
+                    message: "Password changed successfully. Please Login"
+                })
+            }
+        })
+    }
+    else{
+        return res.send({
+            message: "Password and confirm password are not same"
+        })
+    }
 }
 
 

@@ -10,13 +10,12 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    name: {
+    fullname:{
         type: String,
         required: true
     },
     gender: {
-        type: String,
-        required: true
+        type: String
     },
     phone: {
         type: Number,
@@ -24,10 +23,12 @@ var userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     datecreated: {
-        type: Date
+        type: Date,
+        default: new Date()
     }
 },
 {
