@@ -29,7 +29,8 @@
         {{!--post section for posting image, video and status in feed-post starts here--}}
         <div class="col-md-5 mx-2" id="middle-section">
             <div class="row border rounded">
-                <form class="form-group">
+                {{!-- <form class="form-group"> --}}
+                <form action="/" method="post" enctype="multipart/form-data" class="form-group">
                     <div class="">
                         <textarea title="text" name="usersPost" class="form-control" id="postMessage" cols="50" rows="3"
                             placeholder="Write your thoughts here..."></textarea>
@@ -41,21 +42,21 @@
                         <label for="image-input" class="mx-4">
                             <i class="fa fa-camera fa-2x" aria-hidden="true"></i>
                         </label>
-                        <input style="display: none;" type="file" name="imageFile" id="image-input"
+                        <input style="display: none;" type="file" name="imagefile" id="image-input"
                             accept="image/jpeg, image/jpg, image/png, image/*" />
 
                         {{!--displaying video icon--}}
                         <label for="video-input" class="mx-4">
                             <i class="fas fa-photo-video fa-2x"></i>
                         </label>
-                        <input style="display: none;" type="file" name="videoFile" id="video-input"
+                        <input style="display: none;" type="file" name="videofile" id="video-input"
                             accept="video/mp4, video/x-m4v, video/*" />
 
                         {{!--displaying file icon--}}
                         <label for="file-input" class="mx-4">
                             <i class="far fa-file fa-2x"></i>
                         </label>
-                        <input style="display: none;" type="file" name="pdfFile" id="file-input"
+                        <input style="display: none;" type="file" name="pdffile" id="file-input"
                             accept="application/pdf" />
 
                         <button style="float: right;" type="submit" class="btn btn-dark btn-sm mx-2"
@@ -78,8 +79,10 @@
                     <p id="userPost" class="">
                         {{this.post}}
                     </p>
-                    {{#if this.postId.url}}
-                    <img id="imagePost" src="/{{this.postId.url}}" alt="" />
+                    {{#if this.imageUrl}}
+                    <div class="border round">
+                        <img id="imagePost" src="/{{this.imageUrl}}" alt="" />
+                    </div>
                     {{/if}}
                     <hr>
 

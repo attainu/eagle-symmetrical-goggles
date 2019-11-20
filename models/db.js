@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Importing models
-const UserPost = require('./Feedpage.js');
+const UserPost = require('./Homepage.js');
 var user_model = require('./users_model');
 var post_model = require('./posts_model');
 var job_model = require('./jobs_model');

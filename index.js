@@ -1,24 +1,30 @@
 const express = require('express');
+const app = express();
+
 const hbs = require('express-handlebars');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const PORT = 6969;
 
 const routeController = require('./routes/routecontroller');
 const authRoute = require('./routes/authcontroller');
 const db = require('./models/db');
+// Import routes for homepage
+const postRoute = require('./routes/homepage.js');
 
-// Import routes
-const postRoute = require('./routes/feedpage.js');
-
-
-const PORT = 6969;
-const app = express();
 
 app.engine('handlebars', hbs());
 app.set('view engine', 'handlebars');
 app.use(express.static('public'));
+
 app.use(bodyParser.urlencoded({ extended : true }));
 app.use(bodyParser.json());
+
+// // create application/json parser
+// var jsonParser = bodyParser.json();
+// // create application/x-www-form-urlencoded parser
+// var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 app.use(session({
     saveUninitialized:true,
     resave:false,
@@ -31,9 +37,31 @@ app.use(session({
         secure: false
     }
 }));
+
+//importing multer
+const multer = require('multer');
+//setting multer to disk storage
+const fileStorage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		//console.log("file",file);
+		cb(null, 'public/uploads/');
+	},
+	filename: function (req, file, cb) {
+		cb(null, Date.now() + '-' + file.originalname);
+	}
+});
+const upload = multer({
+	storage: fileStorage
+});
+var cpUpload = upload.fields([
+	{ name: 'imagefile', maxCount: 1 },
+	{ name: 'videofile', maxCount: 1 },
+	{ name: 'pdffile', maxCount: 1 }
+]);
+
 //app.use(authRoute.checkIfLoggedIn);
-// user will routed to either loginpage or homepage depending upon his session 
-//app.get('/', routeController.homepage); //this is the homepage of user
+// user will routed to either loginpage or homepage depending upon his session
+app.get('/', postRoute.getFeed);
 app.get('/login', authRoute.sendlogin);
 app.get('/signup', authRoute.sendsignup);
 app.get('/profile', routeController.sendprofile);
@@ -44,10 +72,8 @@ app.get('/profile/edit', routeController.sendprofileEdit);
 app.get('/forgotpassword', routeController.sendForgotPassword);
 app.get('/logout', authRoute.logout);
 
-//
-app.get('/', postRoute.getFeed);
-app.post('/', postRoute.addPost);
 
+app.post('/', cpUpload, postRoute.addPost);
 
 app.post('/setpassword', authRoute.setPassword);
 app.post('/forgotpassword', authRoute.forgotPassword);
@@ -59,14 +85,13 @@ app.post('/create-job', authRoute.addjob);
 //app.post('/profile', routeController.updateprofile);
 
 
-db.connect()
-            .then(function(){
-                app.listen(PORT, function(){
-                    console.log('shuru hogya');
-                }).on('error', function(error){
-                    console.log(error);
-                });
-            })
-            .catch(function(error){
-                return console.log(error);
-            });
+// Start the app on pre defined port number on connection with database
+db.connect().then( function () {
+	app.listen(PORT, function () {
+		console.log("Application has started and running on port: ", PORT);
+	}).on('error', function (error) {
+		console.log("Unable to start app. Error >>>>", error);
+	});
+}).catch( function (error) {
+	console.log("Failed to setup a connection with database",error);
+});

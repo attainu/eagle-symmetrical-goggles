@@ -49,8 +49,11 @@
     margin: 5px 5px 0px 5px;
     border-radius: 10px;
 }
-
-#followButton {
+/* image posted by user */
+#imagePost {
+    width: 420px;
+    margin: 0px 10px 0px 10px;
+    border-radius: 5px;
 }
 #myUserName {
     font-weight: 900;
