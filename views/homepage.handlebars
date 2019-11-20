@@ -1,0 +1,131 @@
+<div class="container">
+    <div class="row mt-5">
+        {{!--profile section in feedpost starts here--}}
+        <div class="col-md-3 border rounded" id="profileSection1">
+            <div class="mt-4 py-2 sticky-top" id="height1">
+                <span><img id="profileImageL" src="https://img.etimg.com/thumb/msid-70255888,width-640,resizemode-4,imgsize-126490/a-different-pov.jpg" alt="img"></span>
+                <p id="userProfileName">Mohd. Afroz</p>
+
+                <span id="skillText"><b>Skills: </b></span>
+                <ul id="userSkills">
+                    <li>Coding</li>
+                    <li>Singing</li>
+                </ul>
+                <div>
+                    <ul style="list-style-type: none;" id="friendlistSuggestion">
+                        <li><span>Friends: </span> <b>100</b></li>
+                        <li><span>Followers: </span> <b>99</b></li>
+                        <li> <span>Following: </span> <b>80</b></li>
+                        <li> <span>Post: </span> <b>243</b></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+        </div>
+        {{!--profile section ends here--}}
+
+        {{!--post section for posting image, video and status in feed-post starts here--}}
+        <div class="col-md-5 mx-2" id="middle-section">
+            <div class="row border rounded">
+                <form class="form-group">
+                    <div class="">
+                        <textarea title="text" name="usersPost" class="form-control" id="postMessage" cols="50" rows="3"
+                            placeholder="Write your thoughts here..."></textarea>
+                    </div>
+
+                    {{!--displaying image icon--}}
+                    <div class="mx-4 mt-4">
+                        {{!--inserting image/video/file through icons--}}
+                        <label for="image-input" class="mx-4">
+                            <i class="fa fa-camera fa-2x" aria-hidden="true"></i>
+                        </label>
+                        <input style="display: none;" type="file" name="imageFile" id="image-input"
+                            accept="image/jpeg, image/jpg, image/png, image/*" />
+
+                        {{!--displaying video icon--}}
+                        <label for="video-input" class="mx-4">
+                            <i class="fas fa-photo-video fa-2x"></i>
+                        </label>
+                        <input style="display: none;" type="file" name="videoFile" id="video-input"
+                            accept="video/mp4, video/x-m4v, video/*" />
+
+                        {{!--displaying file icon--}}
+                        <label for="file-input" class="mx-4">
+                            <i class="far fa-file fa-2x"></i>
+                        </label>
+                        <input style="display: none;" type="file" name="pdfFile" id="file-input"
+                            accept="application/pdf" />
+
+                        <button style="float: right;" type="submit" class="btn btn-dark btn-sm mx-2"
+                            id="postButton">Post</button>
+                    </div>
+                </form>
+            </div>
+            {{!--post section in feed post ends here--}}
+
+            <!--displaying post-->
+            {{#each userData}}
+            <div class="border rounded mt-5">
+                <div class="border round">
+                    <span> <img id="profileImage" src="/public/assets/profile.jpeg" alt=""></span>
+                    <span id="myUserName"> {{this.name}} </span><br>
+                    <span id="postTime">{{this.date}}</span>
+                </div>
+
+                <div class="border round">
+                    <p id="userPost" class="">
+                        {{this.post}}
+                    </p>
+                    {{#if this.postId.url}}
+                    <img id="imagePost" src="/{{this.postId.url}}" alt="" />
+                    {{/if}}
+                    <hr>
+
+                    {{!-- like button --}}
+                    <span class="mx-4">
+                        <button type="submit" id="likeButton">
+                            <span class=""><i class="far fa-thumbs-up buttonx"></i></span>
+                        </button>
+                        <span id="likeCounter">10</span>
+                    </span>
+
+                    {{!-- comment-button --}}
+                    <span class="mx-4">
+                        <button type="submit" id="commentButton">
+                            <span class=""><i class="far fa-comments buttonx"></i></span>
+                        </button>
+                        <span id="commentCounter">5</span>
+                    </span>
+
+                    {{!-- share button --}}
+                    <span class="mx-4">
+                        <button type="submit" id="shareButton">
+                            <span class=""><i class="fas fa-share buttonx"></i></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+
+        <div class="col-md-3 border rounded ml-2" id="right-section">
+            <div class="py-2 sticky-top">
+                <div class="mt-3 ml-2">
+                    <h6 id="article-heading">TOP ARTICLES AND NEWS</h6>
+                </div>
+                <ul id="trending-topics">
+                    <li> <a href="#">Trending-topic-one</a></li>
+                    <hr>
+                    <li> <a href="#">Trending-topic-two</a></li>
+                    <hr>
+                    <li> <a href="#">Trending-topic-three</a></li>
+                    <hr>
+                    <li> <a href="#">Trending-topic-four</a></li>
+                    <hr>
+                    <li> <a href="#">Trending-topic-five</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

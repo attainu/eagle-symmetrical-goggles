@@ -1,0 +1,50 @@
+<br>
+<div id="body">
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="card" id="Job-Search">
+                <form action="/jobsearch" method="get">
+                    <div class="card-header">
+                        Job Search
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <input type="text" class="form-control" id="Job-title" placeholder="Search Jobs" name='Job-title'>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" id="State" placeholder="Enter State" name='place'>
+                        </div>
+                        <button type="submit" class="btn btn-secondary" id="Search">Search</button>
+                    </div>
+                </form>
+            </div>
+            <hr>
+            <div class="card" id="Job-Post">
+                 <form action="/create-job" method="post">
+                    <div class="card-header">
+                        Job Post
+                    </div>
+                    <div class="card-body">
+                    <div>
+                        <input type="text" class="form-control" id="Job-title" placeholder="Designation" name='title'>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" id="State" placeholder="Enter State" name='place'>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" id="Company-Name" placeholder="Company-Name" name='company'>
+                    </div>
+                    <div>
+                        <input type="number" class="form-control" id="Experience" placeholder="Experience-Required" name='experience'>
+                    </div>
+                    <button type="submit" class="btn btn-secondary" id="Post">Post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="vl"></div>
+        <div class="col-md-5">
+            <h4>Search Result</h4>
+        </div>
+    </div>
+</div>
