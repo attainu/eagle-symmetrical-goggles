@@ -17,7 +17,7 @@ app.use(express.static('public'))
 
 //session config
 app.use(session({
-	name: 'Somename',
+	name: 'somename',
 	secret: 'adfasdfas',
 	resave : false,
 	saveUninitialized: true,
@@ -58,14 +58,13 @@ const hbs = exphbs.create({
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
-//app.use(authRoute.checkIfLoggedIn);
+// app.use(authRoute.checkIfLoggedIn);
 //routes
 app.get('/', postController.getFeed);
 
 app.get('/login', function(req, res) {
 	res.render('login',{layout: false});
 });
-app.get('/profile', controllers.ProfileController.currentProfile);
 
 app.get('/signup', function(req,res) {
 	res.render('Signup', {title: "Signup", css_file_ref: 'css/signup.css'});
@@ -74,20 +73,19 @@ app.get('/signup', function(req,res) {
 app.get('/about', function(req,res) {
 	res.render('about', {title: 'About Us', css_file_ref: 'css/about.css'});
 });
-app.get('/search/jobs', function(req,res) {
-	res.render('Jobsearch', {title: "Search"});
-});
+
 app.get('/forgotpassword', function(req, res) {
 	res.render('forgot', {title: "Forgot Password?"})
 });
 
 
 // For post and image upload
-app.post('/', cpUpload, postController.addPost);
+// app.post('/', cpUpload, postController.addPost);
 // For like an dislike button
-app.post('/:id', postController.likedislike);
-
+// app.post('/:id', postController.likedislike);
+app.get('/jobsearch', controllers.JobSearchController.retrievejob);
 app.get('/profile-edit',controllers.ProfileEditController.showInfo);
+app.get('/profile', controllers.ProfileController.currentProfile);
 
 // app.use(authRoute.checkIfLoggedIn);
 app.post('/signup/create', controllers.SignupController.create);

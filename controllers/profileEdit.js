@@ -4,6 +4,7 @@ const ProfileEdit = {};
 
 ProfileEdit.edituser = function(request, response, cb){
     var email = request.body.email;
+    // console.log(email);
     var password = request.body.password;
     var dataFromUser = request.body;
     User.findOne({"email": email},function(error, doc){
@@ -14,7 +15,9 @@ ProfileEdit.edituser = function(request, response, cb){
                 message: "failed to load data"
             });
         }
-        console.log(doc.password);
+        // console.log(dataFromUser);
+        // console.log(doc);
+
         if(doc.password!==password){
             return cb({
                 status: false,
@@ -29,31 +32,38 @@ ProfileEdit.edituser = function(request, response, cb){
             if(error){
                 return console.log("error");
             }
-            return cb({
-                status: true,
-                message: res
-            });
+            return res.redirect('/profile-edit');
         });
     });
 }
 
 ProfileEdit.showInfo = function(req, res) {
     var userSession = req.session.user;
-    // var userSession = "shubhams.saurav@gmail.com";  for testing
+    // var userSession = "shubhamss.saurav@gmail.com";  //for testing
 
-    console.log(userSession);
+    // console.log(userSession);
     User.findOne({"email": userSession}, function(error, data) {
         if(error) {
             return res.send({msg: error})
         }
         if(data){
+
+            var email = data.email;
+            var firstname = data.firstname;
+            var lastname = data.lastname;
+            var phone = data.phone;
+            var city = data.city;
+            var age = data.age;
+            var bioSummary = data.bioSummary;
+
+            console.log(data);
             if(data.projets){
-                var projects = data.projects;
+                var projects = data.projects[0];
                 var projectTitle = projects.projectTitle;
                 var projectSummary = projects.projectSummary;
             };
             if(data.jobs){
-                var jobs = data.jobs;
+                var jobs = data.jobs[0];
                 var companyName = jobs.companyName;
                 var designation = jobs.designation;
                 var workExperience = jobs.workExperience;
@@ -65,20 +75,13 @@ ProfileEdit.showInfo = function(req, res) {
                 var skill2 = skills[1];
                 var skill3 = skills[2];
             }
-            var email = data.email;
-            var username = data.username;
-            var fullname = data.fullname;
-            var phone = data.phone;
-            var city = data.city;
-            var age = data.age;
-            var bioSummary = data.bioSummary;
         }
 
         return res.render('profileEdit', {
             title: "Edit Profile",
             css_file_ref: "css/profileEdit.css",
-            fullname: fullname,
-            username: username,
+            firstname: firstname,
+            lastname: lastname,
             email: email,
             city: city,
             phone: phone,

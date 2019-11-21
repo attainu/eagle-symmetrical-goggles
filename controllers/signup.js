@@ -10,9 +10,9 @@ SignupController.create = function(req, res) {
 		})
 	}
 	Signup.create({
-		username: data.email,
 		email: data.email,
-		fullname: data.firstname+ ' '+data.lastname,
+		firstname: data.firstname,
+		lastname: data.lastname,
 		email: data.email,
 		gender: data.gender,
 		password: data.password,

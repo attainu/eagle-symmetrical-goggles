@@ -24,6 +24,7 @@ AuthController.login = function(req, res) {
 			);
         }
         req.session.user = data.email;
+        console.log(req.session.user);
         return res.status(200).json(
 			{
 				status: true,
