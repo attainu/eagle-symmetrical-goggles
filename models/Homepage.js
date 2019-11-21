@@ -18,12 +18,6 @@ const userSchema = new mongoose.Schema(
             comment: String
         }],
         imageUrl: String,
-        image: {
-            data: Buffer,
-            contentType: String
-        },
-        // body  : {type:String,trim:true},
-        // image : {type:String,trim:true},
         date: {
             type: Date,
             default: Date.now()
