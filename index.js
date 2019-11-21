@@ -83,11 +83,22 @@ app.get('/forgotpassword', function(req, res) {
 });
 //app.use(authRoute.checkIfLoggedIn);
 
-// For post and image upload 
+// For post and image upload
 app.post('/', cpUpload, postController.addPost);
 // For like an dislike button
 app.post('/:id', postController.likedislike);
 
+
+
+// For post and image upload
+app.post('/', cpUpload, postController.addPost);
+// For like an dislike button
+app.post('/:id', postController.likedislike);
+
+app.get('/profile-edit',controllers.ProfileEditController.showInfo);
+
+// app.use(authRoute.checkIfLoggedIn);
+>>>>>>> 4de38145e51d6b08b821db14fb96a37b8c9ab112
 app.post('/signup/create', controllers.SignupController.create);
 app.post('/login', authRoute.login);
 app.get('/logout', authRoute.logout);
