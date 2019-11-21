@@ -70,7 +70,7 @@ app.get('/profile', function(req,res) {
 })
 app.get('/signup', function(req,res) {
 	res.render('Signup', {title: "Signup", css_file_ref: 'css/signup.css'});
-})
+});
 
 app.get('/about', function(req,res) {
 	res.render('about', {title: 'About Us', css_file_ref: 'css/about.css'});

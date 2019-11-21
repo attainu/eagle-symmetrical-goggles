@@ -4,19 +4,13 @@ const JobSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    description: {
+    experience: {
         type: String,
-        require: true
-    },
-    domain: {
-        type: String,
-        require: true
     },
     companyName: {
         type: String,
-        require: true
     },
-    address: {
+    place: {
         type: String
     }    
 },{
