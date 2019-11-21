@@ -1,6 +1,7 @@
 const FeedController = {};
 const FeedModel = require('./../models/Homepage.js');
-
+const tinify = require('tinify');
+tinify.key = "5lbMCxrQywrPhJ6RNBQ46BZ7DNjFWqGh";
 
 FeedController.getFeed = function (req, res) {
     FeedModel.find({}, function (error, data) {
@@ -25,6 +26,8 @@ FeedController.addPost = function (req, res) {
     if (req.files['imagefile']) {
         imgUrl = req.files['imagefile'][0].path;
         console.log("url>>", imgUrl);
+        var __source = tinify.fromFile(imgUrl);
+        __source.toFile(imgUrl);
         imgUrl = imgUrl.replace("public/", "");
     }
     FeedModel.create({
