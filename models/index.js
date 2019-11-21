@@ -1,11 +1,8 @@
 const mongoose = require('mongoose');
 const Auth = require('./Auth');
 const Jobs = require('./Jobs');
-<<<<<<< HEAD
-=======
 
->>>>>>> 4de38145e51d6b08b821db14fb96a37b8c9ab112
-const Signup = require('./Signup');
+// const Signup = require('./Signup');
 const Feedpage = require('./Homepage.js');
 const Users = require('./Users');
 
