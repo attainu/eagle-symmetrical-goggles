@@ -3,8 +3,8 @@ const User = require('../models/Users.js');
 const Profile = {};
 
 Profile.currentProfile = function(req, res) {
-    //var userSession = req.session.user;
-    var userSession = 'rupesh@gmail.com'; //for testing
+    var userSession = req.session.user;
+   // var userSession = 'rupesh@gmail.com'; //for testing
     console.log(userSession);
     User.findOne({"email": userSession}, function(error, data) {
         if(error) {

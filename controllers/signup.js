@@ -19,6 +19,7 @@ SignupController.create = function(req, res) {
 		phone: data.mobileNumber
 	}, function(error, response) {
 		if(error) {
+			console.log(error);
 			return res.status(500).send({
 				status: false,
 				message: "FAiled to create User"

@@ -32,7 +32,7 @@ ProfileEdit.edituser = function(request, response, cb){
             if(error){
                 return console.log("error");
             }
-            return res.redirect('/profile-edit');
+            return response.redirect('/profile-edit');
         });
     });
 }
@@ -57,18 +57,18 @@ ProfileEdit.showInfo = function(req, res) {
             var bioSummary = data.bioSummary;
 
             console.log(data);
-            if(data.projets){
+            if(data.projects[0]){
                 var projects = data.projects[0];
                 var projectTitle = projects.projectTitle;
                 var projectSummary = projects.projectSummary;
-            };
-            if(data.jobs){
+            }
+            if(data.jobs[0]){
                 var jobs = data.jobs[0];
                 var companyName = jobs.companyName;
                 var designation = jobs.designation;
                 var workExperience = jobs.workExperience;
                 var jobSummary = jobs.jobSummary;
-            };
+            }
             if(data.skills){
                 var skills = data.skills;
                 var skill1 = skills[0];

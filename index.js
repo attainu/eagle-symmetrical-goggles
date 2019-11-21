@@ -58,7 +58,7 @@ const hbs = exphbs.create({
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
-// app.use(authRoute.checkIfLoggedIn);
+app.use(authRoute.checkIfLoggedIn);
 //routes
 app.get('/', postController.getFeed);
 
@@ -91,7 +91,7 @@ app.get('/profile', controllers.ProfileController.currentProfile);
 app.post('/signup/create', controllers.SignupController.create);
 app.post('/login', authRoute.login);
 app.get('/logout', authRoute.logout);
-app.get('/search/*', controllers.SearchController.search);
+app.get('/search-*', controllers.SearchController.search);
 app.post('/setpassword', controllers.ForgotPasswordController.setPassword);
 app.post('/forgotpassword', controllers.ForgotPasswordController.findUser);
 app.post('/profile-edit', controllers.ProfileEditController.edituser);
