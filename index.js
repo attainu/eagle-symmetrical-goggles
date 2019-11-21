@@ -6,13 +6,13 @@ const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
 
 const authRoute = require('./controllers/auth.js');
-var session = require('express-session')
+const postController = require('./controllers/homepage.js');
 
+var session = require('express-session')
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
 app.use(express.static('public'))
-// app.use("static",express.static("public"));
 
 
 //session config
@@ -30,6 +30,27 @@ app.use(session({
 	}
 }));
 
+//importing multer
+const multer = require('multer');
+//setting multer to disk storage
+const fileStorage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		//console.log("file",file);
+		cb(null, 'public/uploads/');
+	},
+	filename: function (req, file, cb) {
+		cb(null, Date.now() + '-' + file.originalname);
+	}
+});
+const upload = multer({
+	storage: fileStorage
+});
+var cpUpload = upload.fields([
+	{ name: 'imagefile', maxCount: 1 },
+	{ name: 'videofile', maxCount: 1 },
+	{ name: 'pdffile', maxCount: 1 }
+]);
+
 // Configure Handlebars
 const hbs = exphbs.create({
 	extname: '.hbs'
@@ -39,6 +60,8 @@ app.set('view engine', '.hbs');
 
 
 //routes
+app.get('/', postController.getFeed);
+
 app.get('/login', function(req, res) {
 	res.render('login',{layout: false});
 });
@@ -54,11 +77,17 @@ app.get('/about', function(req,res) {
 });
 app.get('/search/jobs', function(req,res) {
 	res.render('Jobsearch', {title: "Search"});
-})
+});
 app.get('/forgotpassword', function(req, res) {
 	res.render('forgot', {title: "Forgot Password?"})
 });
 //app.use(authRoute.checkIfLoggedIn);
+
+// For post and image upload 
+app.post('/', cpUpload, postController.addPost);
+// For like an dislike button
+app.post('/:id', postController.likedislike);
+
 app.post('/signup/create', controllers.SignupController.create);
 app.post('/login', authRoute.login);
 app.get('/logout', authRoute.logout);
