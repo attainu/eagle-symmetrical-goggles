@@ -2,7 +2,7 @@ const AuthController = {};
 const Model = require('./../models/Auth.js');
 
 AuthController.login = function(req, res) {
-    var email = req.body.username;
+    var email = req.body.email;
     var password = req.body.password;
     console.log(email, password);
     Model.login(email, password, function(error, data){   
