@@ -1,22 +1,21 @@
 const AuthController = {};
 const Model = require('./../models/Auth.js');
-const Login = require('../models/Users.js').Login;
 
 AuthController.login = function(req, res) {
-    var email = req.body.email;
+    var email = req.body.username;
     var password = req.body.password;
-    
-    Login.find({"email": email, "password": password},function(error, data){
+    //console.log(email, password);
+    Model.login(email, password, function(error, data){   
         if (error) {
             res.send({
                 status: false,
                 message: error
             })
         }
-        console.log(data);
-        req.session.loggedIn = true;
-        req.session.user = data.email;
-        if(!req.session.loggedIn) {
+       // console.log(data);
+        //req.session.loggedIn = true;
+        //req.session.user = data.email;
+        if(!data) {
             return res.status(500).json(
 				{
 					status: false,

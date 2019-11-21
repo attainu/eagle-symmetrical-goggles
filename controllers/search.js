@@ -3,6 +3,7 @@ const Signup = require('../models/Users.js');
 
 SearchController.search = function(req, res) {
     var term = req.query.term;
+    console.log(term);
     Signup.find({"firstname": term}, function(error, data) {
         if(error){
             res.send({
