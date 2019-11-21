@@ -14,16 +14,18 @@ Profile.currentProfile = function(req, res) {
        // data = JSON.stringify(data);
        console.log(data);
         var email = data.email;
-        var name = data.fullname;
+        var name = data.firstname +" "+ data.lastname;
         var skills = data.skills;
         var followers = data.followers;
         var following = data.following;
         var summary = data.bioSummary;
+        var job = data.jobs[0];
+        var project = data.projects[0];
         //console.log(summary);
         return res.render('profile', {
             email,
             summary,
-            skills, name, followers, following
+            skills, name, followers, following, job, project
         })
     })
 }

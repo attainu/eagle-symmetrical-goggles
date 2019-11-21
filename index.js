@@ -71,7 +71,7 @@ app.get('/signup', function(req,res) {
 });
 
 app.get('/about', function(req,res) {
-	res.render('about', {title: 'About Us', css_file_ref: 'css/about.css'});
+	res.render('about', {title: 'About Us', css_file_ref: 'css/about.css', layout:false});
 });
 
 app.get('/forgotpassword', function(req, res) {

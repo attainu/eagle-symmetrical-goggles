@@ -2,13 +2,13 @@
 
 <div class="row mt-3">
      <div class="col-md-1"></div>
-    <div class="col-md-3" style="background-color: #9ad4d6 ;">
+    <div class="col-md-3 text-center" style="background-color: #9ad4d6 ;">
         <ul class="nav ml-5 mt-5">
           <li class="nav-item ml-5">
                 <img src="images/Penguins.jpg" class="rounded" alt="Image" width="100px" height="100px"> <br>
                 <h4>{{name}} </h4>
                 <h6>{{email}}</h6>
-                <h6>{{summary}}</h6>
+                <h6><i>{{summary}}</i></h6>
           </li>
         </ul>
     </div>
@@ -32,14 +32,18 @@
             </div>
         </div>
         <hr>
+ 
+        <div class="ml-4">
         <h4>Skills</h4>
       <div class="row">
-            <div class="col-md-4">
+            {{!-- <div class="col-md-4"> --}}
                 <ul>
                 {{#each skills}}
                      <li>{{this}}</li>
                 {{/each}}
                 </ul>
+        </div>         
+        </div>
        {{!--  <div class="row">
             <div class="col-md-4">
                 <ul>
@@ -55,24 +59,24 @@
                     <li>HTML/CSS</li>
                 </ul>
             </div>
+        --}}
         
-        </div> --}}
     
         <hr>
-        <div class="row">
+        <div class="row ml-2">
             <div class="col-md-4">
 
             <h4 style="float: left;">Work Experience</h4><br>
-            <ul>
-            <li>Student | Full Stack Web Development</li>
-            <i>AttainU</i>
+            <ul style="float: left;">
+                <li><b>{{job.designation}}</b></li>
+                <i>{{job.companyName}}</i>
             </ul>
             </div>
             <div class="col-md-4 ml-5">    
             <h4>Projects</h4>
             <ul>
-            <li>White Collar | A Professional social Network</li>
-            <i>Project for Shallow Dive @ AttainU</i>
+                <li><b>{{project.projectTitle}}</b></li>
+                <i>{{project.projectSummary}}</i>
             </ul>
             </div>
         </div>
