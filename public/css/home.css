@@ -49,12 +49,8 @@
     margin: 5px 5px 0px 5px;
     border-radius: 10px;
 }
-/* image posted by user */
-#imagePost {
-    width: 420px;
-    margin: 0px 10px 0px 10px;
-    border-radius: 5px;
-}
+
+
 #myUserName {
     font-weight: 900;
 }
@@ -66,26 +62,23 @@
 #userPost {
     margin: 10px 10px 20px 20px;
 }
+#imagePost{
+    width: 412px;
+    margin: 0px 15px 0px 15px;
+    border-radius: 5px;
+}
 #likeButton{
-    text-align: center;
-    margin-left: 30px;
-    margin-right: -5px;
+    margin-left: 40px;
+    margin-bottom: 5px;
+    margin-right: -10px;
 }
 #commentButton{
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    margin-left: 20px;
-    margin-right: 20px;
-    border-radius: 40%;
+    margin-left: 40px;
+    margin-bottom: 10px;
 }
 #shareButton {
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    margin-left: 20px;
-    margin-right: 10px;
-    border-radius: 40%;
+    margin-left: 40px;
+    margin-bottom: 10px;
 }
 .buttonx {
     color: rgb(13, 51, 13);
@@ -106,14 +99,6 @@
     font-weight: 900;
     text-decoration-line: underline;
 }
-/* for suggested article */
-/* #suggested-article {
-    list-style: none;
-    margin-top: 30px;
-} */
-/* Right section ends */
-
-/* For all anchor tag */
 a:link {
     color:  gray;
 }
