@@ -1,0 +1,134 @@
+
+/* Left section starts*/
+#profileSection1{
+    background-color: seashell;
+    
+}
+#height1 {
+    height: 600px;
+}
+#profileImageL {
+    width: 50px;
+    height: 50px;
+    margin: 5px 5px 0px 50px;
+    border-radius: 20px;
+}
+#userProfileName {
+    font-weight: 900;
+    margin: 10px 0px 10px 50px;
+}
+/* For skills in user profile */
+#skillText {
+    margin: 20px 0px 0px 50px;
+}
+#userSkills{
+    margin: 0px 0px 0px 30px;
+}
+/* For friend suggestion list */
+#friendlistSuggestion {
+    list-style-type: none;
+    margin: 20px 0px 0px 10px;
+}
+.followFriendButton {
+    float: right;
+    margin: 0px;
+}
+.profileImgFriendlist {
+    width: 25px;
+    height: 25px;
+    margin: 0px 0px 0px 0px;
+    border-radius: 10px;
+}
+/* Left section ends*/
+
+/* Middle section starts*/
+/* for post */
+#profileImage {
+    width: 30px;
+    height: 30px;
+    margin: 5px 5px 0px 5px;
+    border-radius: 10px;
+}
+
+#followButton {
+}
+#myUserName {
+    font-weight: 900;
+}
+#postTime {
+    margin: 0px 0px 10px 30px;
+    font-weight: 500;
+    font-size: 12px;
+}
+#userPost {
+    margin: 10px 10px 20px 20px;
+}
+#likeButton{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 20px;
+    border-radius: 40%;
+}
+#commentButton{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 40%;
+}
+#shareButton {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 10px;
+    border-radius: 40%;
+}
+.buttonx {
+    color: rgb(13, 51, 13);
+}
+/* Middle section ends*/
+
+
+/* Right section starts */
+#right-section {
+    background-color: seashell;
+}
+/* For Trending topics */
+#trending-topics {
+    list-style: none;
+    margin-top: 40px;
+}
+#article-heading {
+    font-weight: 900;
+    text-decoration-line: underline;
+}
+/* for suggested article */
+/* #suggested-article {
+    list-style: none;
+    margin-top: 30px;
+} */
+/* Right section ends */
+
+/* For all anchor tag */
+a:link {
+    color:  gray;
+}
+  
+  
+  
+  /* mouse over link */
+a:hover {
+    color: snow;
+}
+  /* visited link */
+a:visited {
+    color:  gray;
+}
+  /* selected link */
+a:active {
+    color: blue;
+}
