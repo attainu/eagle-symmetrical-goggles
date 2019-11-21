@@ -20,7 +20,7 @@ $(document).ready(function () {
             $(this).append("<span id='likedtxt'>Liked</span>");
             $(this).animate({ fontSize: "18px" });
         }
-        var id = $('.likeicon').attr('userId');
+        id = $('.likeicon').attr('userId');
         console.log("id: ",id);
         
         $.post('/' + id, function (response) {
