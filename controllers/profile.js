@@ -1,4 +1,4 @@
-const User = require('./../models/Signup.js');
+const User = require('../models/Users.js');
 
 const Profile = {};
 

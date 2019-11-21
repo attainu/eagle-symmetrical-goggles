@@ -1,5 +1,5 @@
 <!-- Heading -->
-    <div class="headingss mx-auto mt-3">
+    <div class="headingss mx-auto mt-3" style="text-align: center;">
         <h1>
         Welcome
         </h1>
@@ -16,11 +16,11 @@
               </div>
               <div class="col-md-4 mb-3">
                 <label>Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Username" value={{username}}>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required value={{username}}>
               </div>
               <div class="col-md-4 mb-3">
                 <label>Email Id</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Email" required value={{username}}>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Email" disabled value={{email}}>
               </div>
             </div>
             <div class="form-row">
@@ -49,15 +49,30 @@
             </div>
             <hr>
             <div class="form-group">
+              <label>Skills</label>
+              <div class="form-row">
+                <div class="col-md-4 mb-6">
+                  <input type="text" class="form-control" name="skills[0]" id="skill1" placeholder="Skill 1" value={{skill1}}>
+                </div>
+                  <div class="col-md-4 mb-6">
+                  <input type="text" class="form-control" name="skills[1]" id="skill2" placeholder="Skill 2" value={{skill2}}>
+                </div>
+                  <div class="col-md-4 mb-6">
+                  <input type="text" class="form-control" name="skills[2]" id="skill3" placeholder="Skill 3" value={{skill3}}>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
               <h4><i> Project Section</i></h4>
               <div class="form-row">
                 <div class="col-md-4 mb-6">
                   <label>Project Titlte</label>
-                  <input type="text" class="form-control" id="projectTitle" name="projectTitle" placeholder="Titlte" value={{projectTitle}}>
+                  <input type="text" class="form-control" id="projectTitle" name="projects[projectTitle]" placeholder="Titlte" value={{projectTitle}}>
                 </div>
                 <div class="col-md-8 mb-6">
                   <label>Project Summary</label>
-                  <input type="text" class="form-control" id="projectSummary" name="projectSummary" placeholder="Project Summary" value={{projectSummary}}>
+                  <input type="text" class="form-control" id="projectSummary" name="projects[projectSummary]" placeholder="Project Summary" value={{projectSummary}}>
                 </div>
               </div>
             </div>
@@ -67,19 +82,19 @@
               <div class="form-row">
                 <div class="col-md-4 mb-6">
                   <label>Company Name</label>
-                  <input type="text" class="form-control" id="companyName" name="companyName" placeholder="Name" value={{companyName}}>
+                  <input type="text" class="form-control" id="companyName" name="jobs[companyName]" placeholder="Name" value={{companyName}}>
                 </div>
                 <div class="col-md-4 mb-6">
                   <label>Designation</label>
-                  <input type="text" class="form-control" id="designation" name="designation" placeholder="Designation" value={{designation}}>
+                  <input type="text" class="form-control" id="designation" name="jobs[designation]" placeholder="Designation" value={{designation}}>
                 </div>
                 <div class="col-md-3 mb-6">
                   <label>Work Experience</label>
-                  <input type="number" class="form-control" id="workExperience" name="workExperience" placeholder="Experience" value={{workExperience}}>
+                  <input type="number" class="form-control" id="workExperience" name="jobs[workExperience]" placeholder="Experience" value={{workExperience}}>
                 </div>
                 <div class="col-md-8 mb-6">
                   <label>Job Description</label>
-                  <textarea class="form-control" id="jobSummary" name="jobSummary" rows="3" placeholder="Job Description" value={{jobSummary}}></textarea>
+                  <textarea class="form-control" id="jobSummary" name="jobs[jobSummary]" rows="3" placeholder="Job Description" value={{jobSummary}}></textarea>
                 </div>
               </div>
             </div>

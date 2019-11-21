@@ -70,7 +70,7 @@ app.get('/profile', function(req,res) {
 })
 app.get('/signup', function(req,res) {
 	res.render('Signup', {title: "Signup", css_file_ref: 'css/signup.css'});
-})
+});
 
 app.get('/about', function(req,res) {
 	res.render('about', {title: 'About Us', css_file_ref: 'css/about.css'});
@@ -83,25 +83,31 @@ app.get('/forgotpassword', function(req, res) {
 });
 //app.use(authRoute.checkIfLoggedIn);
 
-// For post and image upload 
+// For post and image upload
 app.post('/', cpUpload, postController.addPost);
 // For like an dislike button
 app.post('/:id', postController.likedislike);
 
+
+
+app.get('/jobsearch', controllers.JobSearchController.retrievejob);
+
+app.get('/profile-edit',controllers.ProfileEditController.showInfo);
+
+// app.use(authRoute.checkIfLoggedIn);
+>>>>>>> 571bf6da470555cee3fc8bc7e698f056e687b024
 app.post('/signup/create', controllers.SignupController.create);
 app.post('/login', authRoute.login);
 app.get('/logout', authRoute.logout);
 app.get('/search/*', controllers.SearchController.search);
 app.post('/setpassword', controllers.ForgotPasswordController.setPassword);
 app.post('/forgotpassword', controllers.ForgotPasswordController.findUser);
+app.post('/profile-edit', controllers.ProfileEditController.edituser);
+app.post('/jobsearch', controllers.JobSearchController.createnewjob);
+
 
 //These routes are to be handled
-//app.get('/jobsearch', controllers.);
-//app.get('/profile/edit', routeController.sendprofileEdit);
 //app.post('/create-job', authRoute.addjob);
-
-
-
 
 
 // Start the app on pre defined port number
@@ -116,4 +122,3 @@ db.connect()
 .catch(function(error){
 	console.log("Failed to setup connecton with database.", error);
 })
-

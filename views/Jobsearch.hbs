@@ -3,16 +3,16 @@
     <div class="form-row">
         <div class="col-md-6">
             <div class="card" id="Job-Search">
-                <form action="/jobsearch" method="get">
+                <form action="/jobsearch" method="GET">
                     <div class="card-header">
                         Job Search
                     </div>
                     <div class="card-body">
                         <div>
-                            <input type="text" class="form-control" id="Job-title" placeholder="Search Jobs" name='Job-title'>
+                            <input type="text" class="form-control" id="Job-title" placeholder="Designation" name='titletosearch' required>
                         </div>
                         <div>
-                            <input type="text" class="form-control" id="State" placeholder="Enter State" name='place'>
+                            <input type="text" class="form-control" id="State" placeholder="Enter Place" name='placetosearch' required>
                         </div>
                         <button type="submit" class="btn btn-secondary" id="Search">Search</button>
                     </div>
@@ -20,22 +20,22 @@
             </div>
             <hr>
             <div class="card" id="Job-Post">
-                 <form action="/create-job" method="post">
+                 <form action="/jobsearch" method="post">
                     <div class="card-header">
                         Job Post
                     </div>
                     <div class="card-body">
                     <div>
-                        <input type="text" class="form-control" id="Job-title" placeholder="Designation" name='title'>
+                        <input type="text" class="form-control" id="Job-title" placeholder="Designation" name='title' required>
                     </div>
                     <div>
-                        <input type="text" class="form-control" id="State" placeholder="Enter State" name='place'>
+                        <input type="text" class="form-control" id="State" placeholder="Enter Place" name='place' required>
                     </div>
                     <div>
-                        <input type="text" class="form-control" id="Company-Name" placeholder="Company-Name" name='company'>
+                        <input type="text" class="form-control" id="Company-Name" placeholder="Company Name" name='companyname' required>
                     </div>
                     <div>
-                        <input type="number" class="form-control" id="Experience" placeholder="Experience-Required" name='experience'>
+                        <input type="number" class="form-control" id="Experience" placeholder="Experience (in Yrs)" name='experience' required>
                     </div>
                     <button type="submit" class="btn btn-secondary" id="Post">Post</button>
                     </div>
@@ -43,8 +43,21 @@
             </div>
         </div>
         <div class="vl"></div>
-        <div class="col-md-5">
-            <h4>Search Result</h4>
+        <div class="col-md-5 mx-auto">
+            <h4 class="text-center">Search Result</h4>
+            <hr>
+            {{#if result}}
+                {{#each result}}
+                    <div class="card w-75 mx-auto mt-4" id="searchresult">
+                        <div class="card-body">
+                            <h5 class="card-title" id="title">{{this.title}}</h5>
+                            <label class="card-subtitle" id="companyName"><i>{{this.companyName}}</i></label><br>
+                            <label class="card-text">Experience {{this.experience}} Yrs</label><br>
+                            <label class="text-muted" id="placename">{{this.place}}</label>
+                        </div>
+                    </div>
+                {{/each}}
+            {{/if}}
         </div>
     </div>
 </div>
