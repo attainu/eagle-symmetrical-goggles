@@ -4,7 +4,7 @@ const Model = require('./../models/Auth.js');
 AuthController.login = function(req, res) {
     var email = req.body.username;
     var password = req.body.password;
-    //console.log(email, password);
+    console.log(email, password);
     Model.login(email, password, function(error, data){   
         if (error) {
             res.send({
@@ -23,6 +23,7 @@ AuthController.login = function(req, res) {
 				}
 			);
         }
+        req.session.user = data.email;
         return res.status(200).json(
 			{
 				status: true,
@@ -57,10 +58,7 @@ AuthController.checkIfLoggedIn = function(req, res, next) {
     
     Model.checkIfLoggedIn(url, userSession, function(error, data) {
         if(error) {
-            return res.json({
-                status: false,
-                message: error
-            })
+            return res.redirect('/login')
         }
         return next();
     });

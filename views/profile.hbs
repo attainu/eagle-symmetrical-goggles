@@ -6,7 +6,7 @@
         <ul class="nav ml-5 mt-5">
           <li class="nav-item ml-5">
                 <img src="images/Penguins.jpg" class="rounded" alt="Image" width="100px" height="100px"> <br>
-                <h4>{{username}} </h4>
+                <h4>{{name}} </h4>
                 <h6>{{email}}</h6>
                 <h6>{{summary}}</h6>
           </li>
@@ -37,7 +37,7 @@
             <div class="col-md-4">
                 <ul>
                 {{#each skills}}
-                     <li>{{skills}}</li>
+                     <li>{{this}}</li>
                 {{/each}}
                 </ul>
        {{!--  <div class="row">

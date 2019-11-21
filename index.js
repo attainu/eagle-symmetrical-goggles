@@ -58,16 +58,15 @@ const hbs = exphbs.create({
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
-
+//app.use(authRoute.checkIfLoggedIn);
 //routes
 app.get('/', postController.getFeed);
 
 app.get('/login', function(req, res) {
 	res.render('login',{layout: false});
 });
-app.get('/profile', function(req,res) {
-	res.render('profile', {title: "Profile"});
-})
+app.get('/profile', controllers.ProfileController.currentProfile);
+
 app.get('/signup', function(req,res) {
 	res.render('Signup', {title: "Signup", css_file_ref: 'css/signup.css'});
 });
@@ -81,13 +80,6 @@ app.get('/search/jobs', function(req,res) {
 app.get('/forgotpassword', function(req, res) {
 	res.render('forgot', {title: "Forgot Password?"})
 });
-//app.use(authRoute.checkIfLoggedIn);
-
-// For post and image upload
-app.post('/', cpUpload, postController.addPost);
-// For like an dislike button
-app.post('/:id', postController.likedislike);
-
 
 
 // For post and image upload
@@ -104,6 +96,8 @@ app.get('/logout', authRoute.logout);
 app.get('/search/*', controllers.SearchController.search);
 app.post('/setpassword', controllers.ForgotPasswordController.setPassword);
 app.post('/forgotpassword', controllers.ForgotPasswordController.findUser);
+app.post('/profile-edit', controllers.ProfileEditController.edituser);
+app.post('/jobsearch', controllers.JobSearchController.createnewjob);
 
 //These routes are to be handled
 //app.get('/jobsearch', controllers.);
