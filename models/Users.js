@@ -25,13 +25,28 @@ const profileSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    city: {
+        type: String
+    },
+    age: {
+        type: Number
+    },
+    bioSummary: {
+        type: String
+    },
     skills: {
         type: Array
     },
     projects: {
         type: Array
     },
-    job: {
+    jobs: {
+        type: Array
+    },
+    followers: {
+        type: Array
+    },
+    following: {
         type: Array
     },
     datecreated: {

@@ -1,5 +1,5 @@
 const Auth = {};
-const User = require('./../models/Signup.js');
+const User = require('./Users.js');
 Auth.login = function(email, password, db, cb) {
    // var user = null;
    User.findOne({"email":email, "password": password}, function(error, data){

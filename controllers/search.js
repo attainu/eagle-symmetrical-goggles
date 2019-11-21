@@ -1,5 +1,5 @@
 const SearchController =  {};
-const Signup = require('./../models/Signup.js');
+const Signup = require('../models/Users.js');
 
 SearchController.search = function(req, res) {
     var term = req.query.term;

@@ -1,4 +1,4 @@
-const Signup = require('./../models/Signup.js');
+const Signup = require('../models/Users.js');
 const SignupController = {};
 
 SignupController.create = function(req, res) {

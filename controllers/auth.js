@@ -1,6 +1,6 @@
 const AuthController = {};
 const Model = require('./../models/Auth.js');
-const Login = require('./../models/Signup.js').Login;
+const Login = require('../models/Users.js').Login;
 
 AuthController.login = function(req, res) {
     var email = req.body.email;
