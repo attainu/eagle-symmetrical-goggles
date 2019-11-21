@@ -4,7 +4,7 @@ const app = express();
 const hbs = require('express-handlebars');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const PORT = 6969;
+const PORT = 7000;
 
 const routeController = require('./routes/routecontroller');
 const authRoute = require('./routes/authcontroller');
@@ -72,8 +72,11 @@ app.get('/profile/edit', routeController.sendprofileEdit);
 app.get('/forgotpassword', routeController.sendForgotPassword);
 app.get('/logout', authRoute.logout);
 
-
+// For post and image upload 
 app.post('/', cpUpload, postRoute.addPost);
+
+// For like an dislike button
+// app.post('/:id', postRoute.likedislike);
 
 app.post('/setpassword', authRoute.setPassword);
 app.post('/forgotpassword', authRoute.forgotPassword);

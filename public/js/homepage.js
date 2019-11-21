@@ -1,9 +1,32 @@
 $(document).ready(function () {
     console.log("App is ready");
-    $('#postButton').on('click', function () {
-        setInterval(function () {
-            location.reload();
-        }, 500);
+    // $('#postButton').on('click', function () {
+    //     setInterval(function () {
+    //         //location.reload();
+    //     }, 500);
+    // });
+
+    $('.likeButton').on('click', function () {
+
+        if ($(this).css("color") === "rgb(0, 0, 255)") {
+            console.log("You disliked this post!");
+            $("#likedtxt").remove();
+            $(this).css("color", "black");
+            $(this).animate({ fontSize: "15px" });
+        }
+        else {
+            console.log("You liked this post!");
+            $(this).css("color", "blue");
+            $(this).append("<span id='likedtxt'>Liked</span>");
+            $(this).animate({ fontSize: "18px" });
+        }
+        var id = $('.likeicon').attr('userId');
+        console.log("id: ",id);
+        
+        $.post('/' + id, function (response) {
+            $('fa-thumbs-o-up').text(response.likeCount);
+        })
+
     });
 });
     // For posting status => code starts from here
