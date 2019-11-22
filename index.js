@@ -58,7 +58,7 @@ const hbs = exphbs.create({
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
-app.use(authRoute.checkIfLoggedIn);
+//app.use(authRoute.checkIfLoggedIn);
 //routes
 app.get('/', postController.getFeed);
 
@@ -87,7 +87,6 @@ app.get('/jobsearch', controllers.JobSearchController.retrievejob);
 app.get('/profile-edit',controllers.ProfileEditController.showInfo);
 app.get('/profile', controllers.ProfileController.currentProfile);
 
-// app.use(authRoute.checkIfLoggedIn);
 app.post('/signup/create', controllers.SignupController.create);
 app.post('/login', authRoute.login);
 app.get('/logout', authRoute.logout);
@@ -101,7 +100,7 @@ app.post('/jobsearch', controllers.JobSearchController.createnewjob);
 //app.get('/jobsearch', controllers.);
 //app.get('/profile/edit', routeController.sendprofileEdit);
 //app.post('/create-job', authRoute.addjob);
-
+app.get('/trending', controllers.TrendingController.getTrending);
 
 
 // Start the app on pre defined port number

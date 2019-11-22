@@ -5,5 +5,6 @@ module.exports = {
     ProfileController : require('./profile.js'),
     ForgotPasswordController: require('./forgotPassword.js'),
     ProfileEditController : require('./profileEdit.js'),
-    JobSearchController : require('./jobsearch.js')
+    JobSearchController : require('./jobsearch.js'),
+    TrendingController : require('./trending.js')
 }
