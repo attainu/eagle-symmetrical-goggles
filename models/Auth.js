@@ -15,7 +15,7 @@ Auth.login = function(email, password, cb) {
 };
 
 Auth.checkIfLoggedIn = function(url, userSession, callback) {
-    if(url === '/login'|| url === '/signup' || url === '/about' || url === '/signup/create') {
+    if(url === '/login'|| url === '/signup' || url === '/about' || url === '/signup/create' || url === '/forgotpassword' || url === '/setpassword') {
         return callback(null, "Next");
     }
     if(typeof userSession === "undefined") {
