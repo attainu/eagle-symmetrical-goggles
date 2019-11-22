@@ -75,13 +75,4 @@ FeedController.likedislike = function (req, res) {
         });
     });
 };
-// get the click data from the database
-// app.get('/clicks', (req, res) => {
-// FeedController.getLike = function (req,res) {
-//     FeedModel.find({}, funcion (error, data){
-//         if (err) return console.log(err);
-//         res.send(result);
-//     });
-// }
-
 module.exports = FeedController;
