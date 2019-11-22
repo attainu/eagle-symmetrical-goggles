@@ -18,7 +18,7 @@ app.use(express.static('public'))
 
 //session config
 app.use(session({
-	name: 'Somename',
+	name: 'somename',
 	secret: 'adfasdfas',
 	resave : false,
 	saveUninitialized: true,
@@ -59,29 +59,26 @@ const hbs = exphbs.create({
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
-
+app.use(authRoute.checkIfLoggedIn);
 //routes
 app.get('/', controllers.FeedController.getFeed);
 
 app.get('/login', function(req, res) {
 	res.render('login',{layout: false});
 });
-app.get('/profile', function(req,res) {
-	res.render('profile', {title: "Profile"});
-})
+
 app.get('/signup', function(req,res) {
 	res.render('Signup', {title: "Signup", css_file_ref: 'css/signup.css'});
 });
 
 app.get('/about', function(req,res) {
-	res.render('about', {title: 'About Us', css_file_ref: 'css/about.css'});
+	res.render('about', {title: 'About Us', css_file_ref: 'css/about.css', layout:false});
 });
-app.get('/search/jobs', function(req,res) {
-	res.render('Jobsearch', {title: "Search"});
-});
+
 app.get('/forgotpassword', function(req, res) {
 	res.render('forgot', {title: "Forgot Password?"})
 });
+<<<<<<< HEAD
 //app.use(authRoute.checkIfLoggedIn);
 
 
@@ -91,7 +88,17 @@ app.post('/', cpUpload, controllers.FeedController.addPost);
 // For like an dislike button
 app.post('/:id', controllers.FeedController.likeDislike);
 
+=======
+
+
+// For post and image upload
+// app.post('/', cpUpload, postController.addPost);
+// For like an dislike button
+// app.post('/:id', postController.likedislike);
+app.get('/jobsearch', controllers.JobSearchController.retrievejob);
+>>>>>>> 25eab97840655b31175d33f7d17134212003d242
 app.get('/profile-edit',controllers.ProfileEditController.showInfo);
+app.get('/profile', controllers.ProfileController.currentProfile);
 
 // app.use(authRoute.checkIfLoggedIn);
 app.post('/signup/create', controllers.SignupController.create);
@@ -100,6 +107,8 @@ app.get('/logout', authRoute.logout);
 app.get('/search-*', controllers.SearchController.search);
 app.post('/setpassword', controllers.ForgotPasswordController.setPassword);
 app.post('/forgotpassword', controllers.ForgotPasswordController.findUser);
+app.post('/profile-edit', controllers.ProfileEditController.edituser);
+app.post('/jobsearch', controllers.JobSearchController.createnewjob);
 
 //These routes are to be handled
 // app.get('/jobsearch', controllers.);

@@ -9,29 +9,22 @@ SignupController.create = function(req, res) {
 			message: "password and confirmPassword needs to be same"
 		})
 	}
-	Signup.Profile.create({
-		username: data.username,
+	Signup.create({
+		email: data.email,
 		firstname: data.firstname,
 		lastname: data.lastname,
 		email: data.email,
+		gender: data.gender,
 		password: data.password,
-		mobileNumber:data.mobileNumber
+		phone: data.mobileNumber
 	}, function(error, response) {
 		if(error) {
+			console.log(error);
 			return res.status(500).send({
 				status: false,
 				message: "FAiled to create User"
 			});
 		}
-	
-		Signup.Login.create({
-			email: data.email,
-			password: data.password
-		}, function(error, response) {
-			if(error) {
-				console.error(error);
-			}
-		})
 		return res.status(200).send({
 			status: true,
 			message: "User created Successfully and login details saved"
