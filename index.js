@@ -98,11 +98,6 @@ app.post('/profile-edit', controllers.ProfileEditController.edituser);
 app.post('/jobsearch', controllers.JobSearchController.createnewjob);
 
 //These routes are to be handled
-//app.get('/jobsearch', controllers.);
-//app.get('/profile/edit', routeController.sendprofileEdit);
-//app.post('/create-job', authRoute.addjob);
-
-
 
 // Start the app on pre defined port number
 db.connect()
