@@ -80,7 +80,7 @@ app.get('/forgotpassword', function(req, res) {
 
 
 // For post and image upload
-// app.post('/', cpUpload, postController.addPost);
+app.post('/', cpUpload, postController.addPost);
 // For like an dislike button
 // app.post('/:id', postController.likedislike);
 app.get('/jobsearch', controllers.JobSearchController.retrievejob);
@@ -106,13 +106,13 @@ app.post('/jobsearch', controllers.JobSearchController.createnewjob);
 
 // Start the app on pre defined port number
 db.connect()
-.then(function() {
-	app.listen(PORT, function() {
-		console.log("Application has started and running on port: ", PORT);
-	}).on('error', function(error) {
-		console.log("Unable to start app. Error >>>>", error);
-	});
-})
-.catch(function(error){
-	console.log("Failed to setup connecton with database.", error);
-})
+			.then(function() {
+				app.listen(PORT, function() {
+					console.log("Application has started and running on port: ", PORT);
+				}).on('error', function(error) {
+					console.log("Unable to start app. Error >>>>", error);
+				});
+			})
+			.catch(function(error){
+				console.log("Failed to setup connecton with database.", error);
+			})
