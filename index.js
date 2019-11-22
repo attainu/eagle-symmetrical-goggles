@@ -1,14 +1,15 @@
 const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
-const PORT = 9090;
+const session = require('express-session');
+const PORT = 9000;
 const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
 
 const authRoute = require('./controllers/auth.js');
-const postController = require('./controllers/homepage.js');
+//const postController = require('./controllers/homepage.js');
 
-var session = require('express-session')
+
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
@@ -60,7 +61,7 @@ app.set('view engine', '.hbs');
 
 app.use(authRoute.checkIfLoggedIn);
 //routes
-app.get('/', postController.getFeed);
+app.get('/', controllers.FeedController.getFeed);
 
 app.get('/login', function(req, res) {
 	res.render('login',{layout: false});
@@ -80,6 +81,10 @@ app.get('/forgotpassword', function(req, res) {
 	res.render('forgot', {title: "Forgot Password?"})
 });
 
+// For post and image upload
+app.post('/', cpUpload, controllers.FeedController.addPost);
+// For like an dislike button
+app.post('/:id', controllers.FeedController.likeDislike);
 
 // For post and image upload
 // app.post('/', cpUpload, postController.addPost);
