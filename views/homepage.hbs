@@ -7,23 +7,22 @@
         <div class="col-md-3 border rounded" id="profileSection1">
             <div class="mt-4 py-2 sticky-top" id="height1">
                 <span><img id="profileImageL" src="/images/profile.jpeg" alt="img"></span>
-                <p id="userProfileName">Mohd. Afroz</p>
-
+                <p id="userProfileName">{{profileName}}</p>
+                <p id="userName">{{userName}}</p>
                 <span id="skillText"><b>Skills: </b></span>
+                {{#each Skills}}
                 <ul id="userSkills">
-                    <li>Coding</li>
-                    <li>Singing</li>
+                    <li>this</li>
                 </ul>
+                {{/each}}
                 <div>
                     <ul style="list-style-type: none;" id="friendlistSuggestion">
-                        <li><span>Friends: </span> <b>100</b></li>
-                        <li><span>Followers: </span> <b>99</b></li>
-                        <li> <span>Following: </span> <b>80</b> </li>
-                        <li> <span>Post: </span> <b>243</b> </li>
+                        <li><span>Followers: </span> <b>{{followers}}</b></li>
+                        <li> <span>Following: </span> <b>{{following}}</b> </li>
+                        <li> <span>Post: </span> <b>{{numberOfPosts}}</b> </li>
                     </ul>
                 </div>
             </div>
-            <hr>
         </div>
         {{!--profile section ends here--}}
 
@@ -93,12 +92,13 @@
                             <span class=""><i class="far fa-thumbs-up buttonx"></i></span>
                         </button>
                         <span id="likeCounter">10</span>
-                    </span> --}}
+                    </span> 
+                    --}}
 
                     <a class="btn likeButton" id="likeButton" userId="{{this._id}}">
                             <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
                     </a>
-                    <span id="likes-count-{{ this._id }}">{{ this.likes }}</span>
+                    <span id="likes-count-{{ this._id }}">{{ this.likes.likeCount}}</span>
 
                     
                     <a class="btn commentButton" id="commentButton">
@@ -106,7 +106,7 @@
                     </a>
 
                     <a class="btn shareButton" id="shareButton">
-                        <i class="fas fa-share buttonx" aria-hidden="true"></i>
+                        <i class="fas fa-share buttony" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>

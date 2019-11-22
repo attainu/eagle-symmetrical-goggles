@@ -8,20 +8,16 @@ const userSchema = new mongoose.Schema(
         username: String,
         post: String,
         likes: {
-            type: Number,
-            default: 0
+            likeCount: { type: Number, default: 0 },
+            likedBy: Array
         },
         comments: [{
             user: Object,
-            fullname: String,
             username: String,
             comment: String
         }],
         imageUrl: String,
-        date: {
-            type: Date,
-            default: Date.now()
-        }
+        date: { type: Date, default: Date.now() }
     },
     {
         collection: 'posts'
