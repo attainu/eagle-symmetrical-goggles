@@ -7,13 +7,12 @@ const userSchema = new mongoose.Schema(
         name: String,
         username: String,
         post: String,
-        likes: {
-            type: Number,
-            default: 0
-        },
+        likes: [{
+            likeCount: { type: Number, default: 0 },
+            likedBy: { userId: Array }
+        }],
         comments: [{
             user: Object,
-            fullname: String,
             username: String,
             comment: String
         }],
@@ -28,6 +27,6 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-const UserPost = mongoose.model('Post', userSchema);
+const UserPost = mongoose.model('UserPost', userSchema);
 
 module.exports = UserPost;

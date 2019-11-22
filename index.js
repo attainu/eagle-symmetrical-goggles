@@ -17,7 +17,7 @@ app.use(express.static('public'))
 
 //session config
 app.use(session({
-	name: 'somename',
+	name: 'Somename',
 	secret: 'adfasdfas',
 	resave : false,
 	saveUninitialized: true,
@@ -65,7 +65,9 @@ app.get('/', postController.getFeed);
 app.get('/login', function(req, res) {
 	res.render('login',{layout: false});
 });
-
+app.get('/profile', function(req,res) {
+	res.render('profile', {title: "Profile"});
+})
 app.get('/signup', function(req,res) {
 	res.render('Signup', {title: "Signup", css_file_ref: 'css/signup.css'});
 });
@@ -110,4 +112,4 @@ db.connect()
 })
 .catch(function(error){
 	console.log("Failed to setup connecton with database.", error);
-})
+});
