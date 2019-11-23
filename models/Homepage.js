@@ -7,23 +7,16 @@ const userSchema = new mongoose.Schema(
         name: String,
         username: String,
         post: String,
-        likes: {
-            type: Number,
-            default: 0
-        },
+        likes: [{
+            likeCount: { type: Number, default: 0 },
+            likedBy: { userId: Array }
+        }],
         comments: [{
             user: Object,
-            fullname: String,
             username: String,
             comment: String
         }],
         imageUrl: String,
-        image: {
-            data: Buffer,
-            contentType: String
-        },
-        // body  : {type:String,trim:true},
-        // image : {type:String,trim:true},
         date: {
             type: Date,
             default: Date.now()

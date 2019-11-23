@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+<<<<<<< HEAD
 
 const hbs = require('express-handlebars');
 const session = require('express-session');
@@ -36,6 +37,36 @@ app.use(session({
         sameSite: true,
         secure: false
     }
+=======
+const exphbs = require('express-handlebars');
+const PORT = 9090;
+const db = require('./models/index.js');
+const controllers = require('./controllers/index.js');
+
+const authRoute = require('./controllers/auth.js');
+const postController = require('./controllers/homepage.js');
+
+var session = require('express-session')
+//middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended : true }));
+app.use(express.static('public'))
+
+
+//session config
+app.use(session({
+	name: 'Somename',
+	secret: 'adfasdfas',
+	resave : false,
+	saveUninitialized: true,
+	cookie: {
+		httpOnly: true,
+		maxAge: 1200000,
+		path: '/',
+		sameSite: true,
+		secure: false
+	}
+>>>>>>> feature/feeds-and-status-post
 }));
 
 //importing multer
@@ -59,6 +90,7 @@ var cpUpload = upload.fields([
 	{ name: 'pdffile', maxCount: 1 }
 ]);
 
+<<<<<<< HEAD
 //app.use(authRoute.checkIfLoggedIn);
 // user will routed to either loginpage or homepage depending upon his session
 app.get('/', postRoute.getFeed);
@@ -94,4 +126,73 @@ db.connect().then( function () {
 	});
 }).catch( function (error) {
 	console.log("Failed to setup a connection with database",error);
+=======
+// Configure Handlebars
+const hbs = exphbs.create({
+	extname: '.hbs'
+});
+app.engine('.hbs', hbs.engine);
+app.set('view engine', '.hbs');
+
+
+//routes
+app.get('/', postController.getFeed);
+
+app.get('/login', function(req, res) {
+	res.render('login',{layout: false});
+});
+app.get('/profile', function(req,res) {
+	res.render('profile', {title: "Profile"});
+})
+app.get('/signup', function(req,res) {
+	res.render('Signup', {title: "Signup", css_file_ref: 'css/signup.css'});
+});
+
+app.get('/about', function(req,res) {
+	res.render('about', {title: 'About Us', css_file_ref: 'css/about.css'});
+});
+app.get('/search/jobs', function(req,res) {
+	res.render('Jobsearch', {title: "Search"});
+});
+app.get('/forgotpassword', function(req, res) {
+	res.render('forgot', {title: "Forgot Password?"})
+});
+//app.use(authRoute.checkIfLoggedIn);
+
+
+
+// // For post and image upload
+app.post('/', cpUpload, postController.addPost);
+// // For like an dislike button
+// app.post('/:id', postController.likedislike);
+
+app.get('/profile-edit',controllers.ProfileEditController.showInfo);
+
+// app.use(authRoute.checkIfLoggedIn);
+app.post('/signup/create', controllers.SignupController.create);
+app.post('/login', authRoute.login);
+app.get('/logout', authRoute.logout);
+app.get('/search/*', controllers.SearchController.search);
+app.post('/setpassword', controllers.ForgotPasswordController.setPassword);
+app.post('/forgotpassword', controllers.ForgotPasswordController.findUser);
+
+//These routes are to be handled
+// app.get('/jobsearch', controllers.);
+//app.get('/profile/edit', routeController.sendprofileEdit);
+//app.post('/create-job', authRoute.addjob);
+
+
+
+// Start the app on pre defined port number
+db.connect()
+.then(function() {
+	app.listen(PORT, function() {
+		console.log("Application has started and running on port: ", PORT);
+	}).on('error', function(error) {
+		console.log("Unable to start app. Error >>>>", error);
+	});
+})
+.catch(function(error){
+	console.log("Failed to setup connecton with database.", error);
+>>>>>>> feature/feeds-and-status-post
 });
