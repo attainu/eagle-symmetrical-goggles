@@ -1,12 +1,8 @@
-
-
 const tinify = require('tinify');
 tinify.key = "5lbMCxrQywrPhJ6RNBQ46BZ7DNjFWqGh";
 
 const FeedController = {};
 const FeedModel = require('./../models/Homepage.js');
-const tinify = require('tinify');
-tinify.key = "5lbMCxrQywrPhJ6RNBQ46BZ7DNjFWqGh";
 const UserModel = require('./../models/Users.js');
 
 

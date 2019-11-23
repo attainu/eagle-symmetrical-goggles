@@ -68,7 +68,7 @@ app.set('view engine', '.hbs');
 
 app.use(authRoute.checkIfLoggedIn);
 //routes
-app.get('/', controllers.FeedController.getFeed);
+// app.get('/', controllers.FeedController.getFeed);
 
 app.get('/login', function(req, res) {
 	res.render('login',{layout: false});
@@ -94,7 +94,7 @@ app.get('/forgotpassword', function(req, res) {
 // app.post('/:id', controllers.FeedController.likeDislike);
 
 // For post and image upload
-app.post('/', cpUpload, postController.addPost);
+// app.post('/', cpUpload, postController.addPost);
 // For like an dislike button
 // app.post('/:id', postController.likedislike);
 app.get('/jobsearch', controllers.JobSearchController.retrievejob);

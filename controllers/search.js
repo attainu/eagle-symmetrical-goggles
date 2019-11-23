@@ -12,12 +12,17 @@ SearchController.search = function(req, res) {
                 message: error
             })
         }
+      data.forEach(elem => {
+            elem.followers.includes(userEmail)
+    isfollow = true/false
+        });
         // var check = (data.followers).includes(userEmail);
         // console.log(check);
         res.render('search',{
             term,
             data,
-            userEmail: userEmail,
+            userEmail: uerEmail,
+            isfollow,
             script: "/js/search.js"
         })
     })

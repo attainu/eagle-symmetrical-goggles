@@ -1,4 +1,4 @@
-<main role="main" class="container" id={{userEmail}}>
+<main role="main" class="container">
   <div class="d-flex align-items-center p-3 my-3 bg-purple rounded shadow-sm">
     <div class="lh-100">
       <h6 class="mb-0 lh-100">Results for {{term}}</h6>
@@ -11,14 +11,19 @@
       <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
         <div class="d-flex justify-content-between align-items-center w-100">
           <strong class="text-gray-dark">{{firstname}} {{lastname}}</strong>
-          <div id={{userEmail}}>
-            <button class="unfollowButton" id={{this.email}} name={{userEmail}}>
+          {{#ifCond this.followers userEmail}}
+            <button class="unfollowButton" id={{this.email}}>
               Unfollow
             </button>
-          </div>
-            {{!-- <button class="followButton" id={{this.email}} name={{userEmail}}>
+          {{else}}
+            <button class="followButton" id={{this.email}}>
               Follow
-            </button> --}}
+            </button>
+          {{/ifCond}}
+          {{#if isfollow}}
+
+          {{/}}
+          if
         </div>
         <span class="d-block">{{email}}</span>
       </div>
