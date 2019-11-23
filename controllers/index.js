@@ -6,5 +6,6 @@ module.exports = {
     ForgotPasswordController: require('./forgotPassword.js'),
     ProfileEditController : require('./profileEdit.js'),
     JobSearchController : require('./jobsearch.js'),
-    FeedController: require('./homepage.js')
+    FeedController: require('./homepage.js'),
+    FollowController: require('./follow.js'),
 }

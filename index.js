@@ -9,12 +9,10 @@ const controllers = require('./controllers/index.js');
 const authRoute = require('./controllers/auth.js');
 //const postController = require('./controllers/homepage.js');
 
-
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
 app.use(express.static('public'))
-
 
 //session config
 app.use(session({
@@ -53,8 +51,17 @@ var cpUpload = upload.fields([
 ]);
 
 // Configure Handlebars
+//register handlebars helpers for if condition
 const hbs = exphbs.create({
-	extname: '.hbs'
+	extname: '.hbs',
+	helpers: {
+		ifCond : function(v1, v2, options) {
+				if(v1.includes(v2)) {
+					return options.fn(this);
+				}
+			return options.inverse(this);
+		}
+	}
 });
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
@@ -82,9 +89,9 @@ app.get('/forgotpassword', function(req, res) {
 });
 
 // For post and image upload
-app.post('/', cpUpload, controllers.FeedController.addPost);
+// app.post('/', cpUpload, controllers.FeedController.addPost);
 // For like an dislike button
-app.post('/:id', controllers.FeedController.likeDislike);
+// app.post('/:id', controllers.FeedController.likeDislike);
 
 // For post and image upload
 // app.post('/', cpUpload, postController.addPost);
@@ -94,11 +101,12 @@ app.get('/jobsearch', controllers.JobSearchController.retrievejob);
 app.get('/profile-edit',controllers.ProfileEditController.showInfo);
 app.get('/profile', controllers.ProfileController.currentProfile);
 
-// app.use(authRoute.checkIfLoggedIn);
 app.post('/signup/create', controllers.SignupController.create);
 app.post('/login', authRoute.login);
 app.get('/logout', authRoute.logout);
 app.get('/search-*', controllers.SearchController.search);
+app.put('/search-*', controllers.FollowController.addFollowing,controllers.FollowController.addFollower);
+app.delete('/search-*', controllers.FollowController.removeFollowing,controllers.FollowController.removeFollower);
 app.post('/setpassword', controllers.ForgotPasswordController.setPassword);
 app.post('/forgotpassword', controllers.ForgotPasswordController.findUser);
 app.post('/profile-edit', controllers.ProfileEditController.edituser);
