@@ -37,16 +37,12 @@ input#Experience {
     margin-left: 63px;
     margin-top: 15px;
 }
-h4 {
-    margin-left: 122px;
-}
 
 body {
     background-color: aliceblue;
 }
 .col-md-5 {
     margin-top: 20px;
-    text-align: center;
 }
 div#Job-Search {
     width: 472px;
