@@ -17,10 +17,7 @@ const userSchema = new mongoose.Schema(
             comment: String
         }],
         imageUrl: String,
-        date: {
-            type: Date,
-            default: Date.now()
-        }
+        date: { type: Date, default: Date.now() }
     },
     {
         collection: 'posts'

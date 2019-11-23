@@ -1,43 +1,5 @@
 const express = require('express');
 const app = express();
-<<<<<<< HEAD
-
-const hbs = require('express-handlebars');
-const session = require('express-session');
-const bodyParser = require('body-parser');
-const PORT = 6969;
-
-const routeController = require('./routes/routecontroller');
-const authRoute = require('./routes/authcontroller');
-const db = require('./models/db');
-// Import routes for homepage
-const postRoute = require('./routes/homepage.js');
-
-
-app.engine('handlebars', hbs());
-app.set('view engine', 'handlebars');
-app.use(express.static('public'));
-
-app.use(bodyParser.urlencoded({ extended : true }));
-app.use(bodyParser.json());
-
-// // create application/json parser
-// var jsonParser = bodyParser.json();
-// // create application/x-www-form-urlencoded parser
-// var urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-app.use(session({
-    saveUninitialized:true,
-    resave:false,
-    secret:'io2jej9ji9ruri09i3k2po2k394kyE%YE%TYF&^F^E&*U',
-    cookie:{
-        httpOnly: true,
-        maxAge: 30000, //30sec for testing purposes
-        path: '/',
-        sameSite: true,
-        secure: false
-    }
-=======
 const exphbs = require('express-handlebars');
 const PORT = 9090;
 const db = require('./models/index.js');
@@ -66,7 +28,6 @@ app.use(session({
 		sameSite: true,
 		secure: false
 	}
->>>>>>> feature/feeds-and-status-post
 }));
 
 //importing multer
@@ -90,43 +51,6 @@ var cpUpload = upload.fields([
 	{ name: 'pdffile', maxCount: 1 }
 ]);
 
-<<<<<<< HEAD
-//app.use(authRoute.checkIfLoggedIn);
-// user will routed to either loginpage or homepage depending upon his session
-app.get('/', postRoute.getFeed);
-app.get('/login', authRoute.sendlogin);
-app.get('/signup', authRoute.sendsignup);
-app.get('/profile', routeController.sendprofile);
-app.get('/aboutus', routeController.sendaboutus);
-app.get('/searchquery', routeController.sendsearch);
-app.get('/jobsearch', routeController.sendjobsearch);
-app.get('/profile/edit', routeController.sendprofileEdit);
-app.get('/forgotpassword', routeController.sendForgotPassword);
-app.get('/logout', authRoute.logout);
-
-
-app.post('/', cpUpload, postRoute.addPost);
-
-app.post('/setpassword', authRoute.setPassword);
-app.post('/forgotpassword', authRoute.forgotPassword);
-app.post('/login', authRoute.dologin);
-// app.post('/signup', routeController.dosignup);
-app.post('/profile/edit', authRoute.edituser);//checkinggg now..
-app.post('/signup', authRoute.dosignup);
-app.post('/create-job', authRoute.addjob);
-//app.post('/profile', routeController.updateprofile);
-
-
-// Start the app on pre defined port number on connection with database
-db.connect().then( function () {
-	app.listen(PORT, function () {
-		console.log("Application has started and running on port: ", PORT);
-	}).on('error', function (error) {
-		console.log("Unable to start app. Error >>>>", error);
-	});
-}).catch( function (error) {
-	console.log("Failed to setup a connection with database",error);
-=======
 // Configure Handlebars
 const hbs = exphbs.create({
 	extname: '.hbs'
@@ -194,5 +118,4 @@ db.connect()
 })
 .catch(function(error){
 	console.log("Failed to setup connecton with database.", error);
->>>>>>> feature/feeds-and-status-post
 });
