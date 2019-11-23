@@ -1,0 +1,125 @@
+
+/* Left section starts*/
+#profileSection1{
+    background-color: seashell;
+    
+}
+#height1 {
+    height: 600px;
+}
+#profileImageL {
+    width: 50px;
+    height: 50px;
+    margin: 5px 5px 0px 100px;
+    border-radius: 20px;
+}
+#userProfileName {
+    font-weight: 900;
+    margin-top: 10px;
+    text-align: center;
+}
+#userName {
+    margin: -20px 0px 10px 0px;
+    text-decoration-line: underline;
+    text-align: center;
+}
+/* For skills in user profile */
+#skillText {
+    margin: 20px 0px 0px 50px;
+}
+#userSkills{
+    margin: 0px 0px 0px 30px;
+}
+/* For friend suggestion list */
+#friendlistSuggestion {
+    list-style-type: none;
+    margin: 20px 0px 0px 10px;
+}
+.followFriendButton {
+    float: right;
+    margin: 0px;
+}
+.profileImgFriendlist {
+    width: 25px;
+    height: 25px;
+    margin: 0px 0px 0px 0px;
+    border-radius: 10px;
+}
+/* Left section ends*/
+
+/* Middle section starts*/
+/* for post */
+#profileImage {
+    width: 30px;
+    height: 30px;
+    margin: 5px 5px 0px 5px;
+    border-radius: 10px;
+}
+
+
+#myUserName {
+    font-weight: 900;
+}
+#postTime {
+    margin: 0px 0px 10px 30px;
+    font-weight: 500;
+    font-size: 12px;
+}
+#userPost {
+    margin: 10px 10px 20px 20px;
+}
+#imagePost{
+    width: 412px;
+    margin: 0px 15px 0px 15px;
+    border-radius: 5px;
+}
+#likeButton{
+    margin-left: 40px;
+    margin-bottom: 5px;
+    margin-right: -10px;
+}
+#commentButton{
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
+#shareButton {
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
+.buttonx {
+    color: rgb(13, 51, 13);
+}
+/* Middle section ends*/
+
+
+/* Right section starts */
+#right-section {
+    background-color: seashell;
+}
+/* For Trending topics */
+#trending-topics {
+    list-style: none;
+    margin-top: 40px;
+}
+#article-heading {
+    font-weight: 900;
+    text-decoration-line: underline;
+}
+a:link {
+    color:  gray;
+}
+  
+  
+  
+  /* mouse over link */
+a:hover {
+    color: snow;
+}
+  /* visited link */
+a:visited {
+    color:  gray;
+}
+  /* selected link */
+a:active {
+    color: blue;
+}

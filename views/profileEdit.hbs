@@ -1,0 +1,113 @@
+<!-- Heading -->
+    <div class="headingss mx-auto mt-3" style="text-align: center;">
+        <h1>
+        Welcome
+        </h1>
+        <p>Enter the details which you want to edit</p>
+    </div>
+  <!-- Form -->
+    <div class="form mt-5">
+        <div class="container bg-light w-50">
+          <form method="POST">
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                <label>First name</label>
+                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" value={{firstname}}>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>Last name</label>
+                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" required value={{lastname}}>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>Email Id</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Email" required value={{email}}>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                <label>Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>City</label>
+                <input type="text" class="form-control" id="city" name="city" placeholder="City" value={{city}}>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-5 mb-3">
+                <label>Phone Number</label>
+                <input type="tel" minlength="9" maxlength="14" class="form-control" id="phone" name="phone" placeholder="Phone" value={{phone}}>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label>Age</label>
+                <input type="number" class="form-control" id="age" name="age" placeholder="Age" value={{age}}>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Bio</label>
+              <textarea class="form-control" id="bioSummary" name="bioSummary" rows="3" placeholder="Bio" value="">{{bioSummary}} </textarea>
+            </div>
+            <hr>
+            <div class="form-group">
+              <label>Skills</label>
+              <div class="form-row">
+                <div class="col-md-4 mb-6">
+                  <input type="text" class="form-control" name="skills[0]" id="skill1" placeholder="Skill 1" value={{skill1}}>
+                </div>
+                  <div class="col-md-4 mb-6">
+                  <input type="text" class="form-control" name="skills[1]" id="skill2" placeholder="Skill 2" value={{skill2}}>
+                </div>
+                  <div class="col-md-4 mb-6">
+                  <input type="text" class="form-control" name="skills[2]" id="skill3" placeholder="Skill 3" value={{skill3}}>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <h4><i> Project Section</i></h4>
+              <div class="form-row">
+                <div class="col-md-4 mb-6">
+                  <label>Project Titlte</label>
+                  <input type="text" class="form-control" id="projectTitle" name="projects[projectTitle]" placeholder="Title" value={{projectTitle}}>
+                </div>
+                <div class="col-md-8 mb-6">
+                  <label>Project Summary</label>
+                  <input type="text" class="form-control" id="projectSummary" name="projects[projectSummary]" placeholder="Project Summary" value={{projectSummary}}>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <h4><i> Job Section</i></h4>
+              <div class="form-row">
+                <div class="col-md-4 mb-6">
+                  <label>Company Name</label>
+                  <input type="text" class="form-control" id="companyName" name="jobs[companyName]" placeholder="Name" value={{companyName}}>
+                </div>
+                <div class="col-md-4 mb-6">
+                  <label>Designation</label>
+                  <input type="text" class="form-control" id="designation" name="jobs[designation]" placeholder="Designation" value={{designation}}>
+                </div>
+                <div class="col-md-3 mb-6">
+                  <label>Work Experience</label>
+                  <input type="number" class="form-control" id="workExperience" name="jobs[workExperience]" placeholder="Experience" value={{workExperience}}>
+                </div>
+                <div class="col-md-8 mb-6">
+                  <label>Job Description</label>
+                  <textarea class="form-control" id="jobSummary" name="jobs[jobSummary]" rows="3" placeholder="Job Description" value="">{{jobSummary}}</textarea>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label" for="invalidCheck">
+                  Agree to terms and conditions
+                </label>
+              </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Update Profile</button>
+          </form>
+        </div>
+    </div>
+  <!-- Form ends -->
