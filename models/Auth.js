@@ -1,16 +1,22 @@
+
+const bcrypt = require('bcrypt');
+
 const Auth = {};
 const User = require('./Users.js');
-Auth.login = function(email, password, cb) {
-  //  console.log(email, password);
-   User.findOne({"email":email, "password": password}, function(error, data){
-        if(error) {
+Auth.login = function(email, plain_password, cb) {
+    //console.log(email, password);
+    User.findOne({"email": email}, function(error, data){
+        if(error){
             return cb(error);
         }
-      //  console.log(data);
-        if(data == []) {
-            return cb("User not found")
+        if(!data){
+            return cb("No Such User ... Please Signup")
         }
-        return cb(null, data);
+        console.log(data)
+        bcrypt.compare(plain_password, data.password, function(err, res){
+            console.log(res);
+            return cb(null, res)
+        })
     })
 };
 

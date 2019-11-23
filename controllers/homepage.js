@@ -1,3 +1,8 @@
+
+
+const tinify = require('tinify');
+tinify.key = "5lbMCxrQywrPhJ6RNBQ46BZ7DNjFWqGh";
+
 const FeedController = {};
 const FeedModel = require('./../models/Homepage.js');
 const tinify = require('tinify');
@@ -45,7 +50,7 @@ FeedController.addPost = function (req, res) {
     var imgUrl = null;
     if (req.files['imagefile']) {
         imgUrl = req.files['imagefile'][0].path;
-        console.log("url>>", imgUrl);
+        //console.log("url>>", imgUrl);
         var __source = tinify.fromFile(imgUrl);
         __source.toFile(imgUrl);
         imgUrl = imgUrl.replace("public/", "");
