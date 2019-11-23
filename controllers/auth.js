@@ -3,34 +3,24 @@ const Model = require('./../models/Auth.js');
 
 AuthController.login = function(req, res) {
     var email = req.body.email;
-    var password = req.body.password;
-    console.log(email, password);
-    Model.login(email, password, function(error, data){   
+    var plain_password = req.body.password;
+    //console.log(email, password);
+    Model.login(email, plain_password, function(error, login){   
         if (error) {
-            res.send({
-                status: false,
-                message: error
-            })
+            res.status(500).send(error);
         }
-       // console.log(data);
-        //req.session.loggedIn = true;
-        //req.session.user = data.email;
-        if(!data) {
-            return res.status(500).json(
-				{
-					status: false,
-					message: "Invalid Credentials"
-				}
-			);
+        if(login == true){
+            console.log('Successfully logged in');
+            req.session.user = email;
+            setTimeout(function(){          //to mimmick latency and let animations flow
+                return res.redirect('/');
+            },4000);
         }
-        req.session.user = data.email;
-        console.log(req.session.user);
-        return res.status(200).json(
-			{
-				status: true,
-				message: "Login successfull"
-			}
-        );
+        if(login == false){
+            setTimeout(function(){
+                return res.status(401).send('Invalid Credentials'); // Add bs4 alerts sequence
+            },2000);
+        }
     
     })
 }
@@ -47,10 +37,7 @@ AuthController.logout = function(req, res) {
     var session = req.session;
     session.destroy();
     res.clearCookie('Somename');
-    return res.send({
-        status: true,
-        message: "Logged out"
-    });
+    return res.redirect('/login');
 };
 
 AuthController.checkIfLoggedIn = function(req, res, next) {
