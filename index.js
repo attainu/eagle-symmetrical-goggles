@@ -1,14 +1,15 @@
 const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
-const PORT = 9090;
+const session = require('express-session');
+const PORT = 9000;
 const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
 
 const authRoute = require('./controllers/auth.js');
-const postController = require('./controllers/homepage.js');
+//const postController = require('./controllers/homepage.js');
 
-var session = require('express-session')
+
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
@@ -17,7 +18,7 @@ app.use(express.static('public'))
 
 //session config
 app.use(session({
-	name: 'Somename',
+	name: 'somename',
 	secret: 'adfasdfas',
 	resave : false,
 	saveUninitialized: true,
@@ -58,47 +59,47 @@ const hbs = exphbs.create({
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
-
+// app.use(authRoute.checkIfLoggedIn);
 //routes
-app.get('/', postController.getFeed);
+app.get('/', controllers.FeedController.getFeed);
 
 app.get('/login', function(req, res) {
 	res.render('login',{layout: false});
 });
-app.get('/profile', function(req,res) {
-	res.render('profile', {title: "Profile"});
-})
+
 app.get('/signup', function(req,res) {
 	res.render('Signup', {title: "Signup", css_file_ref: 'css/signup.css'});
 });
 
 app.get('/about', function(req,res) {
-	res.render('about', {title: 'About Us', css_file_ref: 'css/about.css'});
+	res.render('about', {title: 'About Us', css_file_ref: 'css/about.css', layout:false});
 });
-app.get('/search/jobs', function(req,res) {
-	res.render('Jobsearch', {title: "Search"});
-});
+
 app.get('/forgotpassword', function(req, res) {
 	res.render('forgot', {title: "Forgot Password?"})
 });
-//app.use(authRoute.checkIfLoggedIn);
 
 
 
-// // For post and image upload
-app.post('/', cpUpload, postController.addPost);
-// // For like an dislike button
-// app.post('/:id', postController.likedislike);
 
+// For post and image upload
+app.post('/', cpUpload, controllers.FeedController.addPost);
+// For like an dislike button
+app.post('/:id', controllers.FeedController.likeDislike);
+
+app.get('/jobsearch', controllers.JobSearchController.retrievejob);
 app.get('/profile-edit',controllers.ProfileEditController.showInfo);
+app.get('/profile', controllers.ProfileController.currentProfile);
 
 // app.use(authRoute.checkIfLoggedIn);
 app.post('/signup/create', controllers.SignupController.create);
 app.post('/login', authRoute.login);
 app.get('/logout', authRoute.logout);
-app.get('/search/*', controllers.SearchController.search);
+app.get('/search-*', controllers.SearchController.search);
 app.post('/setpassword', controllers.ForgotPasswordController.setPassword);
 app.post('/forgotpassword', controllers.ForgotPasswordController.findUser);
+app.post('/profile-edit', controllers.ProfileEditController.edituser);
+app.post('/jobsearch', controllers.JobSearchController.createnewjob);
 
 //These routes are to be handled
 // app.get('/jobsearch', controllers.);

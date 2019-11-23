@@ -48,31 +48,63 @@ FeedController.addPost = function (req, res) {
          return res.redirect('/');
      });
 };
+// For posting status and images
+FeedController.addPost = function (req, res) {
+    var userPost = req.body.usersPost;
+    // console.log("POST>>", typeof userPost);
+    var imgUrl = null;
+    if (req.files['imagefile']) {
+        imgUrl = req.files['imagefile'][0].path;
+        console.log("url>>", imgUrl);
+        var __source = tinify.fromFile(imgUrl);
+        __source.toFile(imgUrl);
+        imgUrl = imgUrl.replace("public/", "");
+    }
+    FeedModel.create({
+        name: "afroz",
+        post: userPost,
+        imageUrl: imgUrl
+    }, function (error, data) {
+        if (error) console.log("FAiled to save post to database. Error", error);
+        console.log("added to database", data);
+    });
+    FeedModel.find({}, function (error, data) {
+        if (error) console.log(error);
+        // console.log(data);
+        return res.redirect('/');
+    });
+};
 //For like and dislike
-FeedController.likedislike = function (req, res) {
+FeedController.likeDislike = function (req, res) {
     var id = req.params.id;
-    console.log("req.params.id:", id);
+    console.log("post ID:", id);
+
     FeedModel.findById(req.params.id, function (error, data) {
-        if (error) {
-            console.log(error);
-            return res.send(error);
-        }
-        console.log(data.likes);
-        console.log(data.likes[0]['likedBy']);
-        
-        data.likes[0].likeCount += 1;
-        data.likes[0]['likedBy'].userId = id;
-        // console.log("from likedislike", data);
-        console.log(data.likes);
-
-
-        data.save(function (err) {
-            if (error) return res.status(500).send(error);
-            console.log("no. of likes", data.likes[0].likeCount);
-            return res.send({
-                likeCount: data
+        if (error) console.log(error);
+        console.log("Post", data);
+        // console.log("type:",typeof data.likes);
+        var uName = data.name;
+        if (data.likes.likedBy.some(function (elem) {
+           return (elem == uName);
+        }) == true) {
+            data.likes.likeCount = data.likes.likeCount - 1;
+            data.likes.likedBy = data.likes.likedBy.filter(function (x) {
+                if (x != uName)
+                    return x;
             });
+        }
+        else {
+            data.likes.likeCount = data.likes.likeCount + 1;
+            data.likes.likedBy.push(data.name);
+        }
+        console.log("LikedBy", data.likes.likedBy);
+        console.log("likeCount",data.likes.likeCount);
+        
+        data.save(function (err) {
+            if (error) console.log("Unable to save count in database", error);
         });
+        // res.status(200).redirect('/');
+        res.send({likeCount: data.likes.likeCount});
     });
 };
 module.exports = FeedController;
