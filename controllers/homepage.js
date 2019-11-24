@@ -14,6 +14,10 @@ FeedController.getFeed = function (req, res) {
         var email = response[0].email;
         var followers = response[0].followers.length;
         var following = response[0].following.length;
+        var Skills = [];
+        response[0].skills.forEach(function(item,index) {
+            Skills.push(item);
+        });
         // console.log(fullname, username, followers, following);
 
         FeedModel.find({}, function (error, data) {
@@ -35,6 +39,7 @@ FeedController.getFeed = function (req, res) {
                 followers: followers,
                 following: following,
                 numberOfPosts: numberOfPosts,
+                Skills: Skills,
                 userData: data.reverse()
             });
         });
