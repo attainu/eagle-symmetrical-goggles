@@ -1,5 +1,5 @@
 const User = require('../models/Users.js');
-
+const bcrypt = require('bcrypt');
 const ProfileEdit = {};
 
 ProfileEdit.edituser = function(request, response, cb){
@@ -18,23 +18,34 @@ ProfileEdit.edituser = function(request, response, cb){
         // console.log(dataFromUser);
         // console.log(doc);
 
-        if(doc.password!==password){
+        /* if(doc.password!==password){
             return cb({
                 status: false,
                 message: "Error! Password not matched"
             });
-        }
-        User.updateMany({
-            "email" : email
-        }, {
-            "$set": dataFromUser
-        }, function(error, res){
+        } */
+        bcrypt.compare(doc.password, password, function(error, res){
             if(error){
-                return console.log("error");
+                return cb({
+                    status:false,
+                    message: "Error! Password not matched"
+                })
             }
-            return response.redirect('/profile-edit');
+            
+            console.log(res);
+            //return cb(null, res)
+            User.updateMany({
+                "email" : email
+            }, {
+                "$set": dataFromUser
+            }, function(error, res){
+                if(error){
+                    return console.log("error");
+                }
+                return response.redirect('/profile-edit');
+            });
         });
-    });
+    })
 }
 
 ProfileEdit.showInfo = function(req, res) {
