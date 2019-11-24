@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
 const session = require('express-session');
-const PORT = 9000;
+const PORT = 7000;
 const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
 

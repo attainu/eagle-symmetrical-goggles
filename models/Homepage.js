@@ -7,10 +7,10 @@ const userSchema = new mongoose.Schema(
         name: String,
         username: String,
         post: String,
-        likes: [{
+        likes: {
             likeCount: { type: Number, default: 0 },
-            likedBy: { userId: Array }
-        }],
+            likedBy: Array
+        },
         comments: [{
             user: Object,
             username: String,
@@ -24,6 +24,6 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-const UserPost = mongoose.model('UserPost', userSchema);
+const UserPost = mongoose.model('Post', userSchema);
 
 module.exports = UserPost;

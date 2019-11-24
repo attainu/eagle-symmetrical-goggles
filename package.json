@@ -1,19 +1,28 @@
 {
-  "name": "project-attainu",
+  "name": "whitecollar-network",
   "version": "1.0.0",
-  "description": "",
+  "description": "A professional social network",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "raj",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/attainu/eagle-symmetrical-goggles.git"
+  },
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/attainu/eagle-symmetrical-goggles/issues"
+  },
+  "homepage": "https://github.com/attainu/eagle-symmetrical-goggles#readme",
   "dependencies": {
-    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.17.0",
-    "mongoose": "^5.7.11",
+    "moment": "^2.24.0",
+    "mongodb": "^3.3.4",
+    "mongoose": "^5.7.12",
     "multer": "^1.4.2",
     "tinify": "^1.6.0-beta.2"
   }
