@@ -16,13 +16,13 @@
   <div class='login_title'>
     <span>Login to your account</span>
   </div>
-  <form action='/login' method="POST">
+  <form action='/login' method="post">
   <div class='login_fields'>
     <div class='login_fields__user'>
       <div class='icon'>
         <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/user_icon_copy.png'>
       </div>
-      <input placeholder='Username' name='username' type='text'>
+      <input placeholder='Email' name='email' type='text'>
         <div class='validation'>
           <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png'>
         </div>
@@ -48,7 +48,7 @@
         <div class='newcreate'>
           <a>Dont have an account ?</a>
         </div>
-          <form action='/signup'>
+          <form action='/signup' method="GET">
             <input type='submit' value='Sign Up' id="signup_btn">
           </form>
     </div>

@@ -1,21 +1,42 @@
 const FeedController = {};
 const FeedModel = require('./../models/Homepage.js');
+const UserModel = require('./../models/Users.js');
+
 const tinify = require('tinify');
 tinify.key = "5lbMCxrQywrPhJ6RNBQ46BZ7DNjFWqGh";
 
-
 FeedController.getFeed = function (req, res) {
-    FeedModel.find({}, function (error, data) {
-        if (error) {
-            res.status(500).send({
-                status: false,
-                message: error
+    UserModel.find({ email: '123afz@gmail.com' }, function (error, response) {
+        console.log(response);
+        
+        if (error) console.log(error);
+        var fullname = response[0].firstname + " " + response[0].lastname;
+        var email = response[0].email;
+        var followers = response[0].followers.length;
+        var following = response[0].following.length;
+        // console.log(fullname, username, followers, following);
+
+        FeedModel.find({}, function (error, data) {
+            if (error) {
+                res.status(500).send({
+                    status: false,
+                    message: error
+                });
+            }
+            // console.log(data);
+            var numberOfPosts = data.length;
+            // console.log(numberOfPosts);
+
+            return res.render('homepage', {
+                status: true,
+                title: "feedpage",
+                profileName: fullname,
+                email: email,
+                followers: followers,
+                following: following,
+                numberOfPosts: numberOfPosts,
+                userData: data.reverse()
             });
-        }
-        // console.log(data);
-        return res.render('homepage', {
-            status: true,
-            userData: data.reverse()
         });
     });
 };
@@ -35,44 +56,48 @@ FeedController.addPost = function (req, res) {
         name: "afroz",
         post: userPost,
         imageUrl: imgUrl
-    })
-     FeedModel.find({}, function (error, data) {
-         if (error) {
-             console.log(error);
-             // res.status(500).send({
-             //     status: false,
-             //     message: error
-             // });
-         }
-         // console.log(data);
-         return res.redirect('/');
-     });
-};
-//For like and dislike
-FeedController.likedislike = function (req, res) {
-    var id = req.params.id;
-    console.log("req.params.id:", id);
-    FeedModel.findById(req.params.id, function (error, data) {
-        if (error) {
-            console.log(error);
-            return res.send(error);
-        }
-        console.log(data.likes);
-        console.log(data.likes[0]['likedBy']);
-        
-        data.likes[0].likeCount += 1;
-        data.likes[0]['likedBy'].userId = id;
-        // console.log("from likedislike", data);
-        console.log(data.likes);
-
-
-        data.save(function (err) {
-            if (error) return res.status(500).send(error);
-            console.log("no. of likes", data.likes[0].likeCount);
-            return res.send({
-                likeCount: data
-            });
-        });
+    }, function (error, data) {
+        if (error) console.log("FAiled to save post to database. Error", error);
+        console.log("added to database", data);
+    });
+    FeedModel.find({}, function (error, data) {
+        if (error) console.log(error);
+        // console.log(data);
+        return res.redirect('/');
     });
 };
+//For like and dislike
+FeedController.likeDislike = function (req, res) {
+    var id = req.params.id;
+    console.log("post ID:", id);
+
+    FeedModel.findById(req.params.id, function (error, data) {
+        if (error) console.log(error);
+        console.log("Post", data);
+        // console.log("type:",typeof data.likes);
+        var uName = data.name;
+        if (data.likes.likedBy.some(function (elem) {
+           return (elem == uName);
+        }) == true) {
+            data.likes.likeCount = data.likes.likeCount - 1;
+            data.likes.likedBy = data.likes.likedBy.filter(function (x) {
+                if (x != uName)
+                    return x;
+            });
+        }
+        else {
+            data.likes.likeCount = data.likes.likeCount + 1;
+            data.likes.likedBy.push(data.name);
+        }
+        console.log("LikedBy", data.likes.likedBy);
+        console.log("likeCount",data.likes.likeCount);
+        
+        data.save(function (err) {
+            if (error) console.log("Unable to save count in database", error);
+        });
+        // res.status(200).redirect('/');
+        res.send({likeCount: data.likes.likeCount});
+    });
+};
+
 module.exports = FeedController;
