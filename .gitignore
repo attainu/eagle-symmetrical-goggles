@@ -1,5 +1,5 @@
-<<<<<<< HEAD
 node_modules/
-=======
-node_modules
->>>>>>> feature/feeds-and-status-post
+*.jpg
+*.gif
+*.png
+*.jpeg
