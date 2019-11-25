@@ -7,5 +7,6 @@ module.exports = {
     ProfileEditController : require('./profileEdit.js'),
     JobSearchController : require('./jobsearch.js'),
     TrendingController : require('./trending.js'),
-    JobController : require('./applyjob.js')
+    JobController : require('./applyjob.js'),
+    FeedController: require('./homepage.js')
 }

@@ -1,93 +1,46 @@
 $(document).ready(function () {
     console.log("App is ready");
-    // $('#postButton').on('click', function () {
-    //     setInterval(function () {
-    //         //location.reload();
-    //     }, 500);
-    // });
-
     $('.likeButton').on('click', function () {
+        id = $(this).attr('userId');
+        console.log("id: ", id);
+        $.ajax({
+            url: '/' + id,
+            type: 'PUT',
+            success: function(response) {
+                console.log("response", response);
+                var myElement = $('#like-id-' + id);
+                document.getElementById('likes-count-' + id).innerHTML = `${response.likeCount}`;
+                if (myElement.css("color") === "rgb(0, 0, 255)") {
+                        console.log("You disliked this post!");
+                        myElement.css("color", "black");
+                        myElement.animate({ fontSize: "16px" });
+                    }
+                    else {
+                        console.log("You liked this post!");
+                        myElement.css("color", "blue");
+                        myElement.animate({ fontSize: "20px" });
+                    }
+            }
+         });
+        // $.post('/' + id, function (response) {
+        //     console.log("response", response);
+        //     document.getElementById('likes-count-' + id).innerHTML = `${response.likeCount}`;
+            
+        //     // location.reload();
+        // });
 
-        if ($(this).css("color") === "rgb(0, 0, 255)") {
-            console.log("You disliked this post!");
-            $("#likedtxt").remove();
-            $(this).css("color", "black");
-            $(this).animate({ fontSize: "15px" });
-        }
-        else {
-            console.log("You liked this post!");
-            $(this).css("color", "blue");
-            $(this).append("<span id='likedtxt'>Liked</span>");
-            $(this).animate({ fontSize: "18px" });
-        }
-        id = $('.likeicon').attr('userId');
-        console.log("id: ",id);
-        
-        $.post('/' + id, function (response) {
-            $('fa-thumbs-o-up').text(response.likeCount);
-        })
-
+    });
+    $('.commentButton').on('click', function () {
+        console.log("you clicked on comment button!");
+        $('.textBox').append(
+            '<div class="commentTextBox" title="commentTextBox">' +
+                '<div>' +
+                    '<div class= "mx-2">' +
+                        '<textarea class="commentBox border round  mx-2 mt-2"  name="messageText" rows="1" cols="30" placeholder="Enter your comment here..."></textarea>' +
+                        '<a href="#" class="btn btn-dark btn-sm active mb-4" role="button" aria-pressed="true">post</a>'+
+                    '</div>' +               
+                '</div>' +
+            '</div>'
+        );
     });
 });
-    // For posting status => code starts from here
-/*$('#postButton').on('click', function () {
-    console.log("you clicked me!");
-    var item = $('#postMessage');
-    var post = {
-        userName: "afroz",
-        post: item.val(),
-        time: (new Date(new Date - 1))
-    };
-    // console.log(post);
-    $.ajax({
-        type: 'post',
-        url: '/',
-        data: post,
-        success: function (data) {
-            location.reload();
-            console.log(data);
-        },
-        error: function (error) {
-            console.log("Error", error);
-        }
-    });
-    return false;
-});*/
-    // For posting status => code ends here
-
-
-/*
-// For storing Like => code starts from here
-
-   $('#likeButton').on('click', function () {
-      //console.log("You clicked me!");
-
-      fetch('/clicked', {
-          method: 'POST'
-      }).then(function (response) {
-          if (response.ok) {
-              //console.log('Click was recorded');
-              return;
-          }
-          throw new Error('Request failed.');
-      }).catch(function (error) {
-          console.log(error);
-      });
-  });
-
-  setInterval(function() {
-      fetch('/clicks', {
-          method: 'GET'
-      }).then(function(response) {
-          if(response.ok) {
-              return response.json();
-          }
-          throw new Error('Request failed.');
-      }).then(function(data) {
-          document.getElementById('counter').innerHTML = `${data.length}`;
-      }).catch(function(error) {
-          console.log(error);
-      });
-  }, 50);
-// For storing Like => code ends here
-*/

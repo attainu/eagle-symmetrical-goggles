@@ -10,12 +10,18 @@
 #profileImageL {
     width: 50px;
     height: 50px;
-    margin: 5px 5px 0px 50px;
+    margin: 5px 5px 0px 100px;
     border-radius: 20px;
 }
 #userProfileName {
     font-weight: 900;
-    margin: 10px 0px 10px 50px;
+    margin-top: 10px;
+    text-align: center;
+}
+#userName {
+    margin: -20px 0px 10px 0px;
+    text-decoration-line: underline;
+    text-align: center;
 }
 /* For skills in user profile */
 #skillText {
@@ -67,16 +73,16 @@
     margin: 0px 15px 0px 15px;
     border-radius: 5px;
 }
-#likeButton{
+.likeButton{
     margin-left: 40px;
     margin-bottom: 5px;
     margin-right: -10px;
 }
-#commentButton{
+.commentButton{
     margin-left: 40px;
     margin-bottom: 10px;
 }
-#shareButton {
+.shareButton {
     margin-left: 40px;
     margin-bottom: 10px;
 }
