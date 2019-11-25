@@ -11,22 +11,12 @@
       <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
         <div class="d-flex justify-content-between align-items-center w-100">
           <strong class="text-gray-dark">{{firstname}} {{lastname}}</strong>
-          {{#ifCond this.followers userEmail}}
-            <button class="unfollowButton" id={{this.email}}>
-              Unfollow
-            </button>
-          {{else}}
-            <button class="followButton" id={{this.email}}>
-              Follow
-            </button>
-          {{/ifCond}}
-          {{#if isfollow}}
-
-          {{/}}
-          if
         </div>
         <span class="d-block">{{email}}</span>
       </div>
+      <form action="/profile-*" method="get">
+        <button type="submit" style="color:#9ad4d6 ;background-color: #101935;" class="btn" name="user" value={{email}}>View Profile</button>
+      </form>
     </div>
   </div>
   {{/each}}

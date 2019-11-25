@@ -8,4 +8,5 @@ module.exports = {
     JobSearchController : require('./jobsearch.js'),
     FeedController: require('./homepage.js'),
     FollowController: require('./follow.js'),
+    OtherProfileController: require('./otherProfile.js'),
 }

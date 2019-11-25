@@ -6,9 +6,9 @@
         <ul class="nav ml-5 mt-5">
           <li class="nav-item ml-5">
                 <img src="images/Penguins.jpg" class="rounded" alt="Image" width="100px" height="100px"> <br>
-                <h4>{{name}} </h4>
-                <h6>{{email}}</h6>
-                <h6><i>{{summary}}</i></h6>
+                <h4>{{data.firstname}} {{data.lastname}}</h4>
+                <h6>{{data.email}}</h6>
+                <h6><i>{{data.bioSummary}}</i></h6>
           </li>
         </ul>
     </div>
@@ -20,18 +20,24 @@
                 <div class="card-body">
 
                 <h6>Followers</h6><br>
-                {{followers}}
+                <num id="followers">{{data.followers.length}}</num>
                 </div>
             </div>
             <div class="col-md-3 ml-2 card bg-light">
                 <div class="card-body">
 
-                <h6>Following</h6><br>
-                {{following}}
+                <h6 id="following">Following</h6><br>
+                <num id="following">{{data.following.length}}</num>
                 </div>
             </div>
-            <div class="col-md-3 ml-2">
-                
+            <div class="col-md-3 ml-5 mt-5">
+                <button class="btn btn-info" type="button" id={{userEmail}}>
+                {{#if check}}
+                    Unfollow
+                {{else}}
+                    Follow
+                {{/if}}   
+                </button> 
             </div>
         </div>
         <hr>
@@ -50,15 +56,15 @@
             <div class="col-md-4">
                 <h4 style="float: left;">Work Experience</h4><br>
                 <ul style="float: left;">
-                    <li><b>{{job.designation}}</b></li>
-                    <i>{{job.companyName}}</i>
+                    <li><b>{{data.jobs.designation}}</b></li>
+                    <i>{{data.jobs.companyName}}</i>
                 </ul>
             </div>
             <div class="col-md-4 ml-5">    
                 <h4>Projects</h4>
                 <ul>
-                    <li><b>{{project.projectTitle}}</b></li>
-                    <i>{{project.projectSummary}}</i>
+                    <li><b>{{data.projects.projectTitle}}</b></li>
+                    <i>{{data.projects.projectSummary}}</i>
                 </ul>
             </div>
         </div>
