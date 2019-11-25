@@ -73,12 +73,12 @@ FeedController.addPost = function (req, res) {
             cloudinary.uploader.upload(imgUrl, function (error, response) {
                 if (error) return callback(error);
                 cloudinaryUrl = response.url;
-                // console.log("cloudinaryUrl", cloudinaryUrl);
+                console.log("cloudinaryUrl", cloudinaryUrl);
                 console.log("Image uploaded ", response);
                 return callback(null, response);
             });
         }, function (error, result) {
-            // console.log("outside", cloudinaryUrl);
+            console.log("outside", cloudinaryUrl);
             FeedModel.create({
                 name: "afroz",
                 post: userPost,
