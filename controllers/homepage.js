@@ -11,9 +11,9 @@ const async = require('async');
 // Import and set cloudinary configuration
 const cloudinary = require('cloudinary').v2;
 cloudinary.config({
-    cloud_name: 'afroz-123',
-    api_key: '338816749926228',
-    api_secret: '180UVM9lzftZrmsTwn2RzATwYNo'
+    cloud_name: 'eagle-whitecollar',
+    api_key: '416478242371149',
+    api_secret: 'bgO2gVKgNDQAnx5RY2yJlUG7fpM'
 });
 
 FeedController.getFeed = function (req, res) {
