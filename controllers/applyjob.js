@@ -5,7 +5,7 @@ const JobController = {};
 JobController.applyJob = function(req, res) {
     //console.log(req.body);
     var applicantEmail = req.session.user;
-    var jobId = req.body.jobId;
+    var jobId = req.query.jobId;
     console.log(jobId);
     User.findOne({"email": applicantEmail}, function(error, data) {
         if(error) {
