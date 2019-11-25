@@ -17,7 +17,8 @@ cloudinary.config({
 });
 
 FeedController.getFeed = function (req, res) {
-    UserModel.find({ email: '123afz@gmail.com' }, function (error, response) {
+    var user = req.session.user;
+    UserModel.find({ email: user }, function (error, response) {
         // console.log(response);
 
         if (error) console.log(error);
