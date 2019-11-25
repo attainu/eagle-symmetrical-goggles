@@ -13,7 +13,7 @@ const authRoute = require('./controllers/auth.js');
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 
 //session config
@@ -85,7 +85,7 @@ app.get('/forgotpassword', function(req, res) {
 // For post and image upload
 app.post('/', cpUpload, controllers.FeedController.addPost);
 // For like an dislike button
-app.post('/:id', controllers.FeedController.likeDislike);
+app.put('/:id', controllers.FeedController.likeDislike);
 
 app.get('/jobsearch', controllers.JobSearchController.retrievejob);
 app.get('/profile-edit',controllers.ProfileEditController.showInfo);

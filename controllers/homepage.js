@@ -126,7 +126,7 @@ FeedController.addPost = function (req, res) {
 //For like and dislike
 FeedController.likeDislike = function (req, res) {
     var id = req.params.id;
-    console.log("post ID:", id);
+    // console.log("post ID:", id);
 
     FeedModel.findById(req.params.id, function (error, data) {
         if (error) console.log(error);
@@ -152,7 +152,6 @@ FeedController.likeDislike = function (req, res) {
         data.save(function (err) {
             if (error) console.log("Unable to save count in database", error);
         });
-        // res.status(200).redirect('/');
         res.send({ likeCount: data.likes.likeCount });
     });
 };

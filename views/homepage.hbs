@@ -81,7 +81,7 @@
                     </p>
                     {{#if this.imageUrl}}
                     <div class="border round" id="postImage">
-                        <img id="imagePost" src="{{this.imageUrl}}" alt=""/>
+                        <img id="imagePost" src="{{this.imageUrl}}" alt="" />
                     </div>
                     {{/if}}
                     <hr>
@@ -91,24 +91,31 @@
                         <button type="submit" id="likeButton" onclink="updateLikes()">
                             <span class=""><i class="far fa-thumbs-up buttonx"></i></span>
                         </button>
-                        <span id="likeCounter">10</span>
+                        <span id="shareButton"id="likeCounter">10</span>
                     </span> 
                     --}}
+                    <div>
+                        <a class="btn likeButton" id="like-id-{{this._id}}" userId="{{this._id}}">
+                            <span><i class="fa fa-thumbs-o-up"  aria-hidden="true"></i></span>
+                        </a>
+                        <span id="likes-count-{{ this._id }}">{{ this.likes.likeCount}}</span>
 
-                    <a class="btn likeButton" id="likeButton" userId="{{this._id}}">
-                            <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
-                    </a>
-                    <span id="likes-count-{{ this._id }}">{{ this.likes.likeCount}}</span>
 
-                    
-                    <a class="btn commentButton" id="commentButton">
-                        <i class="far fa-comments buttonx" aria-hidden="true"></i>
-                    </a>
+                        <a class="btn commentButton " >
+                            <i class="far fa-comments buttonx" aria-hidden="true"></i>
+                        </a>
 
-                    <a class="btn shareButton" id="shareButton">
-                        <i class="fas fa-share buttony" aria-hidden="true"></i>
-                    </a>
+                        <a class="btn shareButton" >
+                            <i class="fas fa-share buttony" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div >
+                        <form action="#" >
+                            <div class="textBox border round" id="textBox"></div>
+                        </form>
+                    </div>
                 </div>
+
             </div>
             {{/each}}
         </div>
