@@ -101,17 +101,18 @@ app.post('/jobsearch', controllers.JobSearchController.createnewjob);
 //app.get('/profile/edit', routeController.sendprofileEdit);
 //app.post('/create-job', authRoute.addjob);
 app.get('/trending', controllers.TrendingController.getTrending);
+app.get('/applyjob', controllers.JobController.applyJob);
 
 
 // Start the app on pre defined port number
 db.connect()
-			.then(function() {
-				app.listen(PORT, function() {
-					console.log("Application has started and running on port: ", PORT);
-				}).on('error', function(error) {
-					console.log("Unable to start app. Error >>>>", error);
-				});
-			})
-			.catch(function(error){
-				console.log("Failed to setup connecton with database.", error);
-			})
+.then(function() {
+	app.listen(PORT, function() {
+		console.log("Application has started and running on port: ", PORT);
+	}).on('error', function(error) {
+		console.log("Unable to start app. Error >>>>", error);
+	});
+})
+.catch(function(error){
+	console.log("Failed to setup connecton with database.", error);
+})
