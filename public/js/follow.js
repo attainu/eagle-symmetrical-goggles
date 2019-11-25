@@ -1,13 +1,20 @@
+// minor bug is there.. because only when clicking of button value get saved
+// before clickling if we want to save that text value then it doesn't go for ajax call
+
 $(document).ready(function(){
-    
+
+    // will do this when bug get fixed
+    // var value = $('button').text();
+    // console.log("text val>>>", value);
+    // console.log("html val>>>", $('button').html());    
+    // var followEmailId = $('button').attr('id');
+
     $('button').css('display','block');
 
-    // console.log("ready steady poo...");
     $('button').on('click', function(){
         var value = $(this).text();
-        // console.log("click hua phle>>>", value);
-        // console.log(re)
         var followEmailId = $(this).attr('id');
+
         if ($(this).text() == "Follow") { 
             $(this).text("Unfollow"); 
         } else { 
@@ -16,7 +23,7 @@ $(document).ready(function(){
 
         //console for if condition
         if(value == "Follow"){
-            console.log("Follow pe gya");
+            console.log("Follow pe gya"); // for testing
             $.ajax({
                 url: '/profile-*',
                 type: 'PUT',
@@ -25,7 +32,9 @@ $(document).ready(function(){
                 email: followEmailId
                 },
                 success: function() {
-                    console.log("db m gya put k");
+                    $("#followers").load(" #followers");
+                    // will implement this when bug get fixed
+                    // $('#followers').text(function(i, val) { return +val+1 });
                 },
                 error: function(error){
                     console.log(error);
@@ -33,7 +42,7 @@ $(document).ready(function(){
             });
         }
         if(value == "Unfollow"){
-            console.log("Unfollow pe gya");
+            console.log("Unfollow pe gya"); // for testing
             $.ajax({
                 url: '/profile-*',
                 type: 'DELETE',
@@ -42,7 +51,9 @@ $(document).ready(function(){
                 email: followEmailId
                 },
                 success: function() {
-                console.log("db m gya delete k");
+                    $("#followers").load(" #followers");
+                    // will implement this when bug get fixed
+                    // $('#followers').text(function(i, val) { return +val-1 });
                 },
                 error: function(error){
                 console.log(error);
