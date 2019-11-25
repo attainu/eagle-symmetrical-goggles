@@ -9,8 +9,6 @@ const controllers = require('./controllers/index.js');
 const authRoute = require('./controllers/auth.js');
 //const postController = require('./controllers/homepage.js');
 
-
-//var session = require('express-session')
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
@@ -68,7 +66,6 @@ app.get('/', controllers.FeedController.getFeed);
 app.get('/login', function(req, res) {
 	res.render('login',{layout: false});
 });
-
 app.get('/signup', function(req,res) {
 	res.render('Signup', {title: "Signup", css_file_ref: 'css/signup.css'});
 });
@@ -95,6 +92,9 @@ app.post('/signup/create', controllers.SignupController.create);
 app.post('/login', authRoute.login);
 app.get('/logout', authRoute.logout);
 app.get('/search-*', controllers.SearchController.search);
+app.get('/profile-*', controllers.OtherProfileController.seeProfile);
+app.put('/profile-*', controllers.FollowController.addFollowing, controllers.FollowController.addFollower);
+app.delete('/profile-*', controllers.FollowController.removeFollowing, controllers.FollowController.removeFollower);
 app.post('/setpassword', controllers.ForgotPasswordController.setPassword);
 app.post('/forgotpassword', controllers.ForgotPasswordController.findUser);
 app.post('/profile-edit', controllers.ProfileEditController.edituser);
