@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
 const session = require('express-session');
-const PORT = 9000;
+const PORT = 9090;
 const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
 
@@ -16,7 +16,7 @@ app.use(express.static('public'))
 
 //session config
 app.use(session({
-	name: 'Somename',
+	name: 'somename',
 	secret: 'adfasdfas',
 	resave : false,
 	saveUninitialized: true,
@@ -68,14 +68,12 @@ app.set('view engine', '.hbs');
 
 app.use(authRoute.checkIfLoggedIn);
 //routes
-// app.get('/', controllers.FeedController.getFeed);
+
+app.get('/', controllers.FeedController.getFeed);
 
 app.get('/login', function(req, res) {
 	res.render('login',{layout: false});
 });
-app.get('/profile', function(req,res) {
-	res.render('profile', {title: "Profile"});
-})
 app.get('/signup', function(req,res) {
 	res.render('Signup', {title: "Signup", css_file_ref: 'css/signup.css'});
 });
@@ -94,9 +92,10 @@ app.get('/forgotpassword', function(req, res) {
 // app.post('/:id', controllers.FeedController.likeDislike);
 
 // For post and image upload
-// app.post('/', cpUpload, postController.addPost);
+app.post('/', cpUpload, controllers.FeedController.addPost);
 // For like an dislike button
-// app.post('/:id', postController.likedislike);
+app.put('/:id', controllers.FeedController.likeDislike);
+
 app.get('/jobsearch', controllers.JobSearchController.retrievejob);
 app.get('/profile-edit',controllers.ProfileEditController.showInfo);
 app.get('/profile', controllers.ProfileController.currentProfile);
@@ -114,6 +113,9 @@ app.post('/profile-edit', controllers.ProfileEditController.edituser);
 app.post('/jobsearch', controllers.JobSearchController.createnewjob);
 
 //These routes are to be handled
+app.get('/trending', controllers.TrendingController.getTrending);
+app.get('/applyjob', controllers.JobController.checkIfApplied, controllers.JobController.applyJob);
+
 
 // Start the app on pre defined port number
 db.connect()

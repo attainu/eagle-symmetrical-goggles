@@ -12,6 +12,9 @@ const JobSchema = new mongoose.Schema({
     },
     place: {
         type: String
+    },
+    applied: {
+        type: Array
     }    
 },{
     collection: 'jobs'

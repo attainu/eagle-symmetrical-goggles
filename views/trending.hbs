@@ -1,0 +1,25 @@
+<br><br>
+<div class="container">
+    <h4>Trending posts ... </h4>
+    <hr>
+    <div class="row">
+        {{#each posts}}
+        {{#if this.imageUrl}}
+        <div class="col-sm-3 mb-3 d-flex align-items-stretch">
+            <div class="card">
+                
+                <img class="card-img-top img-fluid" src="{{this.imageUrl}}" alt="some image">
+                
+                <div class="card-block">
+                    <h6 class="card-title ml-2 mt-1">{{this.name}}</h6>
+                    <p class="card-text ml-2">{{this.post}}</p>
+                    <div class="card-footer">
+                      <small class="text-muted">{{this.likes}}<i> Likes</i></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/if}} 
+        {{/each}}
+    </div>
+</div>
