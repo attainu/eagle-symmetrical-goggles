@@ -101,7 +101,7 @@ app.post('/jobsearch', controllers.JobSearchController.createnewjob);
 //app.get('/profile/edit', routeController.sendprofileEdit);
 //app.post('/create-job', authRoute.addjob);
 app.get('/trending', controllers.TrendingController.getTrending);
-app.get('/applyjob', controllers.JobController.applyJob);
+app.get('/applyjob', controllers.JobController.checkIfApplied, controllers.JobController.applyJob);
 
 
 // Start the app on pre defined port number
