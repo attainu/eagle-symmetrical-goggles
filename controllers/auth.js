@@ -14,12 +14,13 @@ AuthController.login = function(req, res) {
             req.session.user = email;
             setTimeout(function(){          //to mimmick latency and let animations flow
                 return res.redirect('/');
-            },400);
+            },40);
         }
         if(login == false){
+            var alert = "Invalid Credentials"
             setTimeout(function(){
-                return res.status(401).send('Invalid Credentials'); // Add bs4 alerts sequence
-            },2000);
+                return res.redirect('/login')//res.status(401).send('Invalid Credentials'); // Add bs4 alerts sequence
+            },20);
         }
     
     })

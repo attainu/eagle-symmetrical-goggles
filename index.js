@@ -86,16 +86,6 @@ app.get('/forgotpassword', function(req, res) {
 	res.render('forgot', {title: "Forgot Password?"})
 });
 
-// For post and image upload
-// app.post('/', cpUpload, controllers.FeedController.addPost);
-// For like an dislike button
-// app.post('/:id', controllers.FeedController.likeDislike);
-
-// For post and image upload
-app.post('/', cpUpload, controllers.FeedController.addPost);
-// For like an dislike button
-app.put('/:id', controllers.FeedController.likeDislike);
-
 app.get('/jobsearch', controllers.JobSearchController.checkIfApplied, controllers.JobSearchController.retrievejob);
 app.get('/profile-edit',controllers.ProfileEditController.showInfo);
 app.get('/profile', controllers.ProfileController.currentProfile);
@@ -112,9 +102,13 @@ app.post('/forgotpassword', controllers.ForgotPasswordController.findUser);
 app.post('/profile-edit', controllers.ProfileEditController.edituser);
 app.post('/jobsearch', controllers.JobSearchController.createnewjob);
 
-//These routes are to be handled
+
 app.get('/trending', controllers.TrendingController.getTrending);
 app.get('/applyjob', controllers.JobController.applyJob);
+// For post and image upload
+app.post('/', cpUpload, controllers.FeedController.addPost);
+// For like an dislike button
+app.put('/:id', controllers.FeedController.likeDislike);
 
 
 // Start the app on pre defined port number
