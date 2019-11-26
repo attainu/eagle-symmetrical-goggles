@@ -75,21 +75,17 @@ app.get('/login', function(req, res) {
 	res.render('login',{layout: false});
 });
 app.get('/signup', function(req,res) {
-	res.render('Signup', {title: "Signup", css_file_ref: 'css/signup.css'});
+	res.render('Signup', {title: "Signup"});
 });
 
 app.get('/about', function(req,res) {
-	res.render('about', {title: 'About Us', css_file_ref: 'css/about.css', layout:false});
+	res.render('about', {title: 'About Us', layout:false});
 });
 
 app.get('/forgotpassword', function(req, res) {
 	res.render('forgot', {title: "Forgot Password?"})
 });
 
-// For post and image upload
-// app.post('/', cpUpload, controllers.FeedController.addPost);
-// For like an dislike button
-// app.post('/:id', controllers.FeedController.likeDislike);
 
 // For post and image upload
 app.post('/', cpUpload, controllers.FeedController.addPost);
