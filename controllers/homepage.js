@@ -36,7 +36,7 @@ FeedController.getFeed = function (req, res) {
         });
         // console.log(fullname, username, followers, following);
 
-        FeedModel.find({email: user}, function (error, data) {
+        FeedModel.find({}, function (error, data) {
             if (error) {
                 res.status(500).send({
                     status: false,
