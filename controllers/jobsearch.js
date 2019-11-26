@@ -19,7 +19,7 @@ Jobsection.createnewjob = function(req, res){
             title: "Job Section",
             css_file_ref: "css/jobsearch.css",
             status: true,
-            message: "Success",
+            msg: "Your Job is posted Succesfully",
         });
     });
 }

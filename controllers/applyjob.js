@@ -24,13 +24,20 @@ JobController.applyJob = function(req, res) {
 
             JobModel.findOneAndUpdate({_id: jobId}, {$push: {applied : applicant} },{useFindAndModify: false}, function(error, data) {
                 if(error) {
-                    return res.send({msg: error})
+                    return res.render('Jobsearch', {
+                        title: "Job Section",
+                        css_file_ref: "css/jobsearch.css",
+                        status: true,
+                        msg: "OOPS Something Went Wrong!",
+                    });
                 }
                 console.log(data);
-                return res.send({
-                    status : true,
-                    meessage: "applied to job successfully"
-                })
+                return res.render('Jobsearch', {
+                    title: "Job Section",
+                    css_file_ref: "css/jobsearch.css",
+                    status: true,
+                    msg: "You Applied for the Job Succesfully",
+                });
             })
         })
     }

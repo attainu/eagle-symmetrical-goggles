@@ -11,6 +11,17 @@ background: #9AD4D6;
 
 background: linear-gradient(135deg, #9AD4D6 0%, #101935 100%);
 }
+.alert.alert-danger.col {
+  height: 25px;
+  margin-left: 88px;
+  margin-top: 28px;
+  color: white;
+  padding-left: 10px;
+  padding-top: 2px;
+}
+div#error {
+  background: #ff0909c4;
+}
 body ::-webkit-input-placeholder {
 color: #4E546D;
 }
@@ -73,7 +84,7 @@ transition-duration: 0.5s;
         transform: rotateX(0deg);
 position: relative;
 width: 240px;
-height: 300px;
+height: 360px;
 position: absolute;
 left: 0;
 right: 0;

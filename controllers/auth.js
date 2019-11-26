@@ -17,10 +17,14 @@ AuthController.login = function(req, res) {
             },40);
         }
         if(login == false){
-            var alert = "Invalid Credentials"
-            setTimeout(function(){
-                return res.redirect('/login')//res.status(401).send('Invalid Credentials'); // Add bs4 alerts sequence
-            },20);
+            res.status(500).render('login',{
+                msg: "Invalid Credantials",
+                css_file_ref: '/css/login.css',
+                layout:false
+            })
+            // setTimeout(function(){
+            //     return res.redirect('/login')//res.status(401).send('Invalid Credentials'); // Add bs4 alerts sequence
+            // },20);
         }
     
     })

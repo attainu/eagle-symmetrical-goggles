@@ -42,6 +42,7 @@ button#state {
 button.btn.btn-secondary {
     background-color: #101935;
     margin-left: 206px;
+    margin-top: 12px;
 }
 .form-control {
     width: 264px;
@@ -49,7 +50,7 @@ button.btn.btn-secondary {
 .row.col-md-5 {
     margin-left: 444px;
     border-style: ridge;
-    height: 412px;
+    height: 500px;
     margin-top: 105px;
     background-color: #10193594;
     color: aliceblue;
@@ -78,4 +79,15 @@ input#Mobile-number {
 }
 input#password {
     margin-left: 5px;
+}
+.text-center {
+    margin-left: 161px;
+}
+#error{
+    width: 472px;
+    text-align: center;
+    height: 32px;
+    padding-top: 3px;
+    margin-top: 14px;
+    margin-left: 70px;
 }
