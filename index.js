@@ -101,8 +101,6 @@ app.post('/setpassword', controllers.ForgotPasswordController.setPassword);
 app.post('/forgotpassword', controllers.ForgotPasswordController.findUser);
 app.post('/profile-edit', controllers.ProfileEditController.edituser);
 app.post('/jobsearch', controllers.JobSearchController.createnewjob);
-
-
 app.get('/trending', controllers.TrendingController.getTrending);
 app.get('/applyjob', controllers.JobController.applyJob);
 // For post and image upload
