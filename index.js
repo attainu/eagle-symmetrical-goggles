@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
 const session = require('express-session');
-const PORT = 9090;
+//const PORT = 9090;
 const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
 
@@ -110,10 +110,13 @@ app.put('/:id', controllers.FeedController.likeDislike);
 
 
 // Start the app on pre defined port number
+const env = process.env.NODE_ENV || 'default';
+const PORT = process.env.PORT || 9090;
 db.connect()
 .then(function() {
 	app.listen(PORT, function() {
-		console.log("Application has started and running on port: ", PORT);
+		console.log("Application has started in environment "+env+ " and running on port: ", PORT);
+		//console.log(process.env);
 	}).on('error', function(error) {
 		console.log("Unable to start app. Error >>>>", error);
 	});
