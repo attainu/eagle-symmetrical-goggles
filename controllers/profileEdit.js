@@ -79,7 +79,7 @@ ProfileEdit.showInfo = function(req, res) {
                 var designation = jobs.designation;
                 var workExperience = jobs.workExperience;
                 var jobSummary = jobs.jobSummary;
-            }
+            };
             if(data.skills){
                 var skills = data.skills;
                 var skill1 = skills[0];

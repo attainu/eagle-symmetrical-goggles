@@ -11,18 +11,20 @@ const async = require('async');
 // Import and set cloudinary configuration
 const cloudinary = require('cloudinary').v2;
 cloudinary.config({
-    cloud_name: 'afroz-123',
-    api_key: '338816749926228',
-    api_secret: '180UVM9lzftZrmsTwn2RzATwYNo'
+    cloud_name: 'eagle-whitecollar',
+    api_key: '416478242371149',
+    api_secret: 'bgO2gVKgNDQAnx5RY2yJlUG7fpM'
 });
 
 FeedController.getFeed = function (req, res) {
     var user = req.session.user;
+    var userDtails = req.session;
+    console.log("login details>>",userDtails);
     UserModel.find({ email: user }, function (error, response) {
-        // console.log(response);
+        console.log(response);
 
         if (error) console.log(error);
-        var fullname = response[0].firstname + " " + response[0].lastname;
+        var fullname = response[0].firstname;
         var email = response[0].email;
         var followers = response[0].followers.length;
         var following = response[0].following.length;
@@ -32,14 +34,14 @@ FeedController.getFeed = function (req, res) {
         });
         // console.log(fullname, username, followers, following);
 
-        FeedModel.find({}, function (error, data) {
+        FeedModel.find({email: user}, function (error, data) {
             if (error) {
                 res.status(500).send({
                     status: false,
                     message: error
                 });
             }
-            // console.log(data);
+            console.log(data);
             var numberOfPosts = data.length;
             // console.log(numberOfPosts);
 
@@ -59,65 +61,54 @@ FeedController.getFeed = function (req, res) {
 };
 // For posting status and images
 FeedController.addPost = function (req, res) {
+    var userEmail = req.session.user;
+    var user = req.session;
+    console.log("UserEmail to create posts",userEmail);
     var userPost = req.body.usersPost;
     var cloudinaryUrl = null;
     var files = req.files['imagefile'];
     if (req.files['imagefile']) {
         var imgUrl = req.files['imagefile'][0].path;
         console.log(imgUrl);
-        var url = imgUrl.replace("/public", "");
-        var __source = tinify.fromFile(imgUrl);
-        __source.toFile(imgUrl);
+        // var url = imgUrl.replace("/public", "");
+        // var __source = tinify.fromFile(imgUrl);
+        // __source.toFile(imgUrl);
         //uploading to cloudinary
         async.map(files, function (file, callback) {
             cloudinary.uploader.upload(imgUrl, function (error, response) {
                 if (error) return callback(error);
                 cloudinaryUrl = response.url;
-                console.log("cloudinaryUrl", cloudinaryUrl);
+                // console.log("cloudinaryUrl", cloudinaryUrl);
                 console.log("Image uploaded ", response);
                 return callback(null, response);
             });
         }, function (error, result) {
             console.log("outside", cloudinaryUrl);
             FeedModel.create({
-                name: "afroz",
+                email: userEmail,
                 post: userPost,
                 imageUrl: cloudinaryUrl
             }, function (error, data) {
                 if (error) console.log("FAiled to save post to database. Error", error);
                 console.log("added to database", data);
             });
-            FeedModel.find({}, function (error, data) {
+            FeedModel.find({email: userEmail }, function (error, data) {
                 if (error) console.log(error);
                 // console.log(data);
                 return res.redirect('/');
             });
         });
-        // cloudinary.uploader.upload(imgUrl, function (error, response) {
-        //     console.log("cloudinary error>>", error);
-        //     console.log("cloudinary response", response);
-        //     cloudinaryUrl = response.url;
-        //     console.log("cloudinaryURL>>", cloudinaryUrl);
-        //     FeedModel.create({
-        //         name: "afroz",
-        //         post: userPost,
-        //         imageUrl: cloudinaryUrl
-        //     }, function (error, data) {
-        //         if (error) console.log("FAiled to save post to database. Error", error);
-        //         console.log("added to database", data);
-        //     });
-        // });
     }
     else {
         FeedModel.create({
-            name: "afroz",
+            email: userEmail,
             post: userPost,
             imageUrl: cloudinaryUrl
         }, function (error, data) {
             if (error) console.log("FAiled to save post to database. Error", error);
             console.log("added to database", data);
         });
-        FeedModel.find({}, function (error, data) {
+        FeedModel.find({ email: userEmail}, function (error, data) {
             if (error) console.log(error);
             // console.log(data);
             return res.redirect('/');
@@ -133,7 +124,7 @@ FeedController.likeDislike = function (req, res) {
         if (error) console.log(error);
         console.log("Post", data);
         // console.log("type:",typeof data.likes);
-        var uName = data.name;
+        var uName = data.email;
         if (data.likes.likedBy.some(function (elem) {
             return (elem == uName);
         }) == true) {
@@ -145,13 +136,13 @@ FeedController.likeDislike = function (req, res) {
         }
         else {
             data.likes.likeCount = data.likes.likeCount + 1;
-            data.likes.likedBy.push(data.name);
+            data.likes.likedBy.push(data.email);
         }
         console.log("LikedBy", data.likes.likedBy);
         console.log("likeCount", data.likes.likeCount);
 
         data.save(function (err) {
-            if (error) console.log("Unable to save count in database", error);
+            if (err) console.log("Unable to save count in database", err);
         });
         res.send({ likeCount: data.likes.likeCount });
     });

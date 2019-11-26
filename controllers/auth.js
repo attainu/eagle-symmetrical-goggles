@@ -14,7 +14,7 @@ AuthController.login = function(req, res) {
             req.session.user = email;
             setTimeout(function(){          //to mimmick latency and let animations flow
                 return res.redirect('/');
-            },4000);
+            },400);
         }
         if(login == false){
             setTimeout(function(){
@@ -36,7 +36,7 @@ AuthController.login = function(req, res) {
 AuthController.logout = function(req, res) {
     var session = req.session;
     session.destroy();
-    res.clearCookie('Somename');
+    res.clearCookie('somename');
     return res.redirect('/login');
 };
 

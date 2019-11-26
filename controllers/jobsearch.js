@@ -15,7 +15,7 @@ Jobsection.createnewjob = function(req, res){
                 message: "unable to write this data"
             });
         }
-        return res.render('jobsearch', {
+        return res.render('Jobsearch', {
             title: "Job Section",
             css_file_ref: "css/jobsearch.css",
             status: true,
@@ -36,8 +36,7 @@ Jobsection.retrievejob = function(req, res){
                 message: "unable to get jobs data"
             });
         }
-        console.log(applied);
-        return res.render('jobsearch',{
+        return res.render('Jobsearch',{
             title: "Job Section",
             css_file_ref: "css/jobsearch.css",
             result: response,

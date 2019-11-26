@@ -14,7 +14,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
 app.use(express.static('public'))
 
-
 //session config
 app.use(session({
 	name: 'somename',
@@ -52,8 +51,17 @@ var cpUpload = upload.fields([
 ]);
 
 // Configure Handlebars
+//register handlebars helpers for if condition
 const hbs = exphbs.create({
-	extname: '.hbs'
+	extname: '.hbs',
+	helpers: {
+		ifCond : function(v1, v2, options) {
+				if(v1.includes(v2)) {
+					return options.fn(this);
+				}
+			return options.inverse(this);
+		}
+	}
 });
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
@@ -78,6 +86,10 @@ app.get('/forgotpassword', function(req, res) {
 	res.render('forgot', {title: "Forgot Password?"})
 });
 
+// For post and image upload
+// app.post('/', cpUpload, controllers.FeedController.addPost);
+// For like an dislike button
+// app.post('/:id', controllers.FeedController.likeDislike);
 
 // For post and image upload
 app.post('/', cpUpload, controllers.FeedController.addPost);
@@ -101,9 +113,6 @@ app.post('/profile-edit', controllers.ProfileEditController.edituser);
 app.post('/jobsearch', controllers.JobSearchController.createnewjob);
 
 //These routes are to be handled
-//app.get('/jobsearch', controllers.);
-//app.get('/profile/edit', routeController.sendprofileEdit);
-//app.post('/create-job', authRoute.addjob);
 app.get('/trending', controllers.TrendingController.getTrending);
 app.get('/applyjob', controllers.JobController.applyJob);
 
@@ -119,4 +128,4 @@ db.connect()
 })
 .catch(function(error){
 	console.log("Failed to setup connecton with database.", error);
-})
+});
