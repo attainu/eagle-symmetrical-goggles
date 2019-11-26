@@ -84,7 +84,7 @@ app.post('/', cpUpload, controllers.FeedController.addPost);
 // For like an dislike button
 app.put('/:id', controllers.FeedController.likeDislike);
 
-app.get('/jobsearch', controllers.JobSearchController.retrievejob);
+app.get('/jobsearch', controllers.JobSearchController.checkIfApplied, controllers.JobSearchController.retrievejob);
 app.get('/profile-edit',controllers.ProfileEditController.showInfo);
 app.get('/profile', controllers.ProfileController.currentProfile);
 
@@ -105,7 +105,7 @@ app.post('/jobsearch', controllers.JobSearchController.createnewjob);
 //app.get('/profile/edit', routeController.sendprofileEdit);
 //app.post('/create-job', authRoute.addjob);
 app.get('/trending', controllers.TrendingController.getTrending);
-app.get('/applyjob', controllers.JobController.checkIfApplied, controllers.JobController.applyJob);
+app.get('/applyjob', controllers.JobController.applyJob);
 
 
 // Start the app on pre defined port number

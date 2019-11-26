@@ -2,29 +2,6 @@ const JobModel = require('./../models/Jobs.js');
 const User = require('./../models/Users.js');
 const JobController = {};
 
-JobController.checkIfApplied = function(req, res, next) {
-    var applicantEmail = req.session.user;
-    var jobId = req.query.jobId;
-    JobModel.findOne({'applied': {$elemMatch: {email: applicantEmail}}}, function (err, user) {
-        if (err){
-            return res.send(err);
-        }    
-
-        if (user) {
-            console.log("Applied Already");
-            req.applied = true;
-            next();
-
-        } else {
-            req.applied = false;
-            console.log("You can apply");
-            next();
-
-        }
-    });
-}
-
-
 JobController.applyJob = function(req, res) {
     //console.log(req.body);
     var applicantEmail = req.session.user;

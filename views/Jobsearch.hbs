@@ -46,21 +46,25 @@
         <div class="col-md-5 mx-auto">
             <h4 class="text-center">Search Result</h4>
             <hr>
-            {{#if result}}
+            {{#if result}} 
                 {{#each result}}
                     <div class="card w-75 mx-auto mt-4" id="searchresult">
                         <div class="card-body">
                             <h5 class="card-title" id="title">{{this.title}}</h5>
                             <label class="card-subtitle" id="companyName"><i>{{this.companyName}}</i></label><br>
                             <label class="card-text">Experience {{this.experience}} Yrs</label><br>
-                            <label class="text-muted" id="placename">{{this.place}}</label>
+                            <label class="text-muted" id="placename">{{this.place}}</label><br>
+                            {{#if applied}}
+                            <button style="color:#9ad4d6 ;background-color: #101935;" class="btn" disabled>Applied</button>
+                            {{else}}
                             <form action="/applyjob" method="get">
                             <button type="submit" style="color:#9ad4d6 ;background-color: #101935;" class="btn" name="jobId" value={{this._id}}>Apply</button>
                             </form>
+                            {{/if}}
                         </div>
                     </div>
                 {{/each}}
-            {{/if}}
+            {{/if}} 
         </div>
     </div>
 </div>

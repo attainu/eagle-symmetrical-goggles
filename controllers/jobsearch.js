@@ -25,7 +25,7 @@ Jobsection.createnewjob = function(req, res){
 }
 
 Jobsection.retrievejob = function(req, res){
-
+    var applied = req.applied;   
     Job.find({
         title: req.query.titletosearch,
         place: req.query.placetosearch
@@ -36,12 +36,34 @@ Jobsection.retrievejob = function(req, res){
                 message: "unable to get jobs data"
             });
         }
+        console.log(applied);
         return res.render('jobsearch',{
             title: "Job Section",
             css_file_ref: "css/jobsearch.css",
-            result: response
+            result: response,
+            applied
         })
     });
 }
+Jobsection.checkIfApplied = function(req, res, next) {
+    var applicantEmail = req.session.user;
+    Job.findOne({'applied': {$elemMatch: {email: applicantEmail}}}, function (err, user) {
+       console.log(user);
+        if (err){
+            return res.send(err);
+        }    
 
+        if (user) {
+            console.log("Applied Already");
+            req.applied = true;
+            next();
+
+        } else {
+            req.applied = false;
+            console.log("You can apply");
+            next();
+
+        }
+    });
+}
 module.exports = Jobsection;
