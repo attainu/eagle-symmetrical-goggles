@@ -56,8 +56,8 @@ FeedController.getFeed = function (req, res) {
                 following: following,
                 numberOfPosts: numberOfPosts,
                 Skills: Skills,
-                script: '/js/homepage.js',
-                userData: data.reverse()
+                userData: data.reverse(),
+                script: '/js/homepage.js'
             });
         });
     });
