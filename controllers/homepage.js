@@ -24,7 +24,9 @@ FeedController.getFeed = function (req, res) {
         console.log(response);
 
         if (error) console.log(error);
-        var fullname = response[0].firstname;
+        var firstname = response[0].firstname;
+        var lastname = response[0].lastname;
+        var fullname = firstname +' '+ lastname;
         var email = response[0].email;
         var followers = response[0].followers.length;
         var following = response[0].following.length;
@@ -54,6 +56,7 @@ FeedController.getFeed = function (req, res) {
                 following: following,
                 numberOfPosts: numberOfPosts,
                 Skills: Skills,
+                script: '/js/homepage.js',
                 userData: data.reverse()
             });
         });
