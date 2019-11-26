@@ -58,7 +58,7 @@ const hbs = exphbs.create({
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
-// app.use(authRoute.checkIfLoggedIn);
+app.use(authRoute.checkIfLoggedIn);
 //routes
 
 app.get('/', controllers.FeedController.getFeed);
