@@ -1,93 +1,58 @@
-img {
-    height: 50px;
-    margin-top: 7px;
-    margin-bottom: 7px;
-}
-.container {
-    margin-top: 12px;
-}
-/* div#body {
-background: linear-gradient(135deg, #9AD4D6 0%, #101935 100%);
-} */
-.scrollable-menu {
-    height: auto;
-    max-height: 200px;
-    overflow-x: hidden;
-}
-button#GenderMenuButton {
-    background-color: white;
-    color: #495057c7;
-    border: 1px solid #ced4da;
-    /* margin-top: 32px; */
-}
-button#state {
-    background-color: white;
-    color: #495057c7;
-    border: 1px solid #ced4da;
-    /* margin-top: 32px; */
-}
-#name {
-    margin-top: 12px;
-    font-family: 'Bree Serif', serif;
-    margin-left: 604px;
-    color: #fff;
-}
-.Heading {
-    font-family: 'Bree Serif', serif;
-    /* margin-left: 186px; */
-}
-#HeadBar{
+nav.navbar{
     background-color: #101935;
 }
-button.btn.btn-secondary {
-    background-color: #101935;
-    margin-left: 206px;
-    margin-top: 12px;
+
+a{
+    color: #9ad4d6;
 }
-.form-control {
-    width: 264px;
+
+a:hover {
+    color: white;
 }
-.row.col-md-5 {
-    margin-left: 444px;
+
+a.login-signup{
+    margin-left: 55%;
+}
+
+body{
+    background-image: url("./../images/Background.jpeg");
+    /* opacity: 0.8; */
+}
+.col-md-5 {
+    margin-left: 30%;
     border-style: ridge;
     height: 500px;
-    margin-top: 105px;
+    margin-top: 80px;
     background-color: #10193594;
     color: aliceblue;
 }
-input#last-name {
-    margin-left: -14px;
+.heading {
+    font-family: 'Bree Serif', serif;
+    margin-top: 20px;
+    margin-bottom: 15px;
 }
-input#firstname {
-    margin-left: 2px;
+span{
+    margin-left: 10%;
+    margin-right: 10%;
 }
-.form-group.col {
-    margin-top: 11px;
+.alreadyMember{
+    text-align: center;
 }
-input#inputEmail {
-    margin-left: 5px;
+
+button.btn.btn-secondary {
+    background-color: #101935;
+    margin-left: 35%;
+    margin-top: 12px;
+    margin-bottom: 13px;
 }
-input#confirm-password {
-    margin-left: 5px;
-}
-body{
-    background-image: url("./../images/Background.jpeg");
-    opacity: 0.8;
-}
-input#Mobile-number {
-    margin-left: 5px;
-}
-input#password {
-    margin-left: 5px;
-}
-.text-center {
-    margin-left: 161px;
-}
+
+
+/* to be added once testing is complete */
 #error{
     width: 472px;
     text-align: center;
     height: 32px;
     padding-top: 3px;
     margin-top: 14px;
-    margin-left: 70px;
+    margin-left: 60px;
 }
