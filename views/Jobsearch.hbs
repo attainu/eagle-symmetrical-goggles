@@ -54,13 +54,11 @@
                             <label class="card-subtitle" id="companyName"><i>{{this.companyName}}</i></label><br>
                             <label class="card-text">Experience {{this.experience}} Yrs</label><br>
                             <label class="text-muted" id="placename">{{this.place}}</label><br>
-                            {{#if applied}}
-                            <button style="color:#9ad4d6 ;background-color: #101935;" class="btn" disabled>Applied</button>
-                            {{else}}
+            
                             <form action="/applyjob" method="get">
                             <button type="submit" style="color:#9ad4d6 ;background-color: #101935;" class="btn" name="jobId" value={{this._id}}>Apply</button>
                             </form>
-                            {{/if}}
+                        
                         </div>
                     </div>
                 {{/each}}
