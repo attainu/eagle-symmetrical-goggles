@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+// const { ObjectId } = mongoose.Schema;
+
 const profileSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -21,7 +23,7 @@ const profileSchema = new mongoose.Schema({
         type: String
     },
     phone: {
-        type: String,
+        type: Number,
         required: true
     },
     city: {
@@ -42,12 +44,8 @@ const profileSchema = new mongoose.Schema({
     jobs: {
         type: Array
     },
-    followers: {
-        type: Array
-    },
-    following: {
-        type: Array
-    },
+    followers: { type: Array},
+    following: { type: Array},
     datecreated: {
         type: Date,
         default: new Date()

@@ -141,8 +141,8 @@ FeedController.likeDislike = function (req, res) {
         console.log("LikedBy", data.likes.likedBy);
         console.log("likeCount", data.likes.likeCount);
 
-        data.save(function (error) {
-            if (error) console.log("Unable to save count in database", error);
+        data.save(function (err) {
+            if (err) console.log("Unable to save count in database", err);
         });
         res.send({ likeCount: data.likes.likeCount });
     });
