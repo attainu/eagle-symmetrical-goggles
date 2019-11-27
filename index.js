@@ -86,6 +86,10 @@ app.get('/forgotpassword', function (req, res) {
 	res.render('forgot', { title: "Forgot Password?" })
 });
 
+app.get('/landing', function (req, res) {
+	res.render('landing', { title: "White Collar" , css_file_ref: "/css/landing.css" , script: "/js/main.js" })
+});
+
 app.get('/jobsearch', controllers.JobSearchController.retrievejob);
 app.get('/profile-edit', controllers.ProfileEditController.showInfo);
 app.get('/contact', function (req, res) {

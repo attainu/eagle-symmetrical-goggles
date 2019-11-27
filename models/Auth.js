@@ -20,7 +20,7 @@ Auth.login = function(email, plain_password, cb) {
 };
 
 Auth.checkIfLoggedIn = function(url, userSession, callback) {
-    if(url === '/login'|| url === '/signup' || url === '/signup/create' || url === '/forgotpassword' || url === '/setpassword' || url === '/about' || url === '/contact') {
+    if(url === '/login'|| url === '/signup' || url === '/landing' || url === '/signup/create' || url === '/forgotpassword' || url === '/setpassword' || url === '/about' || url === '/contact') {
         return callback(null, "Next");
     }
     if(typeof userSession === "undefined") {
