@@ -46,12 +46,17 @@
     </div><br>
       <div class='signup_fields__submit'>
         <div class='newcreate'>
-          <a>Dont have an account ?</a>
+          <p>Dont have an account ?</p>
         </div>
-          <form action='/signup'>
-            <input type='submit' value='Sign Up' id="signup_btn">
-          </form>
+        <a href="/signup"><span class="signupAnchor"> Sign Up</span></a>
     </div>
+      {{#if msg}}
+      <div id="error" class="w-75 text-centre">
+        <div class="alert alert-danger col" role="alert">
+          {{this.msg}}
+        </div>
+      </div>
+      {{/if}}
 <!--    <div class="o_auth_buttons">
       <i class="fab fa-facebook-f" id="facebook_oauth" aria-hidden="true"></i>
       <i class="fab fa-google" id="google_oauth" aria-hidden="true"></i>

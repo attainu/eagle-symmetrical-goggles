@@ -6,9 +6,10 @@ const SignupController = {};
 SignupController.create = function(req, res) {
 	var data = req.body;
 	if(data.password !== data.confirmPassword){
-		return res.send({
+		return res.render('Signup',{
 			status: false,
-			message: "password and confirmPassword needs to be same"
+			msg: "Password and ConfirmPassword needs to be same",
+			css_file_ref: '/css/signup.css'
 		})
 	}
 	bcrypt.hash(data.password, 10, function(error, bcrypt_hashedPassword){
@@ -23,14 +24,15 @@ SignupController.create = function(req, res) {
 		}, function(error, response) {
 			if(error) {
 				console.log(error);
-				return res.status(500).send({
-					status: false,
-					message: "FAiled to create User"
+				return res.status(500).render('Signup',{
+					msg: "Email or Mobile number is already Registered",
+					css_file_ref: '/css/signup.css'
 				});
 			}
-			return res.status(200).send({
+			return res.status(200).render('Signup',{
 				status: true,
-				message: "User created Successfully and login details saved"
+				message: "User created Successfully and login details saved",
+				css_file_ref: '/css/signup.css'
 			})
 
 		})

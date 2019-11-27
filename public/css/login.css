@@ -62,7 +62,7 @@ opacity: .6 !important;
 body .login {
 opacity: 1;
 top: 20px;
--webkit-transition-timing-function: cubic-bezier(0.68, -0.25, 0.265, 0.85);
+/* -webkit-transition-timing-function: cubic-bezier(0.68, -0.25, 0.265, 0.85); */
 transition-property: opacity,box-shadow,top,left,-webkit-transform;
 transition-property: transform,opacity,box-shadow,top,left;
 transition-property: transform,opacity,box-shadow,top,left,-webkit-transform;
@@ -146,12 +146,12 @@ margin: auto;
 }
 body .login_fields__submit .forgot {
 float: right;
-font-size: 10px;
+font-size: 12px;
 margin-top: 11px;
 text-decoration: underline;
 }
 body .login_fields__submit .forgot a {
-color: #606479;
+color: #dbdeec;
 }
 body .login_fields__submit input {
 border-radius: 50px;
@@ -174,16 +174,16 @@ cursor: pointer;
 transition-duration: .2s;
 }
 
-body .signup_fields__submit .newcreate {
+body .signup_fields__submit p {
 text-align: center;
 font-size: 15px;
 margin-top: 25px;
 }
-body .signup_fields__submit .newcreate a {
-color: #606479;
+body .signup_fields__submit .newcreate p {
+color: #dbdeec;
 }
 
-body .signup_fields__submit input {
+body .signup_fields__submit span {
 border-radius: 50px;
 background: transparent;
 padding: 10px 50px;
@@ -195,15 +195,28 @@ transition-duration: .2s;
 margin-top: 13px;
 margin-left: 25%;
 }
-body .signup_fields__submit input:focus {
+body .signup_fields__submit span:focus {
 box-shadow: none;
 outline: none;
 }
-body .signup_fields__submit input:hover {
+body .signup_fields__submit span:hover {
 color: white;
 background: #9AD4D6;
 cursor: pointer;
 transition-duration: .2s;
+}
+
+/* Alert box here */
+.alert.alert-danger.col {
+  height: 25px;
+  margin-left: 88px;
+  margin-top: 28px;
+  color: white;
+  padding-left: 10px;
+  padding-top: 2px;
+}
+div#error {
+  background: #ff0909c4;
 }
 
 /*
@@ -217,6 +230,8 @@ color: #afb1be;
 margin-left: 15px;
 margin-right: 15px;
 }*/
+
+/* Animation starts here */
 .highway{
 height:100px;
 width: 1000%;
@@ -228,7 +243,7 @@ left: 0;
 right: 0;
 z-index: 1;
 background-repeat: repeat-x;
-animation: highwaay 5s linear infinite; /* edit to anim */
+animation: highway 5s linear infinite; /* edit to anim */
 }
 @keyframes highway{
 100%{
@@ -247,7 +262,7 @@ right: 0;
 display: block;
 z-index: 1;
 background-repeat: repeat-x;
-animation: cityy 20s linear infinite;   /* edit anim */
+animation: city 20s linear infinite;   /* edit anim */
 }
 @keyframes city{
 100%{
@@ -271,7 +286,7 @@ height: 80px;
 position: absolute;
 z-index: 2;
 bottom: -15px;
-animation: wheeel 1s linear infinite;   /* edit anim */
+animation: wheel 1s linear infinite;   /* edit anim */
 }
 @keyframes wheel{
 100%{
@@ -296,7 +311,7 @@ position: absolute;
 bottom: 51px;
 z-index: 5;
 left: 270px;
-animation: hand-movemennt 3s linear infinite; /* edit anim */
+animation: hand-movement 2s linear infinite; /* edit anim */
 }
 @keyframes hand-movement{
 0%{

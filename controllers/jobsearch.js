@@ -19,13 +19,13 @@ Jobsection.createnewjob = function(req, res){
             title: "Job Section",
             css_file_ref: "css/jobsearch.css",
             status: true,
-            message: "Success",
+            msg: "Your Job is posted Succesfully",
         });
     });
 }
 
 Jobsection.retrievejob = function(req, res){
-
+    var applied = req.applied;   
     Job.find({
         title: req.query.titletosearch,
         place: req.query.placetosearch
@@ -39,9 +39,30 @@ Jobsection.retrievejob = function(req, res){
         return res.render('Jobsearch',{
             title: "Job Section",
             css_file_ref: "css/jobsearch.css",
-            result: response
+            result: response,
+            applied
         })
     });
 }
+Jobsection.checkIfApplied = function(req, res, next) {
+    var applicantEmail = req.session.user;
+    Job.findOne({'applied': {$elemMatch: {email: applicantEmail}}}, function (err, user) {
+       console.log(user);
+        if (err){
+            return res.send(err);
+        }    
 
+        if (user) {
+            console.log("Applied Already");
+            req.applied = true;
+            next();
+
+        } else {
+            req.applied = false;
+            console.log("You can apply");
+            next();
+
+        }
+    });
+}
 module.exports = Jobsection;

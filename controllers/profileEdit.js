@@ -42,7 +42,7 @@ ProfileEdit.edituser = function(request, response, cb){
                 if(error){
                     return console.log("error");
                 }
-                return response.redirect('/profile-edit');
+                return response.redirect('/profile');
             });
         });
     })

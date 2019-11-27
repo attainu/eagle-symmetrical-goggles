@@ -14,12 +14,17 @@ AuthController.login = function(req, res) {
             req.session.user = email;
             setTimeout(function(){          //to mimmick latency and let animations flow
                 return res.redirect('/');
-            },400);
+            },40);
         }
         if(login == false){
-            setTimeout(function(){
-                return res.status(401).send('Invalid Credentials'); // Add bs4 alerts sequence
-            },2000);
+            res.status(500).render('login',{
+                msg: "Invalid Credantials",
+                css_file_ref: '/css/login.css',
+                layout:false
+            })
+            // setTimeout(function(){
+            //     return res.redirect('/login')//res.status(401).send('Invalid Credentials'); // Add bs4 alerts sequence
+            // },20);
         }
     
     })
@@ -36,7 +41,7 @@ AuthController.login = function(req, res) {
 AuthController.logout = function(req, res) {
     var session = req.session;
     session.destroy();
-    res.clearCookie('Somename');
+    res.clearCookie('somename');
     return res.redirect('/login');
 };
 

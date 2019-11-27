@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
 const session = require('express-session');
-const PORT = 9090;
 require('dotenv').config();
+//const PORT = 9090;
 const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
 const Handlebars = require("handlebars");
@@ -32,7 +32,7 @@ app.use(session({
 	saveUninitialized: true,
 	cookie: {
 		httpOnly: true,
-		maxAge: 1200000,
+		maxAge: 12000000,
 		path: '/',
 		sameSite: true,
 		secure: false
@@ -42,15 +42,16 @@ app.use(session({
 //importing multer
 const multer = require('multer');
 //setting multer to disk storage
-const fileStorage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		//console.log("file",file);
-		cb(null, 'public/uploads/');
-	},
-	filename: function (req, file, cb) {
-		cb(null, Date.now() + '-' + file.originalname);
-	}
-});
+// const fileStorage = multer.diskStorage({
+// 	destination: function (req, file, cb) {
+// 		//console.log("file",file);
+// 		cb(null, 'public/uploads/');
+// 	},
+// 	filename: function (req, file, cb) {
+// 		cb(null, Date.now() + '-' + file.originalname);
+// 	}
+// });
+const fileStorage = multer.diskStorage({});
 const upload = multer({
 	storage: fileStorage
 });
@@ -106,6 +107,12 @@ app.post('/comment', controllers.FeedController.addComment);
 
 app.get('/jobsearch', controllers.JobSearchController.retrievejob);
 app.get('/profile-edit', controllers.ProfileEditController.showInfo);
+app.get('/contact', function (req, res) {
+	res.render('contact', { title: "Contact Us", css_file_ref: 'css/contact.css', })
+});
+
+// app.get('/jobsearch', /* controllers.JobSearchController.checkIfApplied, */ controllers.JobSearchController.retrievejob);
+// app.get('/profile-edit',controllers.ProfileEditController.showInfo);
 app.get('/profile', controllers.ProfileController.currentProfile);
 
 app.post('/signup/create', controllers.SignupController.create);
@@ -119,21 +126,25 @@ app.post('/setpassword', controllers.ForgotPasswordController.setPassword);
 app.post('/forgotpassword', controllers.ForgotPasswordController.findUser);
 app.post('/profile-edit', controllers.ProfileEditController.edituser);
 app.post('/jobsearch', controllers.JobSearchController.createnewjob);
-
-//These routes are to be handled
 app.get('/trending', controllers.TrendingController.getTrending);
-app.get('/applyjob', controllers.JobController.checkIfApplied, controllers.JobController.applyJob);
+app.get('/applyjob', controllers.JobController.applyJob);
+// For post and image upload
+app.post('/', cpUpload, controllers.FeedController.addPost);
+// For like an dislike button
+app.put('/:id', controllers.FeedController.likeDislike);
 
 
 // Start the app on pre defined port number
+const env = process.env.NODE_ENV || 'default';
+const PORT = process.env.PORT || 9090;
 db.connect()
 	.then(function () {
 		app.listen(PORT, function () {
-			console.log("Application has started and running on port: ", PORT);
+			console.log("Application has started in environment " + env + " and running on port: ", PORT);
+			//console.log(process.env);
 		}).on('error', function (error) {
 			console.log("Unable to start app. Error >>>>", error);
 		});
-	})
-	.catch(function (error) {
+	}).catch(function (error) {
 		console.log("Failed to setup connecton with database.", error);
-	});
+	});	

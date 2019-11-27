@@ -2,29 +2,6 @@ const JobModel = require('./../models/Jobs.js');
 const User = require('./../models/Users.js');
 const JobController = {};
 
-JobController.checkIfApplied = function(req, res, next) {
-    var applicantEmail = req.session.user;
-    var jobId = req.query.jobId;
-    JobModel.findOne({'applied': {$elemMatch: {email: applicantEmail}}}, function (err, user) {
-        if (err){
-            return res.send(err);
-        }    
-
-        if (user) {
-            console.log("Applied Already");
-            req.applied = true;
-            next();
-
-        } else {
-            req.applied = false;
-            console.log("You can apply");
-            next();
-
-        }
-    });
-}
-
-
 JobController.applyJob = function(req, res) {
     //console.log(req.body);
     var applicantEmail = req.session.user;
@@ -47,13 +24,20 @@ JobController.applyJob = function(req, res) {
 
             JobModel.findOneAndUpdate({_id: jobId}, {$push: {applied : applicant} },{useFindAndModify: false}, function(error, data) {
                 if(error) {
-                    return res.send({msg: error})
+                    return res.render('Jobsearch', {
+                        title: "Job Section",
+                        css_file_ref: "css/jobsearch.css",
+                        status: true,
+                        msg: "OOPS Something Went Wrong!",
+                    });
                 }
                 console.log(data);
-                return res.send({
-                    status : true,
-                    meessage: "applied to job successfully"
-                })
+                return res.render('Jobsearch', {
+                    title: "Job Section",
+                    css_file_ref: "css/jobsearch.css",
+                    status: true,
+                    msg: "You Applied for the Job Succesfully",
+                });
             })
         })
     }

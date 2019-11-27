@@ -1,7 +1,7 @@
 
 /* Left section starts*/
 #profileSection1{
-    background-color: seashell;
+    background-color: aliceblue;
     
 }
 #height1 {
@@ -55,7 +55,9 @@
     margin: 5px 5px 0px 5px;
     border-radius: 10px;
 }
-
+textarea#postMessage {
+    width: 472px;
+}
 
 #myUserName {
     font-weight: 900;
@@ -86,7 +88,7 @@
     margin-bottom: 10px;
 }
 .cButton {
-    margin-left: -40px;
+    margin-left: -5px;
 }
 .commentBox {
     margin: 5px 0px 5px 0px;
@@ -115,7 +117,7 @@
 
 /* Right section starts */
 #right-section {
-    background-color: seashell;
+    background-color: aliceblue;
 }
 /* For Trending topics */
 #trending-topics {
