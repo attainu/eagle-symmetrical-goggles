@@ -9,8 +9,9 @@ const userSchema = new mongoose.Schema(
         post: String,
         likes: {
             likeCount: { type: Number, default: 0 },
-            likedBy: Array
+            likedBy: [String]
         },
+        isLiked: Boolean,
         comments: [ { commentedBy: String, comment: String } ],
         imageUrl: String,
         date: { type: Date, default: Date.now() }

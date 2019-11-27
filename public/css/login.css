@@ -73,7 +73,7 @@ transition-duration: 0.5s;
         transform: rotateX(0deg);
 position: relative;
 width: 240px;
-height: 300px;
+height: 330px;
 position: absolute;
 left: 0;
 right: 0;
@@ -208,12 +208,12 @@ transition-duration: .2s;
 
 /* Alert box here */
 .alert.alert-danger.col {
-  height: 25px;
-  margin-left: 88px;
+  height: 30px;
+  margin-left: 42px;
   margin-top: 28px;
   color: white;
   padding-left: 10px;
-  padding-top: 2px;
+  padding-top: 4px;
 }
 div#error {
   background: #ff0909c4;

@@ -2,23 +2,33 @@ const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
 const session = require('express-session');
+// require('dotenv').config();
 //const PORT = 9090;
 const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
-
+const Handlebars = require("handlebars");
 const authRoute = require('./controllers/auth.js');
 //const postController = require('./controllers/homepage.js');
 
 //middlewares
 app.use(express.json());
-app.use(express.urlencoded({ extended : true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'))
+
+// // Register Helper
+// Handlebars.registerHelper("ifCondition", function (value, options) {
+// 	if (value == 1) {
+// 		options.fn(this);
+// 	} else {
+// 		options.inverse(this);
+// 	}
+// });
 
 //session config
 app.use(session({
 	name: 'somename',
 	secret: 'adfasdfas',
-	resave : false,
+	resave: false,
 	saveUninitialized: true,
 	cookie: {
 		httpOnly: true,
@@ -32,15 +42,16 @@ app.use(session({
 //importing multer
 const multer = require('multer');
 //setting multer to disk storage
-const fileStorage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		//console.log("file",file);
-		cb(null, 'public/uploads/');
-	},
-	filename: function (req, file, cb) {
-		cb(null, Date.now() + '-' + file.originalname);
-	}
-});
+// const fileStorage = multer.diskStorage({
+// 	destination: function (req, file, cb) {
+// 		//console.log("file",file);
+// 		cb(null, 'public/uploads/');
+// 	},
+// 	filename: function (req, file, cb) {
+// 		cb(null, Date.now() + '-' + file.originalname);
+// 	}
+// });
+const fileStorage = multer.diskStorage({});
 const upload = multer({
 	storage: fileStorage
 });
@@ -55,10 +66,10 @@ var cpUpload = upload.fields([
 const hbs = exphbs.create({
 	extname: '.hbs',
 	helpers: {
-		ifCond : function(v1, v2, options) {
-				if(v1.includes(v2)) {
-					return options.fn(this);
-				}
+		ifCond: function (v1, v2, options) {
+			if (v1.includes(v2)) {
+				return options.fn(this);
+			}
 			return options.inverse(this);
 		}
 	}
@@ -71,27 +82,37 @@ app.use(authRoute.checkIfLoggedIn);
 
 app.get('/', controllers.FeedController.getFeed);
 
-app.get('/login', function(req, res) {
-	res.render('login',{layout: false});
+app.get('/login', function (req, res) {
+	res.render('login', { layout: false });
 });
-app.get('/signup', function(req,res) {
-	res.render('Signup', {title: "Signup", css_file_ref: 'css/signup.css'});
-});
-
-app.get('/about', function(req,res) {
-	res.render('about', {title: 'About Us', css_file_ref: 'css/about.css', layout:false});
+app.get('/signup', function (req, res) {
+	res.render('Signup', { title: "Signup" });
 });
 
-app.get('/forgotpassword', function(req, res) {
-	res.render('forgot', {title: "Forgot Password?"})
+app.get('/about', function (req, res) {
+	res.render('about', { title: 'About Us', layout: false });
 });
 
-app.get('/contact', function(req, res) {
-	res.render('contact', {title: "Contact Us", css_file_ref: 'css/contact.css',})
+app.get('/forgotpassword', function (req, res) {
+	res.render('forgot', { title: "Forgot Password?" })
 });
 
-app.get('/jobsearch', /* controllers.JobSearchController.checkIfApplied, */ controllers.JobSearchController.retrievejob);
-app.get('/profile-edit',controllers.ProfileEditController.showInfo);
+
+// For post and image upload
+app.post('/', cpUpload, controllers.FeedController.addPost);
+// // For like an dislike button
+// app.put('/:id', controllers.FeedController.likeDislike);
+// // for comment on post
+// app.post('/comment', controllers.FeedController.addComment);
+
+app.get('/jobsearch', controllers.JobSearchController.retrievejob);
+app.get('/profile-edit', controllers.ProfileEditController.showInfo);
+app.get('/contact', function (req, res) {
+	res.render('contact', { title: "Contact Us", css_file_ref: 'css/contact.css', })
+});
+
+// app.get('/jobsearch', /* controllers.JobSearchController.checkIfApplied, */ controllers.JobSearchController.retrievejob);
+// app.get('/profile-edit',controllers.ProfileEditController.showInfo);
 app.get('/profile', controllers.ProfileController.currentProfile);
 
 app.post('/signup/create', controllers.SignupController.create);
@@ -117,14 +138,13 @@ app.put('/:id', controllers.FeedController.likeDislike);
 const env = process.env.NODE_ENV || 'default';
 const PORT = process.env.PORT || 9090;
 db.connect()
-.then(function() {
-	app.listen(PORT, function() {
-		console.log("Application has started in environment "+env+ " and running on port: ", PORT);
-		//console.log(process.env);
-	}).on('error', function(error) {
-		console.log("Unable to start app. Error >>>>", error);
-	});
-})
-.catch(function(error){
-	console.log("Failed to setup connecton with database.", error);
-});
+	.then(function () {
+		app.listen(PORT, function () {
+			console.log("Application has started in environment " + env + " and running on port: ", PORT);
+			//console.log(process.env);
+		}).on('error', function (error) {
+			console.log("Unable to start app. Error >>>>", error);
+		});
+	}).catch(function (error) {
+		console.log("Failed to setup connecton with database.", error);
+	});	

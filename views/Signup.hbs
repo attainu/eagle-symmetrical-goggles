@@ -1,73 +1,80 @@
 {{!-- Navigation bar --}}
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <a class="navbar-brand" href="/homepage">
-            <img src="./../images/Logo.png" width="30" height="30" class="d-inline-block align-top" id="brand-pic" alt="brand image">
-            White Collar
-        </a>
-        <a class="login-signup" href="/login">Login</a>
-    </nav>
+<nav class="navbar navbar-expand-lg fixed-top">
+    <a class="navbar-brand" href="/homepage">
+        <img src="./../images/Logo.png" width="30" height="30" class="d-inline-block align-top" id="brand-pic"
+            alt="brand image">
+        White Collar
+    </a>
+    <a class="login-signup" href="/login">Login</a>
+</nav>
 
 {{!-- Main body --}}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5">
-                <h3 class="heading">Sign Up Form</h3>
-                <form action="/signup/create" method="post">
-                    <div class="form-row ">
-                        <div class="form-group col">
-                            <input type="text" name='firstname' class="form-control" id="firstname" placeholder="Enter First Name" required>
-                        </div>
-                        <div class="form-group col">
-                            <input type="text" class="form-control" name='lastname' id="last-name" placeholder="Enter Last Name" required>
-                        </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <h3 class="heading">Sign Up Form</h3>
+            <form action="/signup/create" method="post">
+                <div class="form-row ">
+                    <div class="form-group col">
+                        <input type="text" name='firstname' class="form-control" id="firstname"
+                            placeholder="Enter First Name" required>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <p>Please select your gender:</p>
-                            <input type="radio" name="gender" value="male" required> Male
-                            <input type="radio" name="gender" value="female" required> Female
-                            <input type="radio" name="gender" value="other" required> Other
-                        </div>
+                    <div class="form-group col">
+                        <input type="text" class="form-control" name='lastname' id="last-name"
+                            placeholder="Enter Last Name" required>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <input type="text" class="form-control" id="Mobile-number"
-                                placeholder="Enter Mobile Number" name='mobileNumber' required>
-                        </div>
-                        <div class="form-group col">
-                            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
-                                placeholder="Enter email" name='email' required>
-                        </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <p>Please select your gender:</p>
+                        <input type="radio" name="gender" value="male" required> Male
+                        <input type="radio" name="gender" value="female" required> Female
+                        <input type="radio" name="gender" value="other" required> Other
                     </div>
-                    <br>
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <input type="Password" class="form-control" id="password" placeholder="Enter Password" name='password' required>
-                        </div>
-                        <div class="form-group col">
-                            <input type="Password" class="form-control" id="confirm-password"
-                                placeholder="Confirm Password" name='confirmPassword' required>
-                        </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <input type="text" class="form-control" id="Mobile-number" placeholder="Enter Mobile Number"
+                            name='mobileNumber' required>
                     </div>
-                    <button type="submit" class="btn btn-secondary" id="Agreeandjoin">Agree and Join</button>
+                    <div class="form-group col">
+                        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
+                            placeholder="Enter email" name='email' required>
+                    </div>
+                </div>
+                <br>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <input type="Password" class="form-control" id="password" placeholder="Enter Password"
+                            name='password' required>
+                    </div>
+                    <div class="form-group col">
+                        <input type="Password" class="form-control" id="confirm-password" placeholder="Confirm Password"
+                            name='confirmPassword' required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-secondary" id="Agreeandjoin">Agree and Join</button>
                 <div class="alreadyMember">
                     <p>Already a member? <a href="/login">Login here</a></p>
                 </div>
                 {{#if msg}}
                 <div id="error" class="w-75 text-centre">
                     <div class="alert alert-danger col" role="alert">
-                       {{this.msg}}
+                        {{this.msg}}
                     </div>
                 </div>
                 {{/if}}
-                 {{#if message}}
+                {{#if message}}
                 <div id="error" class="w-75 text-centre">
                     <div class="alert alert-success" role="alert">
-                       {{this.message}}
+                        {{this.message}}
                     </div>
                 </div>
                 {{/if}}
-                </form>
-            </div>
+            </form>
         </div>
     </div>
+</div>
+
+</div>
+<link rel="stylesheet" href="/css/signup.css">

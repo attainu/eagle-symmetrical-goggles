@@ -19,9 +19,9 @@ cloudinary.config({
 FeedController.getFeed = function (req, res) {
     var user = req.session.user;
     var userDtails = req.session;
-    console.log("login details>>",userDtails);
+    // console.log("login details>>",userDtails);
     UserModel.find({ email: user }, function (error, response) {
-        console.log(response);
+        // console.log(response);
 
         if (error) console.log(error);
         var firstname = response[0].firstname;
@@ -43,10 +43,27 @@ FeedController.getFeed = function (req, res) {
                     message: error
                 });
             }
-            console.log(data);
+            console.log("Feed data>>", data);
             var numberOfPosts = data.length;
             // console.log(numberOfPosts);
-
+            // whetherLiked or not;
+            // var isLiked = [];
+            // var index = 0;
+            // for (var i = 0; i < data.length; i++) {
+            //     var yesLiked = 0;
+            //     data[i].likes.likedBy.forEach(function (element) {
+            //         if (element == user){
+            //             yesLiked = 1;
+            //             break;
+            //         }
+            //         if(yesLiked == 1){
+            //             data[i].isLiked = true;
+            //         }
+            //         else{
+            //             data[i].isLiked = false;
+            //         }
+            //     });
+            // }
             return res.render('homepage', {
                 status: true,
                 title: "feedpage",
@@ -64,9 +81,11 @@ FeedController.getFeed = function (req, res) {
 };
 // For posting status and images
 FeedController.addPost = function (req, res) {
+    console.log("request:>>", req.files);
+
     var userEmail = req.session.user;
     var user = req.session;
-    console.log("UserEmail to create posts",userEmail);
+    // console.log("UserEmail to create posts",userEmail);
     var userPost = req.body.usersPost;
     var cloudinaryUrl = null;
     var files = req.files['imagefile'];
@@ -86,7 +105,7 @@ FeedController.addPost = function (req, res) {
                 return callback(null, response);
             });
         }, function (error, result) {
-            console.log("outside", cloudinaryUrl);
+            // console.log("outside", cloudinaryUrl);
             FeedModel.create({
                 email: userEmail,
                 post: userPost,
@@ -95,7 +114,7 @@ FeedController.addPost = function (req, res) {
                 if (error) console.log("FAiled to save post to database. Error", error);
                 console.log("added to database", data);
             });
-            FeedModel.find({email: userEmail }, function (error, data) {
+            FeedModel.find({ email: userEmail }, function (error, data) {
                 if (error) console.log(error);
                 // console.log(data);
                 return res.redirect('/');
@@ -111,16 +130,17 @@ FeedController.addPost = function (req, res) {
             if (error) console.log("FAiled to save post to database. Error", error);
             console.log("added to database", data);
         });
-        FeedModel.find({ email: userEmail}, function (error, data) {
+        FeedModel.find({ email: userEmail }, function (error, data) {
             if (error) console.log(error);
             // console.log(data);
             return res.redirect('/');
         });
     }
 };
+
 //For like and dislike
 FeedController.likeDislike = function (req, res) {
-    var id = req.params.id;
+    // var id = req.params.id;
     // console.log("post ID:", id);
 
     FeedModel.findById(req.params.id, function (error, data) {
@@ -128,9 +148,11 @@ FeedController.likeDislike = function (req, res) {
         console.log("Post", data);
         // console.log("type:",typeof data.likes);
         var uName = data.email;
+        var flag = 0;
         if (data.likes.likedBy.some(function (elem) {
             return (elem == uName);
         }) == true) {
+            data.isLiked = null;
             data.likes.likeCount = data.likes.likeCount - 1;
             data.likes.likedBy = data.likes.likedBy.filter(function (x) {
                 if (x != uName)
@@ -138,17 +160,34 @@ FeedController.likeDislike = function (req, res) {
             });
         }
         else {
+            data.isLiked = true;
+            flag = 1;
             data.likes.likeCount = data.likes.likeCount + 1;
             data.likes.likedBy.push(data.email);
         }
+        console.log("isLiked", data.isLiked);
+        
         console.log("LikedBy", data.likes.likedBy);
         console.log("likeCount", data.likes.likeCount);
 
         data.save(function (err) {
             if (err) console.log("Unable to save count in database", err);
         });
-        res.send({ likeCount: data.likes.likeCount });
+        res.send({
+            likeCount: data.likes.likeCount,
+            flag: flag
+        });
     });
 };
+
+// for commenting on post
+FeedController.addComment = function (req, res) {
+    FeedModel.findById(req.params.id, function (error, data) {
+        if (error) console.log(error);
+        console.log("comment>>", data);
+        // console.log("type:",typeof data.likes);
+    });
+    res.redirect('/');
+}
 
 module.exports = FeedController;
