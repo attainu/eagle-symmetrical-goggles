@@ -3,22 +3,32 @@ const app = express();
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const PORT = 9090;
+require('dotenv').config();
 const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
-
+const Handlebars = require("handlebars");
 const authRoute = require('./controllers/auth.js');
 //const postController = require('./controllers/homepage.js');
 
 //middlewares
 app.use(express.json());
-app.use(express.urlencoded({ extended : true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'))
+
+// // Register Helper
+// Handlebars.registerHelper("ifCondition", function (value, options) {
+// 	if (value == 1) {
+// 		options.fn(this);
+// 	} else {
+// 		options.inverse(this);
+// 	}
+// });
 
 //session config
 app.use(session({
 	name: 'somename',
 	secret: 'adfasdfas',
-	resave : false,
+	resave: false,
 	saveUninitialized: true,
 	cookie: {
 		httpOnly: true,
@@ -55,10 +65,10 @@ var cpUpload = upload.fields([
 const hbs = exphbs.create({
 	extname: '.hbs',
 	helpers: {
-		ifCond : function(v1, v2, options) {
-				if(v1.includes(v2)) {
-					return options.fn(this);
-				}
+		ifCond: function (v1, v2, options) {
+			if (v1.includes(v2)) {
+				return options.fn(this);
+			}
 			return options.inverse(this);
 		}
 	}
@@ -71,19 +81,19 @@ app.use(authRoute.checkIfLoggedIn);
 
 app.get('/', controllers.FeedController.getFeed);
 
-app.get('/login', function(req, res) {
-	res.render('login',{layout: false});
+app.get('/login', function (req, res) {
+	res.render('login', { layout: false });
 });
-app.get('/signup', function(req,res) {
-	res.render('Signup', {title: "Signup"});
-});
-
-app.get('/about', function(req,res) {
-	res.render('about', {title: 'About Us', layout:false});
+app.get('/signup', function (req, res) {
+	res.render('Signup', { title: "Signup" });
 });
 
-app.get('/forgotpassword', function(req, res) {
-	res.render('forgot', {title: "Forgot Password?"})
+app.get('/about', function (req, res) {
+	res.render('about', { title: 'About Us', layout: false });
+});
+
+app.get('/forgotpassword', function (req, res) {
+	res.render('forgot', { title: "Forgot Password?" })
 });
 
 
@@ -91,9 +101,11 @@ app.get('/forgotpassword', function(req, res) {
 app.post('/', cpUpload, controllers.FeedController.addPost);
 // For like an dislike button
 app.put('/:id', controllers.FeedController.likeDislike);
+// for comment on post
+app.post('/comment', controllers.FeedController.addComment);
 
 app.get('/jobsearch', controllers.JobSearchController.retrievejob);
-app.get('/profile-edit',controllers.ProfileEditController.showInfo);
+app.get('/profile-edit', controllers.ProfileEditController.showInfo);
 app.get('/profile', controllers.ProfileController.currentProfile);
 
 app.post('/signup/create', controllers.SignupController.create);
@@ -115,13 +127,13 @@ app.get('/applyjob', controllers.JobController.checkIfApplied, controllers.JobCo
 
 // Start the app on pre defined port number
 db.connect()
-.then(function() {
-	app.listen(PORT, function() {
-		console.log("Application has started and running on port: ", PORT);
-	}).on('error', function(error) {
-		console.log("Unable to start app. Error >>>>", error);
+	.then(function () {
+		app.listen(PORT, function () {
+			console.log("Application has started and running on port: ", PORT);
+		}).on('error', function (error) {
+			console.log("Unable to start app. Error >>>>", error);
+		});
+	})
+	.catch(function (error) {
+		console.log("Failed to setup connecton with database.", error);
 	});
-})
-.catch(function(error){
-	console.log("Failed to setup connecton with database.", error);
-});

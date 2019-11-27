@@ -1,3 +1,13 @@
+{{!-- Register helper
+<script>
+    Handlebars.registerHelper("if", function (value, options) {
+        if (value) {
+            options.fn(this);
+        } else {
+            options.inverse(this);
+        }
+    });
+</script> --}}
 {{!-- css link --}}
 <link rel="stylesheet" href="/css/home.css">
 
@@ -94,25 +104,49 @@
                         <span id="shareButton"id="likeCounter">10</span>
                     </span> 
                     --}}
-                    <div>
+                    <div class="imageIcon">
                         <a class="btn likeButton" id="like-id-{{this._id}}" userId="{{this._id}}">
-                            <span><i class="fa fa-thumbs-o-up"  aria-hidden="true"></i></span>
+                            {{#if this.isLiked}}
+                            <span style="color:blue font-size:18px"><i class="fa fa-thumbs-o-up"
+                                    aria-hidden="true"></i></span>
+                            {{else}}
+                            <span style="color:black font-size:16px"><i class="fa fa-thumbs-o-up"
+                                    aria-hidden="true"></i></span>
+                            {{/if}}
                         </a>
                         <span id="likes-count-{{ this._id }}">{{ this.likes.likeCount}}</span>
 
 
-                        <a class="btn commentButton " >
+                        <a class="btn commentButton " id="comment-id-{{this._id}}" userCommentId="x-{{this._id}}" }}>
                             <i class="far fa-comments buttonx" aria-hidden="true"></i>
                         </a>
+                        <span id="comment-count-{{ this._id }}" class="cButton">{{ this.comments.length}}</span>
 
-                        <a class="btn shareButton" >
+                        <a class="btn shareButton">
                             <i class="fas fa-share buttony" aria-hidden="true"></i>
                         </a>
                     </div>
-                    <div >
-                        <form action="#" >
-                            <div class="textBox border round" id="textBox"></div>
+                    <div>
+                        <form>
+                            <div class="commentBox">
+                                <input class="commentTextBox border round" type="text" name="messageText"
+                                    placeholder="Add a comment here...">
+                                {{!-- <textarea class="commentTextBox border round"  name="messageText" rows="1" cols="40" placeholder="Add a comment here..."></textarea> --}}
+                                <button type="button" class="btn btn-secondary btn-sm commentPostButton">Post</button>
+                            </div>
                         </form>
+                        {{#if this.comments}}
+                        <div>
+                            <ul style="list-style: none; font-size: 12px; margin-left: -25px;">
+                                {{#each this.comments}}
+                                <li>
+                                    <span class="commetedByList" ><b>{{this.commentedBy}}: </b></span>
+                                    <span> {{this.comment}}</span>
+                                </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        {{/if}}
                     </div>
                 </div>
 

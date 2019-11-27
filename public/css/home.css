@@ -73,6 +73,9 @@
     margin: 0px 15px 0px 15px;
     border-radius: 5px;
 }
+.imageIcon {
+    margin: -20px 0px -20px 0px;
+}
 .likeButton{
     margin-left: 40px;
     margin-bottom: 5px;
@@ -81,6 +84,24 @@
 .commentButton{
     margin-left: 40px;
     margin-bottom: 10px;
+}
+.cButton {
+    margin-left: -40px;
+}
+.commentBox {
+    margin: 5px 0px 5px 0px;
+}
+.commentTextBox {
+    margin: 5px 0px 0px 5px;
+    border-radius: 10px;
+    width: 380px;
+}
+.commentPostButton {
+    margin: 0px 0px 0px 0px;
+    font-size: 10px;
+    color: #304e69;
+    background-color: #C8D0CD;
+    border-color: #c8d0cd;
 }
 .shareButton {
     margin-left: 40px;
