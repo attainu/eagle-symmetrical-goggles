@@ -7,7 +7,11 @@ AuthController.login = function(req, res) {
     //console.log(email, password);
     Model.login(email, plain_password, function(error, login){   
         if (error) {
-            res.status(500).send(error);
+            res.status(500).render('login',{
+                msg: "No Such User Exists Please Signup!",
+                css_file_ref: '/css/login.css',
+                layout:false
+            });
         }
         if(login == true){
             console.log('Successfully logged in');
