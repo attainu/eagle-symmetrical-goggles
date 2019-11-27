@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
 const session = require('express-session');
-require('dotenv').config();
+// require('dotenv').config();
 //const PORT = 9090;
 const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
@@ -100,10 +100,10 @@ app.get('/forgotpassword', function (req, res) {
 
 // For post and image upload
 app.post('/', cpUpload, controllers.FeedController.addPost);
-// For like an dislike button
-app.put('/:id', controllers.FeedController.likeDislike);
-// for comment on post
-app.post('/comment', controllers.FeedController.addComment);
+// // For like an dislike button
+// app.put('/:id', controllers.FeedController.likeDislike);
+// // for comment on post
+// app.post('/comment', controllers.FeedController.addComment);
 
 app.get('/jobsearch', controllers.JobSearchController.retrievejob);
 app.get('/profile-edit', controllers.ProfileEditController.showInfo);
