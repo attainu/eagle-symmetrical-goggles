@@ -3,26 +3,15 @@ const app = express();
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 // require('dotenv').config();
-//const PORT = 9090;
 const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
-const Handlebars = require("handlebars");
 const authRoute = require('./controllers/auth.js');
-//const postController = require('./controllers/homepage.js');
 
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'))
 
-// // Register Helper
-// Handlebars.registerHelper("ifCondition", function (value, options) {
-// 	if (value == 1) {
-// 		options.fn(this);
-// 	} else {
-// 		options.inverse(this);
-// 	}
-// });
 
 //session config
 app.use(session({
@@ -97,14 +86,6 @@ app.get('/forgotpassword', function (req, res) {
 	res.render('forgot', { title: "Forgot Password?" })
 });
 
-
-// For post and image upload
-app.post('/', cpUpload, controllers.FeedController.addPost);
-// // For like an dislike button
-// app.put('/:id', controllers.FeedController.likeDislike);
-// // for comment on post
-// app.post('/comment', controllers.FeedController.addComment);
-
 app.get('/jobsearch', controllers.JobSearchController.retrievejob);
 app.get('/profile-edit', controllers.ProfileEditController.showInfo);
 app.get('/contact', function (req, res) {
@@ -112,7 +93,6 @@ app.get('/contact', function (req, res) {
 });
 
 // app.get('/jobsearch', /* controllers.JobSearchController.checkIfApplied, */ controllers.JobSearchController.retrievejob);
-// app.get('/profile-edit',controllers.ProfileEditController.showInfo);
 app.get('/profile', controllers.ProfileController.currentProfile);
 
 app.post('/signup/create', controllers.SignupController.create);
