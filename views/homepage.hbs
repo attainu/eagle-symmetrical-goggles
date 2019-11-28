@@ -1,13 +1,3 @@
-{{!-- Register helper
-<script>
-    Handlebars.registerHelper("if", function (value, options) {
-        if (value) {
-            options.fn(this);
-        } else {
-            options.inverse(this);
-        }
-    });
-</script> --}}
 {{!-- css link --}}
 <link rel="stylesheet" href="/css/home.css">
 
@@ -81,7 +71,7 @@
             <div class="border rounded mt-5">
                 <div class="border round">
                     <span> <img id="profileImage" src="/images/profile.jpeg" alt=""></span>
-                    <span id="myUserName"> {{this.email}} </span><br>
+                    <span id="myUserName"> {{this.name}} </span><br>
                     <span id="postTime">{{this.date}}</span>
                 </div>
 
@@ -106,18 +96,18 @@
                     --}}
                     <div class="imageIcon">
                         <a class="btn likeButton" id="like-id-{{this._id}}" userId="{{this._id}}">
-                            {{#if this.isLiked}}
+                            {{!-- {{#if this.}}
                             <span style="color:blue font-size:18px"><i class="fa fa-thumbs-o-up"
-                                    aria-hidden="true"></i></span>
-                            {{else}}
+                                    aria-hidden="true"></i></span> --}}
+                            {{!-- {{else}} --}}
                             <span style="color:black font-size:16px"><i class="fa fa-thumbs-o-up"
                                     aria-hidden="true"></i></span>
-                            {{/if}}
+                            {{!-- {{/if}} --}}
                         </a>
-                        <span id="likes-count-{{ this._id }}">{{ this.likes.likeCount}}</span>
+                        <span id="likes-count-{{ this._id }}">{{ this.likedBy.length}}</span>
 
 
-                        <a class="btn commentButton " id="comment-id-{{this._id}}" userCommentId="x-{{this._id}}" }}>
+                        <a class="btn commentButton " id="comment-id-{{this._id}}"}}>
                             <i class="far fa-comments buttonx" aria-hidden="true"></i>
                         </a>
                         <span id="comment-count-{{ this._id }}" class="cButton">{{ this.comments.length}}</span>
@@ -127,12 +117,12 @@
                         </a>
                     </div>
                     <div>
-                        <form>
+                        {{!-- action="/comment"   --}}
+                        <form class="form-group" method="post" enctype="multipart/form-data">
                             <div class="commentBox">
-                                <input class="commentTextBox border round" type="text" name="messageText"
-                                    placeholder="Add a comment here...">
+                                <input class="commentTextBox border round" type="text" id="id-{{this._id}}" name="addComment" placeholder="Add a comment here...">
                                 {{!-- <textarea class="commentTextBox border round"  name="messageText" rows="1" cols="40" placeholder="Add a comment here..."></textarea> --}}
-                                <button type="button" class="btn btn-secondary btn-sm commentPostButton">Post</button>
+                                <button type="submit" class="btn btn-secondary btn-sm commentPostButton" userCommentId="{{this._id}}">Post</button>
                             </div>
                         </form>
                         {{#if this.comments}}

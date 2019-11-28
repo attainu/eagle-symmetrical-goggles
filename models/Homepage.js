@@ -7,10 +7,9 @@ const userSchema = new mongoose.Schema(
         name: String,
         email: String,
         post: String,
-        likes: {
-            likeCount: { type: Number, default: 0 },
-            likedBy: [String]
-        },
+        likedBy: [{
+            type: Array
+        }],
         isLiked: Boolean,
         comments: [ { commentedBy: String, comment: String } ],
         imageUrl: String,

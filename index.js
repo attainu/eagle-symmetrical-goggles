@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
 const session = require('express-session');
-// require('dotenv').config();
+require('dotenv').config();
 const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
 const authRoute = require('./controllers/auth.js');
@@ -85,7 +85,6 @@ app.get('/about', function (req, res) {
 app.get('/forgotpassword', function (req, res) {
 	res.render('forgot', { title: "Forgot Password?" })
 });
-
 app.get('/landing', function (req, res) {
 	res.render('landing', { title: "White Collar" , css_file_ref: "/css/landing.css" , script: "/js/main.js" })
 });
@@ -115,7 +114,9 @@ app.get('/applyjob', controllers.JobController.applyJob);
 // For post and image upload
 app.post('/', cpUpload, controllers.FeedController.addPost);
 // For like an dislike button
-app.put('/:id', controllers.FeedController.likeDislike);
+app.put('/:id', controllers.FeedController.likeDislike);	//keep this at bottom only
+// for posting comment
+// app.post('/comment:id', controllers.FeedController.postComment);
 
 
 // Start the app on pre defined port number
