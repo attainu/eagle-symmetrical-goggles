@@ -85,7 +85,7 @@ FeedController.addPost = function (req, res) {
 
     var userEmail = req.session.user;
     var user = req.session;
-    // console.log("UserEmail to create posts",userEmail);
+    console.log("User details to create posts",user);
     var userPost = req.body.usersPost;
     var cloudinaryUrl = null;
     var files = req.files['imagefile'];
