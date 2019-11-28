@@ -75,7 +75,7 @@ FeedController.addPost = async function (req, res) {
         fullname = response[0].firstname + " " + response[0].lastname;
     });
     var cloudinaryUrl = null;
-    var files = req.files['imagefile'];
+    // var files = req.files['imagefile'];
     if (req.files['imagefile']) {
         var imgUrl = req.files['imagefile'][0].path;
         console.log(imgUrl);
@@ -83,65 +83,96 @@ FeedController.addPost = async function (req, res) {
         // var __source = tinify.fromFile(imgUrl);
         // __source.toFile(imgUrl);
         //uploading to cloudinary
-        async.map(files, function (file, callback) {
-            cloudinary.uploader.upload(imgUrl, function (error, response) {
-                if (error) return callback(error);
-                cloudinaryUrl = response.url;
-                // console.log("cloudinaryUrl", cloudinaryUrl);
-                console.log("Image uploaded ", response);
-                return callback(null, response);
-            });
-        }, function (error, result) {
-            // console.log("outside", cloudinaryUrl);
-            FeedModel.create({
-                name: fullname,
-                email: userEmail,
-                post: userPost,
-                imageUrl: cloudinaryUrl
-            }, function (error, data) {
-                if (error) console.log("FAiled to save post to database. Error", error);
-                console.log("added to database", data);
-            });
-            FeedModel.find({ email: userEmail }, function (error, data) {
-                if (error) console.log(error);
-                // console.log(data);
-            });
-            return res.redirect('/');
+
+        // async.map(files, function (file, callback) {
+        await cloudinary.uploader.upload(imgUrl, function (error, response) {
+            if (error) {
+                console.log(error);
+            }
+            console.log("response cloudinary", response);
+
+            cloudinaryUrl = response.url;
+            console.log("cloudinaryUrl", cloudinaryUrl);
+            console.log("Image uploaded ", response);
         });
     }
-    else {
-        FeedModel.create({
-            name: fullname,
-            email: userEmail,
-            post: userPost,
-            imageUrl: cloudinaryUrl
-        }, function (error, data) {
-            if (error) console.log("FAiled to save post to database. Error", error);
-            console.log("added to database", data);
-        });
-        FeedModel.find({ email: userEmail }, function (error, data) {
-            if (error) console.log(error);
-            // console.log(data);
-        });
-        return res.redirect('/');
-    }
+    console.log("outside", cloudinaryUrl);
+    FeedModel.create({
+        name: fullname,
+        email: userEmail,
+        post: userPost,
+        imageUrl: cloudinaryUrl
+    }, function (error, data) {
+        if (error) console.log("FAiled to save post to database. Error", error);
+        console.log("added to database", data);
+    });
+    FeedModel.find({ email: userEmail }, function (error, data) {
+        if (error) console.log(error);
+        // console.log(data);
+    });
+    return res.redirect('/');
+
 };
+// //For like and dislike
+// FeedController.likeDislike = function (req, res) {
+//     // var id = req.params.id;
+//     // console.log("post ID:", id);
+//     var uName = req.session.user;
+//     FeedModel.findById(req.params.id, function (error, data) {
+//         if (error) console.log(error);
+//         console.log("Post", data);
+//         // console.log("type:",typeof data.likes);
+//         // var uName = data.email;
+//         var flag = 0;
+//         if (data.likes.likedBy.some(function (elem) {
+//             return (elem == uName);
+//         }) == true) {
+//             data.isLiked = null;
+//             data.likes.likeCount = data.likes.likeCount - 1;
+//             data.likes.likedBy = data.likes.likedBy.filter(function (x) {
+//                 if (x != uName)
+//                     return x;
+//             });
+//         }
+//         else {
+//             data.isLiked = true;
+//             flag = 1;
+//             data.likes.likeCount = data.likes.likeCount + 1;
+//             data.likes.likedBy.push(uName);
+//         }
+//         console.log("isLiked", data.isLiked);
+//         console.log("LikedBy", data.likes.likedBy);
+//         console.log("likeCount", data.likes.likeCount);
+
+//         data.save(function (err) {
+//             if (err) console.log("Unable to save like count in database", err);
+//         });
+//         res.send({
+//             likeCount: data.likes.likeCount,
+//             flag: flag
+//         });
+//     });
+// };
 
 //For like and dislike
-FeedController.likeDislike = function (req, res) {
-    // var id = req.params.id;
-    // console.log("post ID:", id);
+FeedController.likeDislike = async function (req, res) {
     var uName = req.session.user;
-    FeedModel.findById(req.params.id, function (error, data) {
-        if (error) console.log(error);
-        console.log("Post", data);
-        // console.log("type:",typeof data.likes);
-        // var uName = data.email;
-        var flag = 0;
-        if (data.likes.likedBy.some(function (elem) {
+    var flag = 0;
+    var likeCount;
+    await FeedModel.findById(req.params.id, async function (error, data) {
+        if (error) {
+            console.log(error);
+            return error;
+        }
+        console.log("Liked Post", data);
+        // var flag = 0;
+        var alreadyLiked = data.likes.likedBy.some(function (elem) {
+            console.log("check-0.0");
             return (elem == uName);
-        }) == true) {
-            data.isLiked = null;
+        });
+        if ( alreadyLiked == true) {
+            console.log("check-1.1");
+            data.isLiked = false;
             data.likes.likeCount = data.likes.likeCount - 1;
             data.likes.likedBy = data.likes.likedBy.filter(function (x) {
                 if (x != uName)
@@ -149,51 +180,53 @@ FeedController.likeDislike = function (req, res) {
             });
         }
         else {
+            console.log("check-1.2");
             data.isLiked = true;
             flag = 1;
             data.likes.likeCount = data.likes.likeCount + 1;
-            data.likes.likedBy.push(data.email);
+            data.likes.likedBy.push(uName);
         }
-        // console.log("isLiked", data.isLiked);
+        console.log("isLiked", data.isLiked);
+        console.log("LikedBy", data.likes.likedBy);
+        console.log("likeCount", data.likes.likeCount);
 
-        // console.log("LikedBy", data.likes.likedBy);
-        // console.log("likeCount", data.likes.likeCount);
-
-        data.save(function (err) {
-            if (err) console.log("Unable to save like count in database", err);
+        await data.save(function (error) {
+            if(error) console.log("Unable to save like count in database", err);
         });
-        res.send({
-            likeCount: data.likes.likeCount,
-            flag: flag
-        });
+        likeCount =data.likes.likeCount;
+    });
+    console.log("check-3.0");
+    return res.send({
+        likeCount: likeCount,
+        flag: flag
     });
 };
 
 // for commenting on post
-FeedController.postComment = async function (req, res) {
-    var comment = req.body.addComment;
-    var userEmail = req.session.user;
-    console.log("posted comment", comment);
-    console.log("userEmail", userEmail);
-    console.log("req.params.id",req.params.id);
-    var fullname = null;
-    await UserModel.find({ email: userEmail }, function (error, response) {
-        if (error) console.log(error);
-        fullname = response[0].firstname + " " + response[0].lastname;
-    });
-    var commentData = {
-        commentedBy: fullname,
-        comment: comment
-    };
-    await FeedModel.findById(req.params.id,function (error, response) {
-        // console.log("comment response",response);
-        
-        // response.comments.push(commentData);
-        // response.save(function (err) {
-        //     if (err) console.log("Unable to save comments in database", err);
-        // }); 
-    });
-    res.redirect('/');
-}
+// FeedController.postComment = async function (req, res) {
+//     var comment = req.body.addComment;
+//     var userEmail = req.session.user;
+//     console.log("posted comment", comment);
+//     console.log("userEmail", userEmail);
+//     console.log("req.params.id",req.params.id);
+//     var fullname = null;
+//     await UserModel.find({ email: userEmail }, function (error, response) {
+//         if (error) console.log(error);
+//         fullname = response[0].firstname + " " + response[0].lastname;
+//     });
+//     var commentData = {
+//         commentedBy: fullname,
+//         comment: comment
+//     };
+//     await FeedModel.findById(req.params.id,function (error, response) {
+//         // console.log("comment response",response);
+
+//         // response.comments.push(commentData);
+//         // response.save(function (err) {
+//         //     if (err) console.log("Unable to save comments in database", err);
+//         // }); 
+//     });
+//     res.redirect('/');
+// }
 
 module.exports = FeedController;

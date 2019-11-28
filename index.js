@@ -117,7 +117,7 @@ app.post('/', cpUpload, controllers.FeedController.addPost);
 // For like an dislike button
 app.put('/:id', controllers.FeedController.likeDislike);
 // for posting comment
-app.post('/comment:id', controllers.FeedController.postComment);
+// app.post('/comment:id', controllers.FeedController.postComment);
 
 
 // Start the app on pre defined port number
