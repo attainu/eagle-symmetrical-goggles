@@ -71,7 +71,9 @@ FeedController.addPost = async function (req, res) {
     var userPost = req.body.usersPost;
     var fullname = null;
     await UserModel.find({ email: userEmail }, function (error, response) {
-        if (error) console.log(error);
+        if (error){
+            return console.log(error);
+        }
         fullname = response[0].firstname + " " + response[0].lastname;
     });
     var cloudinaryUrl = null;
@@ -107,126 +109,58 @@ FeedController.addPost = async function (req, res) {
         console.log("added to database", data);
     });
     FeedModel.find({ email: userEmail }, function (error, data) {
-        if (error) console.log(error);
+        if (error){
+            console.log(error);
+        } 
         // console.log(data);
     });
     return res.redirect('/');
-
 };
-// //For like and dislike
-// FeedController.likeDislike = function (req, res) {
-//     // var id = req.params.id;
-//     // console.log("post ID:", id);
-//     var uName = req.session.user;
-//     FeedModel.findById(req.params.id, function (error, data) {
-//         if (error) console.log(error);
-//         console.log("Post", data);
-//         // console.log("type:",typeof data.likes);
-//         // var uName = data.email;
-//         var flag = 0;
-//         if (data.likes.likedBy.some(function (elem) {
-//             return (elem == uName);
-//         }) == true) {
-//             data.isLiked = null;
-//             data.likes.likeCount = data.likes.likeCount - 1;
-//             data.likes.likedBy = data.likes.likedBy.filter(function (x) {
-//                 if (x != uName)
-//                     return x;
-//             });
-//         }
-//         else {
-//             data.isLiked = true;
-//             flag = 1;
-//             data.likes.likeCount = data.likes.likeCount + 1;
-//             data.likes.likedBy.push(uName);
-//         }
-//         console.log("isLiked", data.isLiked);
-//         console.log("LikedBy", data.likes.likedBy);
-//         console.log("likeCount", data.likes.likeCount);
-
-//         data.save(function (err) {
-//             if (err) console.log("Unable to save like count in database", err);
-//         });
-//         res.send({
-//             likeCount: data.likes.likeCount,
-//             flag: flag
-//         });
-//     });
-// };
 
 //For like and dislike
-FeedController.likeDislike = async function (req, res) {
+FeedController.likeDislike = function (req, res) {
     var uName = req.session.user;
-    var flag = 0;
+    console.log("seesion ka useremail>>", uName);
     var likeCount;
-    await FeedModel.findById(req.params.id, async function (error, data) {
+    var id = req.params.id
+    console.log("yh like controller k andr ka paramsid h>>>", req.params.id);
+    console.log("yh like controller k andr ka params id h jo j query se aya h>>>", id);
+
+    FeedModel.findById(id, function (error, data) {  //here i get post data
         if (error) {
             console.log(error);
             return error;
         }
+        // post id data got by req.params.id
         console.log("Liked Post", data);
         // var flag = 0;
-        var alreadyLiked = data.likes.likedBy.some(function (elem) {
-            console.log("check-0.0");
-            return (elem == uName);
-        });
-        if ( alreadyLiked == true) {
-            console.log("check-1.1");
-            data.isLiked = false;
-            data.likes.likeCount = data.likes.likeCount - 1;
-            data.likes.likedBy = data.likes.likedBy.filter(function (x) {
-                if (x != uName)
-                    return x;
+        if(data.likedBy===null || data.likedBy.includes(uName)===false){
+            FeedModel.findByIdAndUpdate(req.params.id, { $push: { likedBy: uName } }, function(err, docs){
+                if(err){
+                    return console.log("like update m error>>", err)
+                }
+                console.log("like hone k bad>>",docs);
+                var flag = 1;
+                return res.send({
+                    flag: flag
+                });
             });
         }
-        else {
-            console.log("check-1.2");
-            data.isLiked = true;
-            flag = 1;
-            data.likes.likeCount = data.likes.likeCount + 1;
-            data.likes.likedBy.push(uName);
+        var checking = data.likedBy.includes(uName);
+
+        if(checking===true){
+            FeedModel.findByIdAndUpdate(req.params.id, { $pull: { likedBy: uName } }, function(err, docs){
+                if(err){
+                    return console.log("like update m error>>", err)
+                }
+                console.log("like hone k bad>>",docs);
+                console.log("you already liked this");
+                var flag = 0;
+                return res.send({
+                    flag: flag
+                });
+            }); 
         }
-        console.log("isLiked", data.isLiked);
-        console.log("LikedBy", data.likes.likedBy);
-        console.log("likeCount", data.likes.likeCount);
-
-        await data.save(function (error) {
-            if(error) console.log("Unable to save like count in database", err);
-        });
-        likeCount =data.likes.likeCount;
     });
-    console.log("check-3.0");
-    return res.send({
-        likeCount: likeCount,
-        flag: flag
-    });
-};
-
-// for commenting on post
-// FeedController.postComment = async function (req, res) {
-//     var comment = req.body.addComment;
-//     var userEmail = req.session.user;
-//     console.log("posted comment", comment);
-//     console.log("userEmail", userEmail);
-//     console.log("req.params.id",req.params.id);
-//     var fullname = null;
-//     await UserModel.find({ email: userEmail }, function (error, response) {
-//         if (error) console.log(error);
-//         fullname = response[0].firstname + " " + response[0].lastname;
-//     });
-//     var commentData = {
-//         commentedBy: fullname,
-//         comment: comment
-//     };
-//     await FeedModel.findById(req.params.id,function (error, response) {
-//         // console.log("comment response",response);
-
-//         // response.comments.push(commentData);
-//         // response.save(function (err) {
-//         //     if (err) console.log("Unable to save comments in database", err);
-//         // }); 
-//     });
-//     res.redirect('/');
-// }
-
+}
 module.exports = FeedController;

@@ -96,15 +96,15 @@
                     --}}
                     <div class="imageIcon">
                         <a class="btn likeButton" id="like-id-{{this._id}}" userId="{{this._id}}">
-                            {{#if this.isLiked}}
+                            {{!-- {{#if this.}}
                             <span style="color:blue font-size:18px"><i class="fa fa-thumbs-o-up"
-                                    aria-hidden="true"></i></span>
-                            {{else}}
+                                    aria-hidden="true"></i></span> --}}
+                            {{!-- {{else}} --}}
                             <span style="color:black font-size:16px"><i class="fa fa-thumbs-o-up"
                                     aria-hidden="true"></i></span>
-                            {{/if}}
+                            {{!-- {{/if}} --}}
                         </a>
-                        <span id="likes-count-{{ this._id }}">{{ this.likes.likeCount}}</span>
+                        <span id="likes-count-{{ this._id }}">{{ this.likedBy.length}}</span>
 
 
                         <a class="btn commentButton " id="comment-id-{{this._id}}"}}>
