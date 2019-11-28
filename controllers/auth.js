@@ -46,7 +46,7 @@ AuthController.logout = function(req, res) {
     var session = req.session;
     session.destroy();
     res.clearCookie('somename');
-    return res.redirect('/login');
+    return res.redirect('/landing');
 };
 
 AuthController.checkIfLoggedIn = function(req, res, next) {
@@ -55,7 +55,7 @@ AuthController.checkIfLoggedIn = function(req, res, next) {
     
     Model.checkIfLoggedIn(url, userSession, function(error, data) {
         if(error) {
-            return res.redirect('/login')
+            return res.redirect('/landing')
         }
         return next();
     });

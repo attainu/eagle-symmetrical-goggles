@@ -40,6 +40,7 @@ input#Experience {
 
 body {
     background-color: aliceblue;
+    overflow-x: hidden;
 }
 .col-md-5 {
     margin-top: 20px;
