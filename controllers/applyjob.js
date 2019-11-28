@@ -32,12 +32,13 @@ JobController.applyJob = function(req, res) {
                     });
                 }
                 console.log(data);
-                return res.render('Jobsearch', {
+               /*  return res.render('Jobsearch', {
                     title: "Job Section",
                     css_file_ref: "css/jobsearch.css",
                     status: true,
                     msg: "You Applied for the Job Succesfully",
-                });
+                }); */
+                return res.send({msg:"You applied to the Job Successfully"})
             })
         })
     }

@@ -63,14 +63,14 @@
             {{#if result}}
             {{#each result}}
             <div class="card w-75 mx-auto mt-4" id="searchresult">
-                <div class="card-body">
+                <div class="card-body" id={{this._id}}>
                     <h5 class="card-title" id="title">{{this.title}}</h5>
                     <label class="card-subtitle" id="companyName"><i>{{this.companyName}}</i></label><br>
                     <label class="card-text">Experience {{this.experience}} Yrs</label><br>
                     <label class="text-muted" id="placename">{{this.place}}</label><br>
 
                     <form action="/applyjob" method="get">
-                        <button type="submit" style="color:#9ad4d6 ;background-color: #101935;" class="btn" name="jobId"
+                        <button type="submit" style="color:#9ad4d6 ;background-color: #101935;" class="btn apply-btn" name="jobId" jobId={{this._id}}
                             value={{this._id}}>Apply</button>
                     </form>
 
