@@ -38,6 +38,7 @@ span{
 body{
     background: linear-gradient(135deg, #9AD4D6 0%, #101935 100%);
     background-repeat: no-repeat;
+    overflow-x: hidden;
 }
 .container{
     padding-bottom: 5%;

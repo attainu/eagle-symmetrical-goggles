@@ -5,6 +5,7 @@ body {
   color: #101935;
   background: #fff;
   font-size: 14px;
+  overflow-x: hidden;
   line-height: 24px; }
 
   .text-1 {

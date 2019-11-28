@@ -16,6 +16,7 @@ a.login-signup{
 
 body{
     background-image: url("./../images/Background.jpeg");
+    overflow-x: hidden;
     /* opacity: 0.8; */
 }
 .col-md-5 {
