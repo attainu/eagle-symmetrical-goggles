@@ -28,26 +28,20 @@ $(document).ready(function () {
             }
         });
     });
-    $('.commentPostButton').on('click', function () {
-        console.log("you clicked on comment button!");
-        cId = $(this).attr('userCommentId');
-        console.log("Post ID",cId);
-        $.ajax({
-            url: '/comment',
-            type: 'post',
-            success: function (response) {
-                console.log("comment Posted");
-                // $('.textBox').append(
-                //     '<div class="commentTextBox" title="commentTextBox">' +
-                //         '<div>' +
-                //             '<div class= "mx-2">' +
-                //                 '<textarea class="commentBox border round  mx-2 mt-2"  name="messageText" rows="1" cols="40" placeholder="Enter your comment here..."></textarea>' +
-                //                 '<button type="button" class="btn btn-secondary btn-sm">Post</button>' +
-                //             '</div>' +
-                //         '</div>'+
-                //     '</div>'
-                // );
-            }
-        });
+    $('.commentPostButton').on('click', function (e) {
+        e.preventDefault();
+        console.log("you clicked on comment post button!"); 
+        // id = $(this).attr('userCommentId');
+        // msg = $('#id-').val();
+        // console.log("comment",msg);
+        // console.log("comment post ID",id);
+        // $.ajax({
+        //     url: '/comment' + id,
+        //     type: 'post',
+        //     data: msg,
+        //     success: function (data) {
+        //         console.log("comment Posted",data);
+        //     }
+        // });
     });
 });

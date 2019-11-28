@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
 const session = require('express-session');
-// require('dotenv').config();
+require('dotenv').config();
 const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
 const authRoute = require('./controllers/auth.js');
@@ -116,6 +116,8 @@ app.get('/applyjob', controllers.JobController.applyJob);
 app.post('/', cpUpload, controllers.FeedController.addPost);
 // For like an dislike button
 app.put('/:id', controllers.FeedController.likeDislike);
+// for posting comment
+app.post('/comment:id', controllers.FeedController.postComment);
 
 
 // Start the app on pre defined port number
