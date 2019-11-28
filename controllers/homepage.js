@@ -109,6 +109,7 @@ FeedController.addPost = async function (req, res) {
         console.log("added to database", data);
     });
     FeedModel.find({ email: userEmail }, function (error, data) {
+        // keep bracket after if error messages
         if (error){
             console.log(error);
         } 
@@ -117,14 +118,10 @@ FeedController.addPost = async function (req, res) {
     return res.redirect('/');
 };
 
-//For like and dislike
+//For like and dislike (Fixed, Don't make any changes now)
 FeedController.likeDislike = function (req, res) {
     var uName = req.session.user;
-    console.log("seesion ka useremail>>", uName);
-    var likeCount;
     var id = req.params.id
-    console.log("yh like controller k andr ka paramsid h>>>", req.params.id);
-    console.log("yh like controller k andr ka params id h jo j query se aya h>>>", id);
 
     FeedModel.findById(id, function (error, data) {  //here i get post data
         if (error) {
@@ -133,13 +130,12 @@ FeedController.likeDislike = function (req, res) {
         }
         // post id data got by req.params.id
         console.log("Liked Post", data);
-        // var flag = 0;
         if(data.likedBy===null || data.likedBy.includes(uName)===false){
             FeedModel.findByIdAndUpdate(req.params.id, { $push: { likedBy: uName } }, function(err, docs){
                 if(err){
                     return console.log("like update m error>>", err)
                 }
-                console.log("like hone k bad>>",docs);
+                console.log("like complete");
                 var flag = 1;
                 return res.send({
                     flag: flag
@@ -151,10 +147,9 @@ FeedController.likeDislike = function (req, res) {
         if(checking===true){
             FeedModel.findByIdAndUpdate(req.params.id, { $pull: { likedBy: uName } }, function(err, docs){
                 if(err){
-                    return console.log("like update m error>>", err)
+                    return console.log("dislike update m error>>", err)
                 }
-                console.log("like hone k bad>>",docs);
-                console.log("you already liked this");
+                console.log("you disliked this");
                 var flag = 0;
                 return res.send({
                     flag: flag

@@ -21,11 +21,6 @@ $(document).ready(function () {
                     myElement.css("color", "blue");
                     myElement.animate({ fontSize: "18px" });
                 }
-                // else {
-                //     console.log("You disliked this post!");
-                //     myElement.css("color", "black");
-                //     myElement.animate({ fontSize: "16px" });
-                // }
                 setTimeout(function () {
                     myElement.css("color", "black");
                     myElement.animate({ fontSize: "16px" });

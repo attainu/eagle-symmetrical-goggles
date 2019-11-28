@@ -114,7 +114,7 @@ app.get('/applyjob', controllers.JobController.applyJob);
 // For post and image upload
 app.post('/', cpUpload, controllers.FeedController.addPost);
 // For like an dislike button
-app.put('/:id', controllers.FeedController.likeDislike);
+app.put('/:id', controllers.FeedController.likeDislike);	//keep this at bottom only
 // for posting comment
 // app.post('/comment:id', controllers.FeedController.postComment);
 
