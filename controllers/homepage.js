@@ -19,15 +19,15 @@ cloudinary.config({
 
 FeedController.getFeed = function (req, res) {
     var user = req.session.user;
-    var userDtails = req.session;
-    // console.log("login details>>",userDtails);
+    // console.log("user login details>>",req.session);
     UserModel.find({ email: user }, function (error, response) {
+        if (error) {
+            console.log(error);
+            return error;
+        }
         // console.log(response);
 
-        if (error) console.log(error);
-        var firstname = response[0].firstname;
-        var lastname = response[0].lastname;
-        var fullname = firstname + ' ' + lastname;
+        var fullname = response[0].firstname + ' ' + response[0].lastname;
         var email = response[0].email;
         var followers = response[0].followers.length;
         var following = response[0].following.length;
@@ -35,7 +35,6 @@ FeedController.getFeed = function (req, res) {
         response[0].skills.forEach(function (item, index) {
             Skills.push(item);
         });
-        // console.log(fullname, username, followers, following);
 
         FeedModel.find({}, function (error, data) {
             if (error) {
@@ -46,7 +45,6 @@ FeedController.getFeed = function (req, res) {
             }
             // console.log("Feed data>>", data);
             var numberOfPosts = data.length;
-            // console.log(numberOfPosts);
             return res.render('homepage', {
                 status: true,
                 title: "feedpage",
@@ -64,10 +62,8 @@ FeedController.getFeed = function (req, res) {
 };
 // For posting status and images
 FeedController.addPost = async function (req, res) {
-    // console.log("request:>>", req.files);
     var userEmail = req.session.user;
-    var user = req.session;
-    console.log("User details to create posts", user);
+    console.log("User details to create posts", req.session);
     var userPost = req.body.usersPost;
     var fullname = null;
     await UserModel.find({ email: userEmail }, function (error, response) {
@@ -75,44 +71,38 @@ FeedController.addPost = async function (req, res) {
         fullname = response[0].firstname + " " + response[0].lastname;
     });
     var cloudinaryUrl = null;
-    // var files = req.files['imagefile'];
     if (req.files['imagefile']) {
         var imgUrl = req.files['imagefile'][0].path;
         console.log(imgUrl);
-        // var url = imgUrl.replace("/public", "");
         // var __source = tinify.fromFile(imgUrl);
         // __source.toFile(imgUrl);
         //uploading to cloudinary
-
-        // async.map(files, function (file, callback) {
         await cloudinary.uploader.upload(imgUrl, function (error, response) {
             if (error) {
                 console.log(error);
+                return error;
             }
             console.log("response cloudinary", response);
-
             cloudinaryUrl = response.url;
             console.log("cloudinaryUrl", cloudinaryUrl);
-            console.log("Image uploaded ", response);
         });
     }
-    console.log("outside", cloudinaryUrl);
+    // console.log("outside", cloudinaryUrl);
     FeedModel.create({
         name: fullname,
         email: userEmail,
         post: userPost,
         imageUrl: cloudinaryUrl
     }, function (error, data) {
-        if (error) console.log("FAiled to save post to database. Error", error);
+        if (error) {
+            console.log("FAiled to save post to database. Error", error);
+            return error;
+        }
         console.log("added to database", data);
     });
-    FeedModel.find({ email: userEmail }, function (error, data) {
-        if (error) console.log(error);
-        // console.log(data);
-    });
     return res.redirect('/');
-
 };
+
 // //For like and dislike
 // FeedController.likeDislike = function (req, res) {
 //     // var id = req.params.id;
@@ -155,11 +145,11 @@ FeedController.addPost = async function (req, res) {
 // };
 
 //For like and dislike
-FeedController.likeDislike = async function (req, res) {
+FeedController.likeDislike = function (req, res) {
     var uName = req.session.user;
     var flag = 0;
-    var likeCount;
-    await FeedModel.findById(req.params.id, async function (error, data) {
+    // var likeCount;
+    FeedModel.findById(req.params.id, async function (error, data) {
         if (error) {
             console.log(error);
             return error;
@@ -170,7 +160,7 @@ FeedController.likeDislike = async function (req, res) {
             console.log("check-0.0");
             return (elem == uName);
         });
-        if ( alreadyLiked == true) {
+        if (alreadyLiked == true) {
             console.log("check-1.1");
             data.isLiked = false;
             data.likes.likeCount = data.likes.likeCount - 1;
@@ -191,42 +181,58 @@ FeedController.likeDislike = async function (req, res) {
         console.log("likeCount", data.likes.likeCount);
 
         await data.save(function (error) {
-            if(error) console.log("Unable to save like count in database", err);
+            if (error) {
+                console.log("Unable to save like count in database.Error>>", error);
+                return error;
+            }
+            console.log("like count saved in database");
         });
-        likeCount =data.likes.likeCount;
-    });
-    console.log("check-3.0");
-    return res.send({
-        likeCount: likeCount,
-        flag: flag
+        return res.send({
+            likeCount: data.likes.likeCount,
+            flag: flag
+        });
     });
 };
 
-// for commenting on post
-// FeedController.postComment = async function (req, res) {
-//     var comment = req.body.addComment;
-//     var userEmail = req.session.user;
-//     console.log("posted comment", comment);
-//     console.log("userEmail", userEmail);
-//     console.log("req.params.id",req.params.id);
-//     var fullname = null;
-//     await UserModel.find({ email: userEmail }, function (error, response) {
-//         if (error) console.log(error);
-//         fullname = response[0].firstname + " " + response[0].lastname;
-//     });
-//     var commentData = {
-//         commentedBy: fullname,
-//         comment: comment
-//     };
-//     await FeedModel.findById(req.params.id,function (error, response) {
-//         // console.log("comment response",response);
-
-//         // response.comments.push(commentData);
-//         // response.save(function (err) {
-//         //     if (err) console.log("Unable to save comments in database", err);
-//         // }); 
-//     });
-//     res.redirect('/');
-// }
+// For commenting on post
+FeedController.postComment = function (req, res) {
+    var comment = req.body.addComment;
+    var userEmail = req.session.user;
+    console.log("posted comment", comment);
+    console.log("req.body", req.body);
+    console.log("userEmail", userEmail);
+    console.log("req.params.id", req.params.id);
+    var fullname = null;
+    UserModel.find({ email: userEmail }, function (error, response) {
+        if (error) {
+            console.log("can not find user from database. Error>>>", error);
+            return error;
+        }
+        fullname = response[0].firstname + " " + response[0].lastname;
+        var commentData = {
+            commentedBy: fullname,
+            comment: comment
+        };
+        FeedModel.find({}, function (error, data) {
+            if (error) {
+                console.log("Can not find req.param.id from database. Error>>>", error);
+                return error;
+            }
+            console.log("comment response", data);
+            console.log("response.comments", data[0].comments);
+            data[0].comments.push(commentData);
+            console.log("after comment response", data);
+            console.log("after response.comments", data[0].comments);
+            data[0].save(function (error) {
+                if (error) {
+                    console.log("Unable to save comments in database", error);
+                    return error;
+                }
+                console.log("Comment saved to database");
+            });
+        });
+    });
+    res.redirect('/');
+}
 
 module.exports = FeedController;

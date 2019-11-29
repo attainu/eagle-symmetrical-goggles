@@ -114,10 +114,10 @@ app.get('/trending', controllers.TrendingController.getTrending);
 app.get('/applyjob', controllers.JobController.applyJob);
 // For post and image upload
 app.post('/', cpUpload, controllers.FeedController.addPost);
+// for posting comment
+app.post('/comment', controllers.FeedController.postComment);
 // For like an dislike button
 app.put('/:id', controllers.FeedController.likeDislike);
-// for posting comment
-// app.post('/comment:id', controllers.FeedController.postComment);
 
 
 // Start the app on pre defined port number

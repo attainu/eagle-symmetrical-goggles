@@ -117,12 +117,11 @@
                         </a>
                     </div>
                     <div>
-                        {{!-- action="/comment"   --}}
-                        <form class="form-group" method="post" enctype="multipart/form-data">
+                        {{!-- action="/comment" method="post"   --}}
+                        <form action="/comment" method="post">
                             <div class="commentBox">
-                                <input class="commentTextBox border round" type="text" id="id-{{this._id}}" name="addComment" placeholder="Add a comment here...">
-                                {{!-- <textarea class="commentTextBox border round"  name="messageText" rows="1" cols="40" placeholder="Add a comment here..."></textarea> --}}
-                                <button type="submit" class="btn btn-secondary btn-sm commentPostButton" userCommentId="{{this._id}}">Post</button>
+                                <input class="commentTextBox border round" type="text" id="{{this._id}}" name="addComment" placeholder="Add a comment here...">
+                                <button type="submit" class="btn btn-secondary btn-sm commentPostButton" userCommentId="1-{{this._id}}">Post</button>
                             </div>
                         </form>
                         {{#if this.comments}}
@@ -130,7 +129,7 @@
                             <ul style="list-style: none; font-size: 12px; margin-left: -25px;">
                                 {{#each this.comments}}
                                 <li>
-                                    <span class="commetedByList" ><b>{{this.commentedBy}}: </b></span>
+                                    <span class="commetedByList" ><b>{{this.commentedBy}}   </b></span>
                                     <span> {{this.comment}}</span>
                                 </li>
                                 {{/each}}
