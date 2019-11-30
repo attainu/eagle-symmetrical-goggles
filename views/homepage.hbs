@@ -4,62 +4,63 @@
 <div class="container" id="MainBody">
     <div class="row mt-5">
         {{!--profile section in feedpost starts here--}}
-        <div class="col-md-3 border rounded" id="profileSection1">
+        <div class="col-md-3 border rounded mt-2" id="profileSection1">
             <div class="mt-4 py-2 sticky-top" id="height1">
                 <span><img id="profileImageL" src="/images/profile.jpeg" alt="img"></span>
                 <p id="userProfileName">{{profileName}}</p>
                 <p id="userName">{{email}}</p>
-                <span id="skillText"><b>Skills: </b></span>
-                {{#each Skills}}
-                <ul id="userSkills">
+                
+                <div id="skillText">
+                    <span ><b>Skills: </b></span>
+                    <ul id="userSkills">
+                    {{#each Skills}}
                     <li>{{this}}</li>
+                    {{/each}}
                 </ul>
-                {{/each}}
-                <div>
-                    <ul style="list-style-type: none;" id="friendlistSuggestion">
-                        <li><span>Followers: </span> <b>{{followers}}</b></li>
-                        <li> <span>Following: </span> <b>{{following}}</b> </li>
-                        <li> <span>Post: </span> <b>{{numberOfPosts}}</b> </li>
-                    </ul>
+                </div>
+                <div  id="left-count">
+                    <p><b><span>Followers:</b> </span> <i class="ml-1">{{followers}}</i></p>
+                    <p> <b><span>Following:</b> </span> <i class="ml-1">{{following}}</i> </p>
+                    <p> <b><span>Post: </b> </span> <i class="ml-1">{{numberOfPosts}}</i> </p>
                 </div>
             </div>
         </div>
         {{!--profile section ends here--}}
 
         {{!--post section for posting image, video and status in feed-post starts here--}}
-        <div class="col-md-5 mx-2" id="middle-section">
-            <div class="row border rounded">
+        <div class="col-md-6 " id="middle-section">
+            <div class="row border rounded mt-2">
                 {{!-- <form class="form-group"> --}}
                 <form action="/" method="post" enctype="multipart/form-data" class="form-group">
                     <div class="">
-                        <textarea title="text" name="usersPost" class="form-control" id="postMessage" cols="50" rows="3"
+                        <textarea title="text" name="usersPost" class="form-control" id="postMessage" cols="65" rows="3"
                             placeholder="Write your thoughts here..."></textarea>
                     </div>
 
                     {{!--displaying image icon--}}
-                    <div class="mx-4 mt-4">
+                    <div class="ml-2 mt-4">
                         {{!--inserting image/video/file through icons--}}
-                        <label for="image-input" class="mx-4">
+                        <label for="image-input" id="image-input-icon">
                             <i class="fa fa-camera fa-2x" aria-hidden="true"></i>
                         </label>
                         <input style="display: none;" type="file" name="imagefile" id="image-input"
                             accept="image/jpeg, image/jpg, image/png, image/*" />
 
                         {{!--displaying video icon--}}
-                        <label for="video-input" class="mx-4">
+                        <label for="video-input" id="video-input-icon">
                             <i class="fas fa-photo-video fa-2x"></i>
                         </label>
                         <input style="display: none;" type="file" name="videofile" id="video-input"
                             accept="video/mp4, video/x-m4v, video/*" />
 
                         {{!--displaying file icon--}}
-                        <label for="file-input" class="mx-4">
+                        <label for="file-input" id="file-input-icon">
                             <i class="far fa-file fa-2x"></i>
                         </label>
                         <input style="display: none;" type="file" name="pdffile" id="file-input"
                             accept="application/pdf" />
 
-                        <button style="float: right;" type="submit" class="btn btn-dark btn-sm mx-2"
+                        <button style="float: right;" id="post-input-button" type="submit" class="btn btn-dark btn-sm"
                             id="postButton">Post</button>
                     </div>
                 </form>
@@ -70,22 +71,21 @@
             {{#each userData}}
             <div class="border rounded mt-5">
                 <div class="border round">
-                    <span> <img id="profileImage" src="/images/profile.jpeg" alt=""></span>
-                    <span id="myUserName"> {{this.name}} </span><br>
-                    <span id="postTime">{{this.date}}</span>
+                    <span> <img class="profileImage" src="/images/profile.jpeg" alt=""></span>
+                    <span class="myUserName"> {{this.name}} </span><br>
+                    <span class="postTime">{{this.date}}</span>
                 </div>
 
                 <div class="border round">
-                    <p id="userPost" class="">
+                    <p class="userPost">
                         {{this.post}}
                     </p>
                     {{#if this.imageUrl}}
-                    <div class="border round" id="postImage">
-                        <img id="imagePost" src="{{this.imageUrl}}" alt="" />
+                    <div class="border round mt-1">
+                        <img class="imagePost" src="{{this.imageUrl}}" alt="" />
                     </div>
                     {{/if}}
                     <hr>
-
                     {{!-- like button --}}
                     {{!-- <span class="mx-4">
                         <button type="submit" id="likeButton" onclink="updateLikes()">
@@ -94,23 +94,18 @@
                         <span id="shareButton"id="likeCounter">10</span>
                     </span> 
                     --}}
-                    <div class="imageIcon">
+                    <div class="imageIcon" id="div-imageIcon-id-{{this.id}}">
                         <a class="btn likeButton" id="like-id-{{this._id}}" userId="{{this._id}}">
-                            {{#if this.isLiked}}
-                            <span style="color:blue font-size:18px"><i class="fa fa-thumbs-o-up"
-                                    aria-hidden="true"></i></span>
-                            {{else}}
                             <span style="color:black font-size:16px"><i class="fa fa-thumbs-o-up"
                                     aria-hidden="true"></i></span>
-                            {{/if}}
                         </a>
-                        <span id="likes-count-{{ this._id }}">{{ this.likes.likeCount}}</span>
+                        <span id="likes-count-{{ this._id }}">{{ this.likedBy.length}}</span>
 
 
-                        <a class="btn commentButton " id="comment-id-{{this._id}}"}}>
+                        <a class="btn commentButton " id="comment-id-{{this._id}}" }}>
                             <i class="far fa-comments buttonx" aria-hidden="true"></i>
                         </a>
-                        <span id="comment-count-{{ this._id }}" class="cButton">{{ this.comments.length}}</span>
+                        <span id="comment-count-{{ this._id }}">{{ this.comments.length}}</span>
 
                         <a class="btn shareButton">
                             <i class="fas fa-share buttony" aria-hidden="true"></i>
@@ -118,18 +113,20 @@
                     </div>
                     <div>
                         {{!-- action="/comment" method="post"   --}}
-                        <form action="/comment" method="post">
+                        <form action="" method="post">
                             <div class="commentBox">
-                                <input class="commentTextBox border round" type="text" id="{{this._id}}" name="addComment" placeholder="Add a comment here...">
-                                <button type="submit" class="btn btn-secondary btn-sm commentPostButton" userCommentId="1-{{this._id}}">Post</button>
+                                <input class="commentTextBox border round" type="text" id="comment-{{this._id}}"
+                                    name="addComment" placeholder="  Add a comment here...">
+                                <button type="submit" userCommentId="{{this._id}}"
+                                    class="btn btn-secondary btn-sm commentPostButton">Post</button>
                             </div>
                         </form>
                         {{#if this.comments}}
-                        <div>
+                        <div id="div-comment-{{this.id}}">
                             <ul style="list-style: none; font-size: 12px; margin-left: -25px;">
                                 {{#each this.comments}}
                                 <li>
-                                    <span class="commetedByList" ><b>{{this.commentedBy}}   </b></span>
+                                    <span class="commetedByList"><b>{{this.commentedBy}} </b></span>
                                     <span> {{this.comment}}</span>
                                 </li>
                                 {{/each}}
@@ -138,13 +135,12 @@
                         {{/if}}
                     </div>
                 </div>
-
             </div>
             {{/each}}
         </div>
 
 
-        <div class="col-md-3 border rounded ml-2" id="right-section">
+        <div class="col-md-3 border rounded mt-2" id="right-section">
             <div class="py-2 sticky-top">
                 <div class="mt-3 ml-2">
                     <h6 id="article-heading">TOP ARTICLES AND NEWS</h6>

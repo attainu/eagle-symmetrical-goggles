@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const FeedController = {};
 const FeedModel = require('./../models/Homepage.js');
 const UserModel = require('./../models/Users.js');
@@ -103,136 +104,76 @@ FeedController.addPost = async function (req, res) {
     return res.redirect('/');
 };
 
-// //For like and dislike
-// FeedController.likeDislike = function (req, res) {
-//     // var id = req.params.id;
-//     // console.log("post ID:", id);
-//     var uName = req.session.user;
-//     FeedModel.findById(req.params.id, function (error, data) {
-//         if (error) console.log(error);
-//         console.log("Post", data);
-//         // console.log("type:",typeof data.likes);
-//         // var uName = data.email;
-//         var flag = 0;
-//         if (data.likes.likedBy.some(function (elem) {
-//             return (elem == uName);
-//         }) == true) {
-//             data.isLiked = null;
-//             data.likes.likeCount = data.likes.likeCount - 1;
-//             data.likes.likedBy = data.likes.likedBy.filter(function (x) {
-//                 if (x != uName)
-//                     return x;
-//             });
-//         }
-//         else {
-//             data.isLiked = true;
-//             flag = 1;
-//             data.likes.likeCount = data.likes.likeCount + 1;
-//             data.likes.likedBy.push(uName);
-//         }
-//         console.log("isLiked", data.isLiked);
-//         console.log("LikedBy", data.likes.likedBy);
-//         console.log("likeCount", data.likes.likeCount);
 
-//         data.save(function (err) {
-//             if (err) console.log("Unable to save like count in database", err);
-//         });
-//         res.send({
-//             likeCount: data.likes.likeCount,
-//             flag: flag
-//         });
-//     });
-// };
-
-//For like and dislike
+//For like and dislike (Fixed, Don't make any changes now)
 FeedController.likeDislike = function (req, res) {
     var uName = req.session.user;
-    var flag = 0;
-    // var likeCount;
-    FeedModel.findById(req.params.id, async function (error, data) {
+    var id = req.params.id;
+
+    FeedModel.findById(id, function (error, data) {  //here i get post data
         if (error) {
             console.log(error);
             return error;
         }
+        // post id data got by req.params.id
         console.log("Liked Post", data);
-        // var flag = 0;
-        var alreadyLiked = data.likes.likedBy.some(function (elem) {
-            console.log("check-0.0");
-            return (elem == uName);
-        });
-        if (alreadyLiked == true) {
-            console.log("check-1.1");
-            data.isLiked = false;
-            data.likes.likeCount = data.likes.likeCount - 1;
-            data.likes.likedBy = data.likes.likedBy.filter(function (x) {
-                if (x != uName)
-                    return x;
+        if(data.likedBy===null || data.likedBy.includes(uName)===false){
+            FeedModel.findByIdAndUpdate(req.params.id, { $push: { likedBy: uName } }, function(err, docs){
+                if(err){
+                    return console.log("like update m error>>", err);
+                }
+                console.log("like complete",docs);
+                var flag = 1;
+                return res.send({
+                    flag: flag
+                });
             });
         }
-        else {
-            console.log("check-1.2");
-            data.isLiked = true;
-            flag = 1;
-            data.likes.likeCount = data.likes.likeCount + 1;
-            data.likes.likedBy.push(uName);
-        }
-        console.log("isLiked", data.isLiked);
-        console.log("LikedBy", data.likes.likedBy);
-        console.log("likeCount", data.likes.likeCount);
+        var checking = data.likedBy.includes(uName);
 
-        await data.save(function (error) {
-            if (error) {
-                console.log("Unable to save like count in database.Error>>", error);
-                return error;
-            }
-            console.log("like count saved in database");
-        });
-        return res.send({
-            likeCount: data.likes.likeCount,
-            flag: flag
-        });
+        if(checking===true){
+            FeedModel.findByIdAndUpdate(req.params.id, { $pull: { likedBy: uName } }, function(err, docs){
+                if(err){
+                    console.log("dislike update m error>>", err);
+                    return err;
+                }
+                console.log("you disliked this",docs);
+                var flag = 0;
+                return res.send({
+                    flag: flag
+                });
+            }); 
+        }
     });
-};
+}
 
 // For commenting on post
 FeedController.postComment = function (req, res) {
-    var comment = req.body.addComment;
+    var comment = req.body.comment;
     var userEmail = req.session.user;
+    var id = req.params.id;
     console.log("posted comment", comment);
     console.log("req.body", req.body);
     console.log("userEmail", userEmail);
-    console.log("req.params.id", req.params.id);
-    var fullname = null;
+    console.log("req.params.id", id);
     UserModel.find({ email: userEmail }, function (error, response) {
         if (error) {
-            console.log("can not find user from database. Error>>>", error);
+            console.log("can not find user's full name from database. Error>>>", error);
             return error;
         }
-        fullname = response[0].firstname + " " + response[0].lastname;
-        var commentData = {
+        var fullname = response[0].firstname + " " + response[0].lastname;
+        var commentedData = {
             commentedBy: fullname,
             comment: comment
         };
-        FeedModel.find({}, function (error, data) {
-            if (error) {
-                console.log("Can not find req.param.id from database. Error>>>", error);
+        FeedModel.findByIdAndUpdate(id, { $push: { comments: commentedData } }, function(error, commentData){
+            if(error){
+                console.log("Can not update coment to database. Error>>>>", error);
                 return error;
             }
-            console.log("comment response", data);
-            console.log("response.comments", data[0].comments);
-            data[0].comments.push(commentData);
-            console.log("after comment response", data);
-            console.log("after response.comments", data[0].comments);
-            data[0].save(function (error) {
-                if (error) {
-                    console.log("Unable to save comments in database", error);
-                    return error;
-                }
-                console.log("Comment saved to database");
-            });
+            console.log("comment updated to database", commentData);
+            res.send({comment: "comment saved"});
         });
     });
-    res.redirect('/');
 }
-
 module.exports = FeedController;

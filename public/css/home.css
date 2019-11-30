@@ -2,7 +2,6 @@
 /* Left section starts*/
 #profileSection1{
     background-color: aliceblue;
-    
 }
 #height1 {
     height: 600px;
@@ -10,104 +9,94 @@
 #profileImageL {
     width: 50px;
     height: 50px;
-    margin: 5px 5px 0px 100px;
-    border-radius: 20px;
+    margin: 2% 0% 0% 35%;
+    border-radius: 40%;
 }
 #userProfileName {
     font-weight: 900;
-    margin-top: 10px;
+    margin-top: 2%;
     text-align: center;
 }
 #userName {
-    margin: -20px 0px 10px 0px;
+    margin-top: -10%;
     text-decoration-line: underline;
     text-align: center;
 }
 /* For skills in user profile */
 #skillText {
-    margin: 20px 0px 0px 50px;
+    margin: 1% 0% 0% 10%;
 }
 #userSkills{
-    margin: 0px 0px 0px 30px;
+    margin-top: 1%;
 }
-/* For friend suggestion list */
-#friendlistSuggestion {
-    list-style-type: none;
-    margin: 20px 0px 0px 10px;
-}
-.followFriendButton {
-    float: right;
-    margin: 0px;
-}
-.profileImgFriendlist {
-    width: 25px;
-    height: 25px;
-    margin: 0px 0px 0px 0px;
-    border-radius: 10px;
+#left-count {
+    margin: 4% 0% 0% 10%;
 }
 /* Left section ends*/
 
 /* Middle section starts*/
 /* for post */
-#profileImage {
+textarea#postMessage {
+    width: 100%;
+}
+#image-input-icon {
+    margin: 0% 5% 0% 5%;
+}
+#video-input-icon {
+    margin: 0% 5% 0% 5%;
+}
+#file-input-icon {
+    margin: 0% 5% 0% 5%;
+}
+#post-input-button {
+    margin-right: 10%;
+}
+.profileImage {
     width: 30px;
     height: 30px;
-    margin: 5px 5px 0px 5px;
-    border-radius: 10px;
+    margin: 2% 0% 0% 3%;
+    border-radius: 40%;
 }
-textarea#postMessage {
-    width: 472px;
-}
-
-#myUserName {
+.myUserName {
     font-weight: 900;
 }
-#postTime {
+.postTime {
     margin: 0px 0px 10px 30px;
     font-weight: 500;
     font-size: 12px;
 }
-#userPost {
-    margin: 10px 10px 20px 20px;
+.userPost {
+    margin: 2% 5% 0% 5%;
 }
-#imagePost{
-    width: 412px;
-    margin: 0px 15px 0px 15px;
-    border-radius: 5px;
+.imagePost{
+    width: 100%;
+    border-radius: 1%;
 }
 .imageIcon {
-    margin: -20px 0px -20px 0px;
+    margin: -2% 0% -2% 0%;
 }
 .likeButton{
-    margin-left: 40px;
-    margin-bottom: 5px;
-    margin-right: -10px;
+    margin: 1% -2% 1% 10%;
 }
 .commentButton{
-    margin-left: 40px;
-    margin-bottom: 10px;
+    margin: 1% -2% 1% 15%;
 }
-.cButton {
-    margin-left: -5px;
+.shareButton {
+    margin: 1% -2% 1% 15%;
 }
 .commentBox {
-    margin: 5px 0px 5px 0px;
+    margin: 1% 0% 1% 0%;
 }
 .commentTextBox {
-    margin: 5px 0px 0px 5px;
-    border-radius: 10px;
-    width: 380px;
+    margin: 1% 0% 0% 2%;
+    border-radius: 5%;
+    width: 83%;
 }
 .commentPostButton {
-    margin: 0px 0px 0px 0px;
     font-size: 10px;
     color: #304e69;
     background-color: #C8D0CD;
     border-color: #c8d0cd;
-}
-.shareButton {
-    margin-left: 40px;
-    margin-bottom: 10px;
 }
 .buttonx {
     color: rgb(13, 51, 13);
@@ -122,7 +111,7 @@ textarea#postMessage {
 /* For Trending topics */
 #trending-topics {
     list-style: none;
-    margin-top: 40px;
+    margin-top: 5%;
 }
 #article-heading {
     font-weight: 900;
@@ -131,18 +120,37 @@ textarea#postMessage {
 a:link {
     color:  gray;
 }
-  
-  
-  
-  /* mouse over link */
-a:hover {
-    color: snow;
+@media only screen and (max-width: 768px){
+    #height1 {
+        height: 400px;
+    }
+    #profileImageL {
+        width: 50px;
+        height: 50px;
+        margin: 2% 0% 0% 45%;
+        border-radius: 40%;
+    }
+    #userProfileName {
+        font-weight: 900;
+        margin-top: 4%;
+        text-align: center;
+    }
+    #userName {
+        margin-top: -3%;
+        text-decoration-line: underline;
+        text-align: center;
+    }
+    /* For skills in user profile */
+    #skillText {
+        margin: 1% 0% 0% 10%;
+    }
+    #userSkills{
+        margin-top: 1%;
+    }
+    #left-count {
+        margin: 4% 0% 0% 10%;
+    }
 }
-  /* visited link */
-a:visited {
-    color:  gray;
-}
-  /* selected link */
-a:active {
-    color: blue;
+@media only screen and (max-width: 412px) {
+
 }

@@ -10,8 +10,7 @@ const authRoute = require('./controllers/auth.js');
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'))
-
+app.use(express.static('public'));
 
 //session config
 app.use(session({
@@ -85,7 +84,6 @@ app.get('/about', function (req, res) {
 app.get('/forgotpassword', function (req, res) {
 	res.render('forgot', { title: "Forgot Password?" })
 });
-
 app.get('/landing', function (req, res) {
 	res.render('landing', { title: "White Collar" , css_file_ref: "/css/landing.css" , script: "/js/main.js" })
 });
@@ -115,10 +113,9 @@ app.get('/applyjob', controllers.JobController.applyJob);
 // For post and image upload
 app.post('/', cpUpload, controllers.FeedController.addPost);
 // for posting comment
-app.post('/comment', controllers.FeedController.postComment);
+app.post('/comment:id', controllers.FeedController.postComment);
 // For like an dislike button
-app.put('/:id', controllers.FeedController.likeDislike);
-
+app.put('/:id', controllers.FeedController.likeDislike);	//keep this at bottom only
 
 // Start the app on pre defined port number
 const env = process.env.NODE_ENV || 'default';
