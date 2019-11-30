@@ -48,7 +48,7 @@ FeedController.getFeed = function (req, res) {
             var numberOfPosts = data.length;
             return res.render('homepage', {
                 status: true,
-                title: "feedpage",
+                title: "WhiteCollar/Home",
                 profileName: fullname,
                 email: email,
                 followers: followers,
