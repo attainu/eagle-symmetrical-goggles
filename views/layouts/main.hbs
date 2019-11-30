@@ -15,9 +15,6 @@
 	<style>
 		#navbar-id {
 			background-color: #101935;
-			padding-top: 0px;
-			padding-bottom: 0px;
-			height: 70px;
 			border-radius: 1%;
 		}
 
@@ -107,12 +104,10 @@
 			padding: 10px 0px 10px 0px;
 		}
 
-		#toggle-button {
-			color: rgb(150, 157, 163);
-		}
+		#toggle-button {}
 
 		#navbar-toggler-button {
-			background-color: snow;
+			color: grey;
 		}
 
 		/*complete */
@@ -131,8 +126,75 @@
 		.footer>span>a:hover {
 			color: #fff;
 		}
-		@media only screen and (max-width: 668px){
 
+		@media only screen and (max-width: 668px) {
+			#Icons-1 {
+				width: 15%;
+				margin-left: 0%;
+			}
+
+			#list-icons-1 {
+				margin-left: 20%;
+			}
+
+			#list-icons-2 {
+				margin-left: 2%;
+			}
+
+			#list-icons-3 {
+				margin-left: 2%;
+			}
+		}
+
+		@media only screen and (max-width: 575px) {
+			#navbar-id a {
+				color: #b0b1a3;
+				text-align: center;
+			}
+
+			#Icons-1 {
+				margin-left: 10%;
+			}
+
+			#list-icons-1 {
+				margin-left: 10%;
+			}
+
+			#list-icons-2 {
+				margin-left: 10%;
+			}
+
+			#list-icons-3 {
+				margin-left: 10%;
+			}
+
+			#searchbar {
+				margin-left: 10%;
+				width: 100%;
+			}
+
+			#search-input {
+				width: 90px;
+			}
+
+			#search-button {
+				width: 70px;
+				font-size: 14px;
+				text-align: center;
+				margin-left: 5%;
+				padding: .75em 0em .75em 0em;
+			}
+
+			#drop-down-menu {
+				width: 30%;
+				margin-left: 0%;
+			}
+			#drop-down-hidden-menu a {
+				color: rgb(37, 33, 33)!important;
+			}
+			#drop-down-hidden-menu a:hover {
+				color: rgb(158, 226, 184)!important;
+			}
 		}
 	</style>
 </head>
@@ -143,7 +205,7 @@
 		{{!-- button --}}
 		<button class="navbar-toggler" id="navbar-toggler-button" type="button" data-toggle="collapse"
 			data-target="#navbar-collapse-id">
-			<span class="navbar-toggler-icon" id="toggle-button"></span>
+			<span class="navbar-toggler-icon bg-dark" id="toggle-button"></span>
 		</button>
 		{{!-- botton --}}
 		<div class="collapse navbar-collapse" id="navbar-collapse-id">
@@ -187,7 +249,7 @@
 					<img src="https://res.cloudinary.com/eagle-whitecollar/image/upload/v1574847247/Logo_dp505y.png"
 						width="20" height="20" class="d-inline-block align-top" id="profile-pic" alt="brand image">
 				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				<div class="dropdown-menu" id="drop-down-hidden-menu" aria-labelledby="navbarDropdownMenuLink">
 					<a class="dropdown-item" style="text-align: left;" href="/profile">View Profile</a>
 					<a class="dropdown-item" style="text-align: left;" href="/profile-edit">Edit Profile</a>
 					<a class="dropdown-item" style="text-align: left;" href="/logout">Sign out</a>
