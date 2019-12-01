@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
 const session = require('express-session');
-require('dotenv').config();
+//require('dotenv').config();
 const db = require('./models/index.js');
 const controllers = require('./controllers/index.js');
 const authRoute = require('./controllers/auth.js');

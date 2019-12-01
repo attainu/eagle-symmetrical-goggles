@@ -3,7 +3,7 @@ const TrendingController = {};
 
 
 TrendingController.getTrending = function(req, res) {
-    Posts.find({}).sort({ likes: 'desc' }).exec(function(error, posts) {
+    Posts.find({}).sort({ likedBy: 'desc' }).exec(function(error, posts) {
         if (error) {
             console.log(error);
             res.status(500).send({
