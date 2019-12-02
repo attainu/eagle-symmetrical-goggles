@@ -241,13 +241,13 @@ a:hover {
   color: white;
 }
 
-/* a.login-signup{
+a.login-signup{
   margin-left: 55%;
-} */
-a.login-signup {
+}
+/* a.login-signup {
   margin-right: 20%;
   float: right;
-}
+} */
 
 #navbar-id {
   display: none;
