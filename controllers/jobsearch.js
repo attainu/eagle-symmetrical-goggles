@@ -40,7 +40,8 @@ Jobsection.retrievejob = function(req, res){
             title: "Job Section",
             css_file_ref: "css/jobsearch.css",
             result: response,
-            applied
+            applied,
+            script: 'js/jobSearch.js'
         })
     });
 }
