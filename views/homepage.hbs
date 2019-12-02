@@ -9,16 +9,16 @@
                 <span><img id="profileImageL" src="/images/profile.jpeg" alt="img"></span>
                 <p id="userProfileName">{{profileName}}</p>
                 <p id="userName">{{email}}</p>
-                
+
                 <div id="skillText">
-                    <span ><b>Skills: </b></span>
+                    <span><b>Skills: </b></span>
                     <ul id="userSkills">
-                    {{#each Skills}}
-                    <li>{{this}}</li>
-                    {{/each}}
-                </ul>
+                        {{#each Skills}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
                 </div>
-                <div  id="left-count">
+                <div id="left-count">
                     <p><b><span>Followers:</b> </span> <i class="ml-1">{{followers}}</i></p>
                     <p> <b><span>Following:</b> </span> <i class="ml-1">{{following}}</i> </p>
                 </div>
@@ -46,12 +46,13 @@
                             accept="image/jpeg, image/jpg, image/png, image/*" />
 
                         {{!--displaying video icon--}}
-                        <label for="video-input" id="video-input-icon">
-                            <i class="fas fa-photo-video fa-2x"></i>
-                        </label>
-                        <input style="display: none;" type="file" name="videofile" id="video-input"
-                            accept="video/mp4, video/x-m4v, video/*" />
-
+                        <a id="video-button">
+                            <label for="video-input" id="video-input-icon">
+                                <i class="fas fa-photo-video fa-2x"></i>
+                            </label>
+                            <input style="display: none;" type="file" name="videofile" id="video-input"
+                                accept="video/mp4, video/x-m4v, video/*" />
+                        </a>
                         {{!--displaying file icon--}}
                         <label for="file-input" id="file-input-icon">
                             <i class="far fa-file fa-2x"></i>

@@ -120,6 +120,11 @@ textarea#postMessage {
 a:link {
     color:  gray;
 }
+/* .btn-transparent {
+    background-color: transparent;
+    border-color: #ccc;
+    border: none;
+} */
 @media only screen and (max-width: 768px){
     #height1 {
         height: 400px;

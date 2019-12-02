@@ -10,8 +10,9 @@ a:hover {
     color: white;
 }
 
-a.login-signup{
-    margin-left: 55%;
+a.login-signup {
+    margin-right: 10%;
+    float: right;
 }
 
 body{
