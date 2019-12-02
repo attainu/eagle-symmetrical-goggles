@@ -244,3 +244,10 @@ a:hover {
 a.login-signup{
   margin-left: 55%;
 }
+
+#navbar-id {
+  display: none;
+}
+#brand-a-id-1{
+  margin-left: 12%;
+}
