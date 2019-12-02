@@ -9,7 +9,7 @@ $(document).ready(function(){
     // console.log("html val>>>", $('button').html());    
     // var followEmailId = $('button').attr('id');
 
-    $('button').css('display','block');
+    $('.btn-info').css('display','block');
 
     $('button').on('click', function(){
         var value = $(this).text();
