@@ -13,9 +13,9 @@ const async = require('async');
 // Import and set cloudinary configuration
 const cloudinary = require('cloudinary').v2;
 cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET
+    cloud_name: process.env.CLOUD_NAME || "eagle-whitecollar",
+    api_key: process.env.API_KEY || "416478242371149",
+    api_secret: process.env.API_SECRET || "bgO2gVKgNDQAnx5RY2yJlUG7fpM"
 });
 
 FeedController.getFeed = function (req, res) {
@@ -67,33 +67,64 @@ FeedController.addPost = async function (req, res) {
     console.log("User details to create posts", req.session);
     var userPost = req.body.usersPost;
     var fullname = null;
+    console.log("req.files>>>", req.files);
     await UserModel.find({ email: userEmail }, function (error, response) {
         if (error) console.log(error);
         fullname = response[0].firstname + " " + response[0].lastname;
     });
-    var cloudinaryUrl = null;
+    var cloudinaryImgUrl = null;
+    var cloudinaryPdfUrl = null;
+    var cloudinaryVideoUrl = null;
     if (req.files['imagefile']) {
         var imgUrl = req.files['imagefile'][0].path;
-        console.log(imgUrl);
+        console.log("imgUrl>>>", imgUrl);
         // var __source = tinify.fromFile(imgUrl);
         // __source.toFile(imgUrl);
         //uploading to cloudinary
         await cloudinary.uploader.upload(imgUrl, function (error, response) {
             if (error) {
-                console.log(error);
+                console.log("image file not uploaded to cloudinary>>", error);
                 return error;
             }
-            console.log("response cloudinary", response);
-            cloudinaryUrl = response.url;
-            console.log("cloudinaryUrl", cloudinaryUrl);
+            console.log("response from image section cloudinary", response);
+            cloudinaryImgUrl = response.url;
+            console.log("cloudinaryUrl", cloudinaryImgUrl);
         });
     }
-    // console.log("outside", cloudinaryUrl);
+    if (req.files['pdffile']) {
+        var pdfUrl = req.files['pdffile'][0].path;
+        console.log("PDF url>>>", pdfUrl);
+        await cloudinary.uploader.upload(pdfUrl, function (error, response) {
+            if (error) {
+                console.log("pdf file not uploaded to cloudinary>>", error);
+                return error;
+            }
+            console.log("response from pdf section cloudinary", response);
+            cloudinaryPdfUrl = response.url;
+            console.log("cloudinaryPdfUrl", cloudinaryPdfUrl);
+        });
+    }
+    if (req.files['videofile']) {
+        var videoUrl = req.files['videofile'][0].path;
+        console.log("PDF url>>>", videoUrl);
+        await cloudinary.uploader.upload(videoUrl,{resource_type: "video" }, function (error, response) {
+            if (error) {
+                console.log("video file not uploaded to cloudinary>>", error);
+                return error;
+            }
+            console.log("response from video section cloudinary", response);
+            cloudinaryVideoUrl = response.url;
+            console.log("cloudinaryVideoUrl", cloudinaryVideoUrl);
+        });
+    }
+    console.log("outside", cloudinaryPdfUrl);
     FeedModel.create({
         name: fullname,
         email: userEmail,
         post: userPost,
-        imageUrl: cloudinaryUrl
+        imageUrl: cloudinaryImgUrl,
+        pdfUrl: cloudinaryPdfUrl,
+        videoUrl: cloudinaryVideoUrl
     }, function (error, data) {
         if (error) {
             console.log("FAiled to save post to database. Error", error);
@@ -117,12 +148,12 @@ FeedController.likeDislike = function (req, res) {
         }
         // post id data got by req.params.id
         console.log("Liked Post", data);
-        if(data.likedBy===null || data.likedBy.includes(uName)===false){
-            FeedModel.findByIdAndUpdate(req.params.id, { $push: { likedBy: uName } }, function(err, docs){
-                if(err){
+        if (data.likedBy === null || data.likedBy.includes(uName) === false) {
+            FeedModel.findByIdAndUpdate(req.params.id, { $push: { likedBy: uName } }, function (err, docs) {
+                if (err) {
                     return console.log("like update m error>>", err);
                 }
-                console.log("like complete",docs);
+                console.log("like complete", docs);
                 var flag = 1;
                 return res.send({
                     flag: flag
@@ -131,18 +162,18 @@ FeedController.likeDislike = function (req, res) {
         }
         var checking = data.likedBy.includes(uName);
 
-        if(checking===true){
-            FeedModel.findByIdAndUpdate(req.params.id, { $pull: { likedBy: uName } }, function(err, docs){
-                if(err){
+        if (checking === true) {
+            FeedModel.findByIdAndUpdate(req.params.id, { $pull: { likedBy: uName } }, function (err, docs) {
+                if (err) {
                     console.log("dislike update m error>>", err);
                     return err;
                 }
-                console.log("you disliked this",docs);
+                console.log("you disliked this", docs);
                 var flag = 0;
                 return res.send({
                     flag: flag
                 });
-            }); 
+            });
         }
     });
 }
@@ -166,13 +197,13 @@ FeedController.postComment = function (req, res) {
             commentedBy: fullname,
             comment: comment
         };
-        FeedModel.findByIdAndUpdate(id, { $push: { comments: commentedData } }, function(error, commentData){
-            if(error){
+        FeedModel.findByIdAndUpdate(id, { $push: { comments: commentedData } }, function (error, commentData) {
+            if (error) {
                 console.log("Can not update coment to database. Error>>>>", error);
                 return error;
             }
             console.log("comment updated to database", commentData);
-            res.send({comment: "comment saved"});
+            res.send({ comment: "comment saved" });
         });
     });
 }

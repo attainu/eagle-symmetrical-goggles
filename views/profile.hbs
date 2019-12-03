@@ -1,54 +1,55 @@
 <!-- Navigation bar -->
 <div class="mt-5">
 
-<div class="row mt-3">
-     <div class="col-md-1"></div>
-    <div class="col-md-3 text-center border border-secondary" style="background-color: #9ad4d6 ;">
-        <ul class="nav ml-5 mt-5">
-          <li class="nav-item ml-5 border border-secondary">
-              <div class="mt-2 mt-2 mr-2 mb-2 ml-2">
-
-                <img src="images/Penguins.jpg" class="rounded" alt="Image" width="100px" height="100px"> <br>
-                <h4>{{name}} </h4>
-                <h6>{{email}}</h6>
-                <h6><i>{{summary}}</i></h6>
-              </div>
-          </li>
-        </ul>
-    </div>
-    <div class="col-md-6 ml-2 border border-secondary">
-        <main role="main" class="" style="background-color: #f2fdff ;">
-        <h1 class="h2">Dashboard</h1><br>
-        <div class="row text-center">
-            <div class="col-md-3 ml-2 card bg-light">
-                <div class="card-body">
-
-                <h6>Followers</h6><br>
-                {{followers.length}}
-                </div>
-            </div>
-            <div class="col-md-3 ml-2 card bg-light">
-                <div class="card-body">
-
-                <h6>Following</h6><br>
-                {{following.length}}
-                </div>
-            </div>
+    <div class="row mt-3">
+        <div class="col-md-1"></div>
+        <div class="col-md-3 text-center border border-secondary" style="background-color: #9ad4d6 ;">
+            <ul class="nav mx-auto mt-5">
+                <li class="nav-item border border-secondary mx-auto">
+                    <div class="m-2">
+                        <img src="images/Penguins.jpg" class="rounded" alt="Image" width="100px" height="100px"> <br>
+                        <h4 style="text-decoration-line: underline;">{{name}} </h4>
+                        <h6>{{email}}</h6> <br>
+                        <h6><i>{{summary}}</i></h6>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <hr>
- 
-        <div class="ml-4">
-        <h4>Skills</h4>
-      <div class="row">
-            {{!-- <div class="col-md-4"> --}}
-                <ul>
-                {{#each skills}}
-                     <li>{{this}}</li>
-                {{/each}}
-                </ul>
-        </div>         
-        </div>
-       {{!--  <div class="row">
+        <div class="col-md-6 ml-2 border border-secondary">
+            <main role="main" class="" style="background-color: #f2fdff ;">
+                <h1 class="h2 mx-auto mt-2">Dashboard</h1><br>
+                <div class="row text-center">
+                    <div class="col-md-3 ml-4 card bg-light">
+                        <div class="card-body">
+                            <a href="#">
+                                <h6 style="text-decoration-line: underline;">Followers</h6>
+                            </a>
+                            <span>{{followers.length}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 ml-5 card bg-light">
+                        <div class="card-body">
+                            <a href="#">
+                                <h6 style="text-decoration-line: underline;">Following</h6>
+                            </a>
+                            <span>{{following.length}}</span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="ml-4">
+                    <h4 style="text-decoration-line: underline;">Skills</h4>
+                    <div class="row">
+                        {{!-- <div class="col-md-4"> --}}
+                        <ul class="ml-4">
+                            {{#each skills}}
+                            <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+                {{!--  <div class="row">
             <div class="col-md-4">
                 <ul>
                     <li>JavaScript</li>
@@ -64,28 +65,29 @@
                 </ul>
             </div>
         --}}
-        
-    
-        <hr>
-        <div class="row ml-2">
-            <div class="col-md-4">
 
-            <h4 style="float: left;">Work Experience</h4><br>
-            <ul style="float: left;">
-                <li><b>{{job.designation}}</b></li>
-                <i>{{job.companyName}}</i>
-            </ul>
-            </div>
-            <div class="col-md-4 ml-5">    
-            <h4>Projects</h4>
-            <ul>
-                <li><b>{{project.projectTitle}}</b></li>
-                <i>{{project.projectSummary}}</i>
-            </ul>
-            </div>
+
+                <hr>
+                <div class="row ml-2">
+                    <div class="col-md-4">
+
+                        <h4 style="float: left; text-decoration-line: underline;">Work Experience</h4><br>
+                        <ul style="float: left;">
+                            <li style="text-decoration-line: underline;"><b>{{job.designation}}</b></li>
+                            <i>{{job.companyName}}</i>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 ml-5">
+                        <h4 style="text-decoration-line: underline;">Projects</h4>
+                        <ul>
+                            <li style="text-decoration-line: underline;"><b>{{project.projectTitle}}</b></li>
+                            <i>{{project.projectSummary}}</i>
+                        </ul>
+                    </div>
+                </div>
+            </main>
         </div>
-        </main>
+        <div class="col-md-1"></div>
     </div>
-    <div class="col-md-1"></div>
 </div>
-</div>
+<link rel="stylesheet" href="/css/profile.css">

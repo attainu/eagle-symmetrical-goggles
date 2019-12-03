@@ -1,4 +1,4 @@
-<main role="main" class="container">
+<main role="main" class="container my-4">
   <div class="d-flex align-items-center p-3 my-3 bg-purple rounded shadow-sm">
     <div class="lh-100">
       <h6 class="mb-0 lh-100">Results for {{term}}</h6>
@@ -7,7 +7,12 @@
   {{#each data}}
   <div class="my-3 p-3 bg-white rounded shadow-sm col-md-6">
     <div class="media text-muted pt-3">
-      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+        <title>Placeholder</title>
+        <rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff"
+          dy=".3em">32x32</text>
+      </svg>
       <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
         <div class="d-flex justify-content-between align-items-center w-100">
           <strong class="text-gray-dark">{{firstname}} {{lastname}}</strong>
@@ -15,9 +20,21 @@
         <span class="d-block">{{email}}</span>
       </div>
       <form action="/profile-*" method="get">
-        <button type="submit" style="color:#9ad4d6 ;background-color: #101935;" class="btn" name="user" value={{email}}>View Profile</button>
+        <button type="submit" style="color:#9ad4d6 ;background-color: #101935;" class="btn" name="user"
+          value={{email}}>View Profile</button>
       </form>
     </div>
   </div>
   {{/each}}
 </main>
+<style>
+  #footer-id {
+    position: fixed !important;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #777980;
+    color: white;
+    padding: .25% 0% .25% 0%;
+  }
+</style>

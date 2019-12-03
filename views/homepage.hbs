@@ -1,14 +1,17 @@
 {{!-- css link --}}
 <link rel="stylesheet" href="/css/home.css">
 
-<div class="container" id="MainBody">
+<div class="container my-2" id="MainBody">
     <div class="row mt-5">
         {{!--profile section in feedpost starts here--}}
         <div class="col-md-3 border rounded mt-2" id="profileSection1">
             <div class="mt-4 py-2 sticky-top" id="height1">
                 <span><img id="profileImageL" src="/images/profile.jpeg" alt="img"></span>
-                <p id="userProfileName">{{profileName}}</p>
-                <p id="userName">{{email}}</p>
+                {{!-- <p id="userProfileName">{{profileName}}</p> --}}
+                <div id="userProfileName">
+                    <a href="/profile">{{profileName}}</a>
+                </div>
+                <p id="userEmail">{{email}}</p>
 
                 <div id="skillText">
                     <span><b>Skills: </b></span>
@@ -19,8 +22,8 @@
                     </ul>
                 </div>
                 <div id="left-count">
-                    <p><b><span>Followers:</b> </span> <i class="ml-1">{{followers}}</i></p>
-                    <p> <b><span>Following:</b> </span> <i class="ml-1">{{following}}</i> </p>
+                    <a href="#"><b><span>Followers:</b> </span></a><i class="ml-2">{{followers}}</i><br>
+                    <a href="#"><b><span>Following:</b> </span></a><i class="ml-2">{{following}}</i>
                 </div>
             </div>
         </div>
@@ -71,8 +74,14 @@
             {{#each userData}}
             <div class="border rounded mt-5">
                 <div class="border round">
-                    <span> <img class="profileImage" src="/images/profile.jpeg" alt=""></span>
-                    <span class="myUserName"> {{this.name}} </span><br>
+                    <a href="/profile">
+                        <span>
+                            <img class="profileImage" src="/images/profile.jpeg">
+                        </span>
+                    </a>
+                    <a href="/profile" class="myUserName">
+                        <span> {{this.name}} </span>
+                    </a>
                     <span class="postTime">{{this.date}}</span>
                 </div>
 
@@ -80,6 +89,18 @@
                     <p class="userPost">
                         {{this.post}}
                     </p>
+                    {{#if this.pdfUrl}}
+                    <div class="border round mt-1">
+                        <iframe src="{{this.pdfUrl}}" class="pdfPost"></iframe>
+                    </div>
+                    {{/if}}
+                    {{#if this.videoUrl}}
+                    <div class="border round mt-1">
+                        <video controls class="videoPost">
+                            <source src="{{this.videoUrl}}" type="video/mp4">
+                        </video>
+                    </div>
+                    {{/if}}
                     {{#if this.imageUrl}}
                     <div class="border round mt-1">
                         <img class="imagePost" src="{{this.imageUrl}}" alt="" />
