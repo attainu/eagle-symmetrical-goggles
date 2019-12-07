@@ -71,29 +71,62 @@ FeedController.addPost = async function (req, res) {
         if (error) console.log(error);
         fullname = response[0].firstname + " " + response[0].lastname;
     });
-    var cloudinaryUrl = null;
+    var cloudinaryImgUrl = null;
+    var cloudinaryPdfUrl = null;
+    var cloudinaryVideoUrl = null;
     if (req.files['imagefile']) {
         var imgUrl = req.files['imagefile'][0].path;
-        console.log(imgUrl);
+        console.log("imgUrl>>>", imgUrl);
         // var __source = tinify.fromFile(imgUrl);
         // __source.toFile(imgUrl);
         //uploading to cloudinary
         await cloudinary.uploader.upload(imgUrl, function (error, response) {
             if (error) {
-                console.log(error);
+                console.log("image file not uploaded to cloudinary>>", error);
                 return error;
             }
-            console.log("response cloudinary", response);
-            cloudinaryUrl = response.url;
-            console.log("cloudinaryUrl", cloudinaryUrl);
+            console.log("response from image section cloudinary", response);
+            cloudinaryImgUrl = response.url;
+            console.log("cloudinaryUrl", cloudinaryImgUrl);
         });
     }
     // console.log("outside", cloudinaryUrl);
+
+    if (req.files['pdffile']) {
+        var pdfUrl = req.files['pdffile'][0].path;
+        console.log("PDF url>>>", pdfUrl);
+        await cloudinary.uploader.upload(pdfUrl, function (error, response) {
+            if (error) {
+                console.log("pdf file not uploaded to cloudinary>>", error);
+                return error;
+            }
+            console.log("response from pdf section cloudinary", response);
+            cloudinaryPdfUrl = response.url;
+            console.log("cloudinaryPdfUrl", cloudinaryPdfUrl);
+        });
+    }
+    if (req.files['videofile']) {
+        var videoUrl = req.files['videofile'][0].path;
+        console.log("PDF url>>>", videoUrl);
+        await cloudinary.uploader.upload(videoUrl,{resource_type: "video" }, function (error, response) {
+            if (error) {
+                console.log("video file not uploaded to cloudinary>>", error);
+                return error;
+            }
+            console.log("response from video section cloudinary", response);
+            cloudinaryVideoUrl = response.url;
+            console.log("cloudinaryVideoUrl", cloudinaryVideoUrl);
+        });
+    }
+    console.log("outside", cloudinaryPdfUrl);
+
     FeedModel.create({
         name: fullname,
         email: userEmail,
         post: userPost,
-        imageUrl: cloudinaryUrl
+        imageUrl: cloudinaryImgUrl,
+        pdfUrl: cloudinaryPdfUrl,
+        videoUrl: cloudinaryVideoUrl
     }, function (error, data) {
         if (error) {
             console.log("FAiled to save post to database. Error", error);

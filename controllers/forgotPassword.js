@@ -17,8 +17,8 @@ forgotPassword.findUser = function(req, res, cb) {
         if(data == []){
             return res.send({message: "User not found"})
         }
-        return res.render('setpassword', {layout: false})
-        })
+    return res.render('setpassword', {layout: false, css_file_ref: 'css/about.css'})
+    })
 }
 
 forgotPassword.setPassword = function(req, res, cb){

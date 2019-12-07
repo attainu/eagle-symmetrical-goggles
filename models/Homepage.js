@@ -16,6 +16,8 @@ const userSchema = new mongoose.Schema(
         isLiked: Boolean,
         comments: [{ commentedBy: String, comment: String }],
         imageUrl: String,
+        pdfUrl: String,
+        videoUrl: String,
         date: { type: Date, default: currentTime }
     }],
     {

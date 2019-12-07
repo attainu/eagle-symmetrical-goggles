@@ -23,7 +23,6 @@ $(document).ready(function(){
 
         //console for if condition
         if(value == "Follow"){
-            console.log("Follow pe gya"); // for testing
             $.ajax({
                 url: '/profile-*',
                 type: 'PUT',
@@ -33,6 +32,7 @@ $(document).ready(function(){
                 },
                 success: function() {
                     $("#followers").load(" #followers");
+                    console.log("Follow pe gya"); // for testing
                     // will implement this when bug get fixed
                     // $('#followers').text(function(i, val) { return +val+1 });
                 },
@@ -42,7 +42,6 @@ $(document).ready(function(){
             });
         }
         if(value == "Unfollow"){
-            console.log("Unfollow pe gya"); // for testing
             $.ajax({
                 url: '/profile-*',
                 type: 'DELETE',
@@ -51,6 +50,7 @@ $(document).ready(function(){
                 email: followEmailId
                 },
                 success: function() {
+                    console.log("Unfollow pe gya"); // for testing
                     $("#followers").load(" #followers");
                     // will implement this when bug get fixed
                     // $('#followers').text(function(i, val) { return +val-1 });

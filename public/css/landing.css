@@ -213,25 +213,34 @@ p {
       background-color: #101935;
   }
   
-  .footer{
-      background-color: #101935;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      color: white;
-      margin-bottom: 0px;
-      margin-top: 0px !important;
-      padding: 10px 0px 10px 0px;
+  #footer-id {
+    position: absolute;
+    background-color: #101935;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    margin-top: 50px;
+    padding: 10px 0px 10px 0px;
+    font-family: 'Raleway', sans-serif;
+    /*padding: .25% 0% .25% 0%;*/
   }
   
   #brand-pic{
       margin-left: 150px;
   }
 
-  .footer>span{
+  .footer>span {
     margin-left: 17%;
     margin-right: 6%;
-}
+  }
+
+  .footer>span>a {
+    color: #9ad4d6;
+  }
+
+  .footer>span>a:hover {
+    color: #fff;
+  }
 
 a{
   color: #9ad4d6;
