@@ -11,14 +11,11 @@ Profile.currentProfile = function(req, res) {
         if(error) {
             return res.send({msg: error})
         }
-        //var username = data.username;
-       // data = JSON.stringify(data);
         console.log(data);
         Post.find({"email": userSession}, function (err, allpost){
             if(err){
                 return res.send({msg: err})
             }
-            console.log('total post length are>>>',allpost.length);
             var totalPost = allpost.length;
             var email = data.email;
             var name = data.firstname +" "+ data.lastname;
@@ -31,7 +28,6 @@ Profile.currentProfile = function(req, res) {
             var phone = data.phone;
             var job = data.jobs[0];
             var project = data.projects[0];
-            //console.log(summary);
             return res.render('profile', {
                 css_file_ref: "css/profile.css",
                 email,age, city, phone,
@@ -39,8 +35,7 @@ Profile.currentProfile = function(req, res) {
                 skills, name, followers, following, job, project, totalPost
             })
         });
-        // console.log('total post length outside are>>>',totalPost);
-    })
+    });
 }
 
 module.exports = Profile;
