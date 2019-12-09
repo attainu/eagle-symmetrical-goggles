@@ -213,7 +213,7 @@ p {
       background-color: #101935;
   }
   
-  /* .footer{
+  .footer{
       background-color: #101935;
       left: 0;
       bottom: 0;
@@ -222,7 +222,7 @@ p {
       margin-bottom: 0px;
       margin-top: 0px !important;
       padding: 10px 0px 10px 0px;
-  } */
+  }
   
   #brand-pic{
       margin-left: 150px;

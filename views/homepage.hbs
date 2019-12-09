@@ -6,8 +6,13 @@
         {{!--profile section in feedpost starts here--}}
         <div class="col-md-3 border rounded mt-2" id="profileSection1">
             <div class="mt-4 py-2 sticky-top" id="height1">
-                <span><img id="profileImageL" src="/images/profile.jpeg" alt="img"></span>
-                {{!-- <p id="userProfileName">{{profileName}}</p> --}}
+
+                {{!-- updating profile image --}}
+                <label>
+                    <img id="profileImageL" src="/images/profile.jpeg" alt="img">
+                </label>
+                <input style="display: none;" type="file" name="profileImageFile" id="profile-image-input"
+                    accept="image/jpeg, image/jpg, image/png, image/*" />
                 <div id="userProfileName">
                     <a href="/profile">{{profileName}}</a>
                 </div>

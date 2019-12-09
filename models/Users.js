@@ -49,7 +49,8 @@ const profileSchema = new mongoose.Schema({
     datecreated: {
         type: Date,
         default: new Date()
-    }
+    },
+    profileImageUrl: String
 }, {
     collection: 'profiles'
 }); 
