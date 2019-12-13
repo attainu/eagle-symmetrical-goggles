@@ -1,0 +1,72 @@
+@import "https://fonts.googleapis.com/css?family=Raleway:300,400,700";
+
+body{
+    background: linear-gradient(135deg, #9AD4D6 0%, #101935 100%);
+    background-repeat: no-repeat;
+    color: white;
+    overflow-x: hidden;
+}
+
+nav.navbar{
+    background-color: #101935;
+    font-family: 'Raleway', sans-serif;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem;
+    /* Footer height */
+}
+
+#brand-pic{
+    margin-left: 150px;
+}
+
+a{
+    color: #9ad4d6;
+}
+
+a:hover {
+    color: white;
+}
+
+a.login-signup{
+    margin-left: 55%;
+}
+
+.footer>span {
+    margin-left: 17%;
+    margin-right: 6%;
+}
+
+.footer>span>a {
+    color: #9ad4d6;
+}
+
+.footer>span>a:hover {
+    color: #fff;
+}
+
+.nav-link>span {
+    font-size: 10px;
+    padding: 0px 0px 0px 0px;
+    display: block;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#footer-id {
+    position: absolute;
+    background-color: #101935;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    margin-top: 50px;
+    padding: 10px 0px 10px 0px;
+    font-family: 'Raleway', sans-serif;
+    /*padding: .25% 0% .25% 0%;*/
+}

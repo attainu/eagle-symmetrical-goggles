@@ -1,74 +1,110 @@
-<!-- Navigation bar -->
-
-<div class="row mt-3">
-    <div class="col-md-1"></div>
-    <div class="col-md-3 text-center" style="background-color: #9ad4d6 ;">
-        <ul class="nav ml-5 mt-5">
-          <li class="nav-item ml-5">
-                <img src="images/Penguins.jpg" class="rounded" alt="Image" width="100px" height="100px"> <br>
-                <h4>{{data.firstname}} {{data.lastname}}</h4>
-                <h6>{{data.email}}</h6>
-                <h6><i>{{data.bioSummary}}</i></h6>
-          </li>
-        </ul>
+<!-- Body -->
+    <div class="row top-profile-head">
+        <div class="col-4">
+            <img src="images/Penguins.jpg" class="profile-pic-circle">
+        </div>
+        <div class="col-4 top-profile-name">
+            <h2>{{name}}</h2>
+            <label>{{job.designation}}</label>
+        </div>
     </div>
-    <div class="col-md-6">
-        <main role="main" class="" style="background-color: #f2fdff ;">
-        <h1 class="h2">Dashboard</h1><br>
-        <div class="row text-center">
-            <div class="col-md-3 ml-2 card bg-light">
-                <div class="card-body">
-
-                <h6>Followers</h6><br>
-                <num id="followers">{{data.followers.length}}</num>
-                </div>
-            </div>
-            <div class="col-md-3 ml-2 card bg-light">
-                <div class="card-body">
-
-                <h6 id="following">Following</h6><br>
-                <num id="following">{{data.following.length}}</num>
-                </div>
-            </div>
-            <div class="col-md-3 ml-5 mt-5">
-                <button class="btn btn-info" type="button" id={{userEmail}}>
+    <div class="row top-mid-section">
+        <div class="col-2">
+            <h4>Posts</h4>
+            <num class="badge badge-primary badge-pill">{{totalPost}}</num>
+        </div>
+        <div id="followers" class="col-2">
+            <h4>Followers</h4>
+            <num id="followers" class="badge badge-primary badge-pill">{{followers.length}}</num>
+        </div>
+        <div class="col-2">
+            <h4>Following</h4>
+            <num id="following" class="badge badge-primary badge-pill">{{following.length}}</num>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-info" type="button" id={{userEmail}}>
                 {{#if check}}
                     Unfollow
                 {{else}}
                     Follow
                 {{/if}}   
-                </button> 
-            </div>
+            </button> 
         </div>
-        <hr>
-        <div class="ml-4">
-            <h4>Skills</h4>
-            <div class="row">
-                <ul>
-                    {{#each skills}}
-                        <li>{{this}}</li>
-                    {{/each}}
-                </ul>
-            </div>         
-        </div>
-        <hr>
-        <div class="row ml-2">
-            <div class="col-md-4">
-                <h4 style="float: left;">Work Experience</h4><br>
-                <ul style="float: left;">
-                    <li><b>{{data.jobs.designation}}</b></li>
-                    <i>{{data.jobs.companyName}}</i>
-                </ul>
-            </div>
-            <div class="col-md-4 ml-5">    
-                <h4>Projects</h4>
-                <ul>
-                    <li><b>{{data.projects.projectTitle}}</b></li>
-                    <i>{{data.projects.projectSummary}}</i>
-                </ul>
-            </div>
-        </div>
-        </main>
     </div>
-    <div class="col-md-1"></div>
-</div>
+    <div class="container mb-5">
+        <div class="row mid-profile">
+            <div class="col-3 mid-profile-nav">
+                <div class="nav flex-column nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Personal</a>
+                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Professional</a>
+                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Projects</a>
+                </div>
+            </div>
+            <div class="col-9">
+                <!-- <div class="vl"></div> -->
+                <div class="tab-content mid-profile-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active shadow" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        <div class="row mx-auto">
+                            <div class="col">
+                                <h4>BIO <i class="fas fa-feather"></i></h4>
+                                <label for="bio">{{summary}}</label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row mx-auto">
+                            <div class="col">
+                                <h4>AGE <i class="fas fa-birthday-cake"></i></h4>
+                                <label for="bio">{{age}}</label>
+                            </div>
+                            <div class="col">
+                                <h4>E-MAIL <i class="fas fa-at"></i></h4>
+                                <label for="bio">{{email}}</label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row mx-auto">
+                            <div class="col">
+                                <h4>MOBILE <i class="fas fa-phone-square-alt"></i></h4>
+                                <label for="bio">{{phone}}</label>
+                            </div>
+                            <div class="col">
+                                <h4>LIVE @ <i class="fas fa-home"></i></h4>
+                                <label for="bio">{{city}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade shadow" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                        <div class="row mx-auto">
+                            <div class="col-5">
+                                <h4>SKILL's <i class="fas fa-fist-raised"></i></h4>
+                                <ul>
+                                    {{#each skills}}
+                                    <li><label for="skill">{{this}}</label></li>
+                                    {{/each}}
+                                </ul>
+                            </div>
+                            <div class="col-5">
+                                <h4>JOB <i class="fas fa-briefcase"></i></h4>
+                                <span>{{job.designation}}</span>
+                                <small>{{job.workExperience}}</small><br>
+                                <span><i>{{job.companyName}}</i></span>
+                                <p>{{job.jobSummary}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade shadow" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                        <div class="row mx-auto">
+                            <div class="col-3">
+                                <h4>TITLE <i class="fas fa-file-code"></i> :</h4>
+                                <label for="title">Description :</label>
+                           </div>
+                           <div class="col-9">
+                                <h4>{{project.projectTitle}}</h4>
+                                <p for="description">{{project.projectSummary}}</p>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

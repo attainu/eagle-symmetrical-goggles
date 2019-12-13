@@ -1,39 +1,10 @@
 const User = require('../models/Users.js');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const ProfileEdit = {};
 
-ProfileEdit.edituser = function(request, response, cb){
+ProfileEdit.edituser = function(request, response){
     var email = request.body.email;
-    // console.log(email);
-    var password = request.body.password;
     var dataFromUser = request.body;
-    User.findOne({"email": email},function(error, doc){
-        if(error){
-            console.log(error);
-            return cb({
-                status: false,
-                message: "failed to load data"
-            });
-        }
-        // console.log(dataFromUser);
-        // console.log(doc);
-
-        /* if(doc.password!==password){
-            return cb({
-                status: false,
-                message: "Error! Password not matched"
-            });
-        } */
-        bcrypt.compare(doc.password, password, function(error, res){
-            if(error){
-                return cb({
-                    status:false,
-                    message: "Error! Password not matched"
-                })
-            }
-            
-            console.log(res);
-            //return cb(null, res)
             User.updateMany({
                 "email" : email
             }, {
@@ -44,14 +15,10 @@ ProfileEdit.edituser = function(request, response, cb){
                 }
                 return response.redirect('/profile');
             });
-        });
-    })
-}
+    }
 
 ProfileEdit.showInfo = function(req, res) {
     var userSession = req.session.user;
-    // var userSession = "shubhamss.saurav@gmail.com";  //for testing
-
     // console.log(userSession);
     User.findOne({"email": userSession}, function(error, data) {
         if(error) {

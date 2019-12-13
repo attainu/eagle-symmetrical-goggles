@@ -2,18 +2,32 @@
 
 nav.navbar{
     background-color: #101935;
+    font-family: 'Raleway', sans-serif;
 }
 
-.footer{
+#footer-id {
     position: absolute;
     background-color: #101935;
-    margin-left: 0px;
-    bottom: 0%;
+    bottom: 0;
     width: 100%;
     color: white;
-    margin-bottom: 0px;
     margin-top: 50px;
     padding: 10px 0px 10px 0px;
+    font-family: 'Raleway', sans-serif;
+    /*padding: .25% 0% .25% 0%;*/
+  }
+
+  .footer>span {
+    margin-left: 17%;
+    margin-right: 6%;
+}
+
+.footer>span>a {
+    color: #9ad4d6;
+}
+
+.footer>span>a:hover {
+    color: #fff;
 }
 
 a{
@@ -41,6 +55,7 @@ body{
     background: linear-gradient(135deg, #9AD4D6 0%, #101935 100%);
     background-repeat: no-repeat;
     overflow-x: hidden;
+    height: 100vh;
 }
 .container{
     padding-bottom: 5%;

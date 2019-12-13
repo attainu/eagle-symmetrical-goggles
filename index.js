@@ -74,24 +74,24 @@ app.get('/login', function (req, res) {
 	res.render('login', { layout: false });
 });
 app.get('/signup', function (req, res) {
-	res.render('Signup', { title: "Signup" });
+	res.render('Signup', { title: "Signup", css_file_ref: 'css/signup.css' });
 });
 
 app.get('/about', function (req, res) {
-	res.render('about', { title: 'About Us', layout: false });
+	res.render('about', { layout: false });
 });
 
 app.get('/forgotpassword', function (req, res) {
-	res.render('forgot', { title: "Forgot Password?", layout: false })
+	res.render('forgot', { layout: false })
 });
 app.get('/landing', function (req, res) {
-	res.render('landing', { title: "White Collar" , css_file_ref: "/css/landing.css" , script: "/js/main.js" })
+	res.render('landing', { layout: false })
 });
 
 app.get('/jobsearch', controllers.JobSearchController.retrievejob);
 app.get('/profile-edit', controllers.ProfileEditController.showInfo);
 app.get('/contact', function (req, res) {
-	res.render('contact', { title: "Contact Us", css_file_ref: 'css/contact.css', })
+	res.render('contact', { layout: false })
 });
 
 // app.get('/jobsearch', /* controllers.JobSearchController.checkIfApplied, */ controllers.JobSearchController.retrievejob);
@@ -102,8 +102,7 @@ app.post('/login', authRoute.login);
 app.get('/logout', authRoute.logout);
 app.get('/search-*', controllers.SearchController.search);
 app.get('/profile-*', controllers.OtherProfileController.seeProfile);
-app.put('/profile-*', controllers.FollowController.addFollowing, controllers.FollowController.addFollower);
-app.delete('/profile-*', controllers.FollowController.removeFollowing, controllers.FollowController.removeFollower);
+app.put('/profile-*', controllers.FollowController.followUnfollow);
 app.post('/setpassword', controllers.ForgotPasswordController.setPassword);
 app.post('/forgotpassword', controllers.ForgotPasswordController.findUser);
 app.post('/profile-edit', controllers.ProfileEditController.edituser);

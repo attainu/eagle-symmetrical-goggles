@@ -2,6 +2,7 @@
 
 nav.navbar{
     background-color: #101935;
+    font-family: 'Raleway', sans-serif;
 }
 
 .footer{
@@ -13,6 +14,7 @@ nav.navbar{
     margin-bottom: 0px;
     margin-top: 50px;
     padding: 10px 0px 10px 0px;
+    font-family: 'Raleway', sans-serif;
 }
 
 #brand-pic{

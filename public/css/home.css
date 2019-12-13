@@ -17,8 +17,11 @@
     margin-top: 2%;
     text-align: center;
 }
-#userEmail {
+/* #userEmail {
     margin-top: 0;
+} */
+#userEmail  {
+    margin-top: 0%;
     text-decoration-line: underline;
     text-align: center;
 }

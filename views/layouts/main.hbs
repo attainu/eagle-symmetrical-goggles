@@ -97,19 +97,36 @@
 		}
 
 		#footer-id {
-			position: relative;
-			left: 0;
+			position: absolute;
+			background-color: #101935;
 			bottom: 0;
 			width: 100%;
-			background-color: #777980;
 			color: white;
-			padding: .25% 0% .25% 0%;
+			margin-top: 50px;
+			padding: 10px 0px 10px 0px;
+			font-family: 'Raleway', sans-serif;
+			/*padding: .25% 0% .25% 0%;*/
+		}
+
+		#page-container {
+			position: relative;
+			min-height: 100vh;
+		}
+
+		#content-wrap {
+			padding-bottom: 2.5rem;
+			/* Footer height */
 		}
 
 		#toggle-button {}
 
 		#navbar-toggler-button {
 			color: grey;
+		}
+
+		body {
+			overflow-x: hidden;
+			height: 100%;
 		}
 
 		/*complete */
@@ -216,87 +233,86 @@
 </head>
 
 <body>
-	<!-- Navigation bar -->
-	<nav class="navbar navbar-expand-sm fixed-top" id="navbar-id">
-		{{!-- button --}}
-		<button class="navbar-toggler" id="navbar-toggler-button" type="button" data-toggle="collapse"
-			data-target="#navbar-collapse-id">
-			<span class="navbar-toggler-icon" id="toggle-button">Menu</span>
-		</button>
-		{{!-- botton --}}
-		<div class="collapse navbar-collapse" id="navbar-collapse-id">
-			<a class="navbar-brand" href="/" id="Icons-1">
-				<img src="https://res.cloudinary.com/eagle-whitecollar/image/upload/v1574847247/Logo_dp505y.png"
-					width="30" height="30" class="d-inline-block align-top" id="brand-pic" alt="brand image">
-				White Collar
-			</a>
-			<ul class="navbar-nav" id="navbar-nav-ul">
-				<li class="nav-item active" id="list-icons-1">
-					<a class="nav-link item-1 link-item" href="/" id="Icons-2"><i class="material-icons">
-							home
-						</i><span>Home</span>
+	<div id="page-container">
+		<div id="content-wrap">
+			<!-- Navigation bar -->
+			<nav class="navbar navbar-expand-sm fixed-top" id="navbar-id">
+				{{!-- button --}}
+				<button class="navbar-toggler" id="navbar-toggler-button" type="button" data-toggle="collapse"
+					data-target="#navbar-collapse-id">
+					<span class="navbar-toggler-icon" id="toggle-button">Menu</span>
+				</button>
+				{{!-- botton --}}
+				<div class="collapse navbar-collapse" id="navbar-collapse-id">
+					<a class="navbar-brand" href="/" id="Icons-1">
+						<img src="https://res.cloudinary.com/eagle-whitecollar/image/upload/v1574847247/Logo_dp505y.png"
+							width="30" height="30" class="d-inline-block align-top" id="brand-pic" alt="brand image">
+						White Collar
 					</a>
-				</li>
-				<li class="nav-item" id="list-icons-2">
-					<a class="nav-link link-item" href="/jobsearch" id="Icons-3"><i class="material-icons">
-							work_outline
-						</i><span>Jobs</span>
-					</a>
-				</li>
-				<li class="nav-item" id="list-icons-3">
-					<a class="nav-link link-item" href="/trending" id="Icons-4"><i class="material-icons" id="Icons2">
-							trending_up
-						</i><span>Trending</span>
-					</a>
-				</li>
-			</ul>
-			<div id="searchbar">
-				<form action='/search-*' method="GET" class="form-inline">
-					<input class="form-control" name='term' id="search-input" type="search" placeholder="Search"
-						aria-label="Search">
-					<button class="btn btn-outline-success my-2 my-sm-0" id="search-button"
-						type="submit">Search</button>
-				</form>
-			</div>
+					<ul class="navbar-nav" id="navbar-nav-ul">
+						<li class="nav-item active" id="list-icons-1">
+							<a class="nav-link item-1 link-item" href="/" id="Icons-2"><i class="material-icons">
+									home
+								</i><span>Home</span>
+							</a>
+						</li>
+						<li class="nav-item" id="list-icons-2">
+							<a class="nav-link link-item" href="/jobsearch" id="Icons-3"><i class="material-icons">
+									work_outline
+								</i><span>Jobs</span>
+							</a>
+						</li>
+						<li class="nav-item" id="list-icons-3">
+							<a class="nav-link link-item" href="/trending" id="Icons-4"><i class="material-icons"
+									id="Icons2">
+									trending_up
+								</i><span>Trending</span>
+							</a>
+						</li>
+					</ul>
+					<div id="searchbar">
+						<form action='/search-*' method="GET" class="form-inline">
+							<input class="form-control" name='term' id="search-input" type="search" placeholder="Search"
+								aria-label="Search">
+							<button class="btn btn-outline-success my-2 my-sm-0" id="search-button"
+								type="submit">Search</button>
+						</form>
+					</div>
 
-			<div class="nav-item dropdown" id="drop-down-menu">
-				<a class="nav-link dropdown-toggle link-item" href="#" id="navbarDropdownMenuLink" role="button"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<img src="https://res.cloudinary.com/eagle-whitecollar/image/upload/v1574847247/Logo_dp505y.png"
-						width="20" height="20" class="d-inline-block align-top" id="profile-pic" alt="brand image">
-				</a>
-				<div class="dropdown-menu" id="drop-down-hidden-menu" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" style="text-align: left;" href="/profile">View Profile</a>
-					<a class="dropdown-item" style="text-align: left;" href="/profile-edit">Edit Profile</a>
-					<a class="dropdown-item" style="text-align: left;" href="/logout">Sign out</a>
+					<div class="nav-item dropdown" id="drop-down-menu">
+						<a class="nav-link dropdown-toggle link-item" href="#" id="navbarDropdownMenuLink" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="https://res.cloudinary.com/eagle-whitecollar/image/upload/v1574847247/Logo_dp505y.png"
+								width="20" height="20" class="d-inline-block align-top" id="profile-pic"
+								alt="brand image">
+						</a>
+						<div class="dropdown-menu" id="drop-down-hidden-menu" aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" style="text-align: left;" href="/profile">View Profile</a>
+							<a class="dropdown-item" style="text-align: left;" href="/profile-edit">Edit Profile</a>
+							<a class="dropdown-item" style="text-align: left;" href="/logout">Sign out</a>
+						</div>
+					</div>
 				</div>
-			</div>
+			</nav><br><br>
+
+			{{{body}}}
 		</div>
-	</nav><br><br>
-
-	{{{body}}}
-
-	<!-- Footer -->
-	<div class="footer" id="footer-id">
-		<span> ©White Collar </span>
-		<span> <a href="/about">About Us</a></span>
-		<span> <a href="/contact">Contact</a></span>
+		<!-- Footer -->
+		<footer class="footer" id="footer-id">
+			<span> ©White Collar </span>
+			<span> <a href="/about">About Us</a></span>
+			<span> <a href="/contact">Contact</a></span>
+		</footer>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"></script>
+		<script type="text/javascript" src={{script}}></script>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
-	<script type="text/javascript" src={{script}}></script>
-	{{!-- Will move this in rendering part of Auth.js --}}
-	{{!-- I'm sending this script in homepage.js file --}}
-
-	{{!-- Don't uncomment below js for homepage, i already send it via rendering --}}
-	{{!-- <script type="text/javascript" src="/js/homepage.js"></script> --}}
-
 </body>
 
 </html>

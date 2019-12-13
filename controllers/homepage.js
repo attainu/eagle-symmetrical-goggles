@@ -36,7 +36,8 @@ FeedController.getFeed = function (req, res) {
         response[0].skills.forEach(function (item, index) {
             Skills.push(item);
         });
-
+        var profileImageurl = response[0].profileImageUrl;
+        console.log("profileImageurl>>",profileImageurl);
         FeedModel.find({}, function (error, data) {
             if (error) {
                 res.status(500).send({
@@ -53,7 +54,7 @@ FeedController.getFeed = function (req, res) {
                 email: email,
                 followers: followers,
                 following: following,
-                numberOfPosts: numberOfPosts,
+                profileImageurl: profileImageurl,
                 Skills: Skills,
                 userData: data.reverse(),
                 script: '/js/homepage.js'
@@ -91,6 +92,8 @@ FeedController.addPost = async function (req, res) {
             console.log("cloudinaryUrl", cloudinaryImgUrl);
         });
     }
+    // console.log("outside", cloudinaryUrl);
+
     if (req.files['pdffile']) {
         var pdfUrl = req.files['pdffile'][0].path;
         console.log("PDF url>>>", pdfUrl);
@@ -118,6 +121,7 @@ FeedController.addPost = async function (req, res) {
         });
     }
     console.log("outside", cloudinaryPdfUrl);
+
     FeedModel.create({
         name: fullname,
         email: userEmail,
