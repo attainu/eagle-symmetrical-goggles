@@ -1,0 +1,66 @@
+nav.navbar{
+    background-color: #101935;
+}
+
+a{
+    color: #9ad4d6;
+}
+
+a:hover {
+    color: white;
+}
+
+a.login-signup {
+    margin-left: 55%;
+}
+
+body{
+    background-image: url("./../images/Background.jpeg");
+    overflow-x: hidden;
+    /* opacity: 0.8; */
+}
+.col-md-5 {
+    margin-left: 30%;
+    border-style: ridge;
+    height: 500px;
+    margin-top: 80px;
+    background-color: #10193594;
+    color: aliceblue;
+}
+.heading {
+    font-family: 'Bree Serif', serif;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+span{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.alreadyMember{
+    text-align: center;
+}
+
+button.btn.btn-secondary {
+    background-color: #101935;
+    margin-left: 35%;
+    margin-top: 12px;
+    margin-bottom: 13px;
+}
+
+
+/* to be added once testing is complete */
+#error{
+    width: 472px;
+    text-align: center;
+    height: 32px;
+    padding-top: 3px;
+    margin-top: 14px;
+    margin-left: 60px;
+}
+#navbar-id {
+    display: none;
+}
+#brand-a-id-2{
+    margin-left: 12%;
+    font-family: 'Raleway', sans-serif;
+}

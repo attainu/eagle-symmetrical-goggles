@@ -1,0 +1,69 @@
+.col-md-6 {
+    margin-top: 20px;
+}
+input#Job-title {
+    width: 275px;
+    margin-left: 63px;
+}
+input#State {
+    width: 275px;
+    margin-top: 15px;
+    margin-left: 63px;
+}
+.vl {
+    border-left: 1px solid #516151;
+    height: 655px;
+    margin-top: 14px;
+}
+  input#Company-Name {
+    width: 277px;
+    margin-left: 63px;
+    margin-top: 15px;
+}
+button#Post {
+    width: 157px;
+    margin-left: 116px;
+    margin-top: 15px;
+    background-color: #101935
+}
+button#Search {
+    width: 157px;
+    margin-left: 116px;
+    margin-top: 15px;
+    background-color: #101935
+}
+input#Experience {
+    width: 277px;
+    margin-left: 63px;
+    margin-top: 15px;
+}
+
+body {
+    background-color: aliceblue;
+    overflow-x: hidden;
+}
+.col-md-5 {
+    margin-top: 20px;
+}
+div#Job-Search {
+    width: 472px;
+    margin-left: 107px;
+}
+div#Job-Post {
+    width: 472px;
+    margin-left: 107px;
+}
+.card-header {
+    background-color: #101935;
+    color: white;
+}
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+div#error {
+    text-align: center;
+    margin-left: 65px;
+    margin-top: 95px;
+}

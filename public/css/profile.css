@@ -1,0 +1,60 @@
+body{
+    overflow-x: hidden;
+}
+
+.top-profile-head{
+    background-color: #9AD4D6 ;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    color: #ffffff;
+}
+
+.profile-pic-circle{
+    height: 150px;
+    width: 150px;
+    margin-top: 30px;
+    margin-left: 220px;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.top-profile-name{
+    margin-top: 2%;
+    padding-left: 10px;
+}
+
+.top-mid-section{
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 400px;
+}
+
+.mid-profile{
+    margin-top: 30px;
+    margin-left: 5%;
+    margin-right: 15%;
+}
+
+.nav-pills .active{
+background-color: #101935  !important;
+}
+
+.tab-pane{
+    padding: 10px;
+}
+
+/* .vl {
+    border-left: 2px solid black;
+    height: 500px;
+    position: absolute;
+} */
+
+/* .mid-profile-nav{
+    border-style: groove;
+    border-color: #101935;
+    border-width: 2px;
+} */
+
+.mid-profile-content{
+    padding-left: 5%;
+}

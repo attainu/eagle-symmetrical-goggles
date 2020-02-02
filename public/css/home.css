@@ -1,0 +1,169 @@
+
+/* Left section starts*/
+#profileSection1{
+    background-color: aliceblue;
+}
+#height1 {
+    height: 600px;
+}
+#profileImageL {
+    width: 50px;
+    height: 50px;
+    margin: 2% 0% 0% 35%;
+    border-radius: 40%;
+}
+#userProfileName {
+    font-weight: 900;
+    margin-top: 2%;
+    text-align: center;
+}
+#userEmail  {
+    margin-top: 0%;
+    text-decoration-line: underline;
+    text-align: center;
+}
+/* For skills in user profile */
+#skillText {
+    margin: 1% 0% 0% 10%;
+}
+#userSkills{
+    margin-top: 1%;
+}
+#left-count {
+    margin: 4% 0% 0% 10%;
+}
+/* Left section ends*/
+
+/* Middle section starts*/
+/* for post */
+textarea#postMessage {
+    width: 100%;
+}
+#image-input-icon {
+    margin: 0% 5% 0% 5%;
+}
+#video-input-icon {
+    margin: 0% 5% 0% 5%;
+}
+#file-input-icon {
+    margin: 0% 5% 0% 5%;
+}
+#post-input-button {
+    margin-right: 10%;
+}
+.profileImage {
+    width: 30px;
+    height: 30px;
+    margin: 2% 0% 2% 3%;
+    border-radius: 40%;
+}
+.myUserName {
+    font-weight: 900;
+    margin-left: 1%;
+}
+.postTime {
+    margin: 0% 0% 1% 2%;
+    font-weight: 500;
+    font-size: 12px;
+}
+.userPost {
+    margin: 2% 5% 0% 5%;
+}
+.imagePost{
+    width: 100%;
+    border-radius: 1%;
+}
+.pdfPost{
+    width: 100%;
+    border: none;
+}
+.videoPost{
+    width: 100%;
+}
+.imageIcon {
+    margin: -2% 0% -2% 0%;
+}
+.likeButton{
+    margin: 1% -2% 1% 10%;
+}
+.commentButton{
+    margin: 1% -2% 1% 15%;
+}
+.shareButton {
+    margin: 1% -2% 1% 15%;
+}
+.commentBox {
+    margin: 1% 0% 1% 0%;
+}
+.commentTextBox {
+    margin: 1% 0% 0% 2%;
+    border-radius: 5%;
+    width: 83%;
+}
+.commentPostButton {
+    font-size: 10px;
+    color: #304e69;
+    background-color: #C8D0CD;
+    border-color: #c8d0cd;
+}
+.buttonx {
+    color: rgb(13, 51, 13);
+}
+/* Middle section ends*/
+
+
+/* Right section starts */
+#right-section {
+    background-color: aliceblue;
+}
+/* For Trending topics */
+#trending-topics {
+    list-style: none;
+    margin-top: 5%;
+}
+#article-heading {
+    font-weight: 900;
+    text-decoration-line: underline;
+}
+a:link {
+    color:  gray;
+}
+/* .btn-transparent {
+    background-color: transparent;
+    border-color: #ccc;
+    border: none;
+} */
+@media only screen and (max-width: 768px){
+    #height1 {
+        height: 400px;
+    }
+    #profileImageL {
+        width: 50px;
+        height: 50px;
+        margin: 2% 0% 0% 45%;
+        border-radius: 40%;
+    }
+    #userProfileName {
+        font-weight: 900;
+        margin-top: 4%;
+        text-align: center;
+    }
+    #userName {
+        margin-top: -3%;
+        text-decoration-line: underline;
+        text-align: center;
+    }
+    /* For skills in user profile */
+    #skillText {
+        margin: 1% 0% 0% 10%;
+    }
+    #userSkills{
+        margin-top: 1%;
+    }
+    #left-count {
+        margin: 4% 0% 0% 10%;
+    }
+}
+@media only screen and (max-width: 412px) {
+
+}

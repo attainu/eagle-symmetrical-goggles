@@ -1,0 +1,266 @@
+@import "https://fonts.googleapis.com/css?family=Raleway:300,400,700";
+
+body {
+  font-family: 'Raleway', sans-serif;
+  color: #101935;
+  background: #fff;
+  font-size: 14px;
+  overflow-x: hidden;
+  line-height: 24px; }
+
+  .text-1 {
+    animation: text1;
+  }
+  .text-2 {
+    animation: text2;
+  }
+  .text-1, .text-2 {
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    position: relative;
+    animation-duration: 15s;
+    animation-timing-function: steps(25, end);
+    animation-iteration-count: infinite;
+  }
+  .text-1::after, .text-2::after {
+    content: "|";
+    position: absolute;
+    right: 0;
+    animation: caret infinite;
+    animation-duration: 1s;
+    animation-timing-function: steps(1, end);
+  }
+  @keyframes text2 {
+    0%, 50%, 100% {
+      width: 0;
+    }
+    
+    60%, 90% {
+      width: 25rem;
+    }
+  }
+  @keyframes text1 {
+    0%, 50%, 100% {
+      width: 0;
+    }
+    10%, 40% {
+      width: 33rem;
+    }
+  }
+/*-- Preloader --*/
+.page-preloader {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #101935;
+  z-index: 100000; }
+
+.spinner {
+  position: relative;
+  top: 35%;
+  margin: 100px auto;
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  font-size: 10px; }
+
+.spinner > div {
+  background-color: #fff;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out; }
+
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s; }
+
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s; }
+
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s; }
+
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s; }
+
+
+@-webkit-keyframes sk-stretchdelay {
+  0%,
+    40%,
+    100% {
+    -webkit-transform: scaleY(0.4); }
+  20% {
+    -webkit-transform: scaleY(1); } }
+@keyframes sk-stretchdelay {
+  0%,
+    40%,
+    100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4); }
+  20% {
+    transform: scaleY(1);
+    -webkit-transform: scaleY(1); } }
+
+/*-- Typo Style --*/
+h1 {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 35px;
+  color: #9AD4D6; }
+
+h2 {
+  font-size: 36px;
+  letter-spacing: 0.08em; }
+
+
+p {
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  line-height: 24px; }
+
+.btn-blue {
+  background: #9AD4D6;
+  padding: 10px 28px;
+  border: 2px solid #9AD4D6;
+  color: #fff;
+  border-radius: 50px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  -webkit-transition: 0.5s all;
+          transition: 0.5s all;
+  box-shadow: 0px 0px 60px 0px rgba(68, 197, 238, 0.6);
+  outline: none !important; }
+
+.btn-blue:hover,
+.btn-blue:focus,
+.btn-blue:active {
+  background: #fff;
+  color: #101935; }
+
+.btn-transparent {
+  background: transparent;
+  padding: 10px 28px;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 50px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  -webkit-transition: 0.5s all;
+          transition: 0.5s all;
+  outline: none !important; }
+
+.btn-transparent:hover,
+.btn-transparent:focus,
+.btn-transparent:active {
+  background: #fff;
+  color: #9AD4D6; }
+
+@media (max-width: 992px) {
+  #home .container {
+    text-align: center; }
+    #home .container h1 {
+      font-size: 36px; }
+    #home .container h2 {
+      font-size: 26px; }
+}
+@media (max-width: 767px) {
+  #home .container {
+    text-align: center; }
+    #home .container h1 {
+      font-size: 34px; }
+    #home .container h2 {
+      font-size: 24px; }
+    }
+#home {
+  position: relative;
+  padding: 80px 0px 50px 0px;
+  background: url(https://res.cloudinary.com/eagle-whitecollar/image/upload/v1574887527/Black_j4m8v5.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat; }
+  #home .caption {
+    padding: 60px 0; }
+    #home .caption h2 {
+      color: #fff; }
+    #home .caption p {
+      font-size: 18px;
+      margin-top: 25px;
+      color: #fff; }
+    #home .caption .btn {
+      margin-top: 25px; }
+    #home .caption .btn-blue {
+      margin-left: 15px; }
+      #home .caption .btn-blue i {
+        position: relative;
+        top: 5px;
+        margin-right: 10px; }
+  #home .signup-form {
+    background-color: #fff;
+    padding: 45px;
+    border-radius: 5px; }
+
+    nav.navbar{
+      background-color: #101935;
+  }
+  
+  #footer-id {
+    position: absolute;
+    background-color: #101935;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    margin-top: 50px;
+    padding: 10px 0px 10px 0px;
+    font-family: 'Raleway', sans-serif;
+    /*padding: .25% 0% .25% 0%;*/
+  }
+  
+  #brand-pic{
+      margin-left: 150px;
+  }
+
+  .footer>span {
+    margin-left: 17%;
+    margin-right: 6%;
+  }
+
+  .footer>span>a {
+    color: #9ad4d6;
+  }
+
+  .footer>span>a:hover {
+    color: #fff;
+  }
+
+a{
+  color: #9ad4d6;
+}
+
+a:hover {
+  color: white;
+}
+
+a.login-signup{
+  margin-left: 55%;
+}
+/* a.login-signup {
+  margin-right: 20%;
+  float: right;
+} */
+
+#navbar-id {
+  display: none;
+}
+#brand-a-id-1{
+  margin-left: 12%;
+}

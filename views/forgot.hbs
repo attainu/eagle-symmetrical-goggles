@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Forgot Password?</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5eb08b3082.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/forgot.css" type="text/css">
+</head>
+
+<body>
+    <div id="page-container">
+        <div id="content-wrap">
+            <!-- Navigation bar -->
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <a class="navbar-brand" href="/homepage">
+                    <img src="./../images/Logo.png" width="30" height="30" class="d-inline-block align-top"
+                        id="brand-pic" alt="brand image">
+                    White Collar
+                </a>
+                <a class="login-signup" href="/login">Login</a>
+            </nav>
+            <!-- Main content -->
+            <br><br><br><br>
+            <div class="container text-center form-group col-md-4">
+                <form action="/forgotpassword" method="POST">
+                    <label for="uname" class=""><b>Email</b></label><br>
+                    <input type="text" class="form-control" placeholder="Enter Email" name="email" required><br><br>
+                    <button type="submit" class="btn btn-secondary" style="background-color: #101935;">Submit</button>
+                </form>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer class="footer" id="footer-id">
+            <span> ©White Collar </span>
+            <span> <a href="/about">About Us</a></span>
+            <span> <a href="/contact">Contact</a></span>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    </div>
+</body>
+
+</html>

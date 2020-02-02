@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>{{title}}</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/5eb08b3082.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href={{css_file_ref}} type="text/css">
+	<style>
+		@import "https://fonts.googleapis.com/css?family=Raleway:300,400,700";
+
+		#navbar-id {
+			background-color: #101935;
+			border-radius: 1%;
+			height: 4em;
+		}
+
+		#navbar-id a {
+			color: #9ad4d6;
+			text-align: center;
+		}
+
+		#Icons-1 {
+			width: 15%;
+			margin-left: 3%;
+			font-family: 'Raleway', sans-serif;
+		}
+
+		#navbar-collapse-id {
+			width: 100%;
+		}
+
+		#navbar-nav-ul {
+			width: 40%;
+		}
+
+		#list-icons-1 {
+			margin-left: 10%;
+		}
+
+		#list-icons-2 {
+			margin-left: 10%;
+		}
+
+		#list-icons-3 {
+			margin-left: 10%;
+		}
+
+		.link-item {
+			padding-top: 0px;
+			padding-bottom: 0px;
+		}
+
+		a.nav-link :hover {
+			color: white;
+		}
+
+		#drop-down-menu :hover {
+			color: grey;
+		}
+
+		#searchbar {
+			color: #9ad4d6;
+			border-color: #9ad4d6;
+			width: 30%;
+		}
+
+		#search-input {
+			width: 65%;
+		}
+
+		#search-button {
+			width: 25%;
+			font-size: 12px;
+			text-align: center;
+			margin-left: 1%;
+			padding: .75em 0em .75em 0em;
+		}
+
+		#drop-down-menu {
+			width: 5%;
+			margin-right: 5%;
+		}
+
+		.nav-link>span {
+			font-size: 10px;
+			padding: 0px 0px 0px 0px;
+			display: block;
+			text-transform: uppercase;
+			text-align: center;
+		}
+
+		#footer-id {
+			position: absolute;
+			background-color: #101935;
+			bottom: 0;
+			width: 100%;
+			color: white;
+			margin-top: 50px;
+			padding: 10px 0px 10px 0px;
+			font-family: 'Raleway', sans-serif;
+			/*padding: .25% 0% .25% 0%;*/
+		}
+
+		#page-container {
+			position: relative;
+			min-height: 100vh;
+		}
+
+		#content-wrap {
+			padding-bottom: 2.5rem;
+			/* Footer height */
+		}
+
+		#toggle-button {}
+
+		#navbar-toggler-button {
+			color: grey;
+		}
+
+		body {
+			overflow-x: hidden;
+			height: 100%;
+		}
+
+		/*complete */
+
+
+
+		.footer>span {
+			margin-left: 17%;
+			margin-right: 6%;
+		}
+
+		.footer>span>a {
+			color: #9ad4d6;
+		}
+
+		.footer>span>a:hover {
+			color: #fff;
+		}
+
+		@media only screen and (max-width: 668px) {
+			#Icons-1 {
+				width: 15%;
+				margin-left: 0%;
+			}
+
+			#list-icons-1 {
+				margin-left: 20%;
+			}
+
+			#list-icons-2 {
+				margin-left: 2%;
+			}
+
+			#list-icons-3 {
+				margin-left: 2%;
+			}
+		}
+
+		@media only screen and (max-width: 575px) {
+			#navbar-id {
+				height: auto;
+			}
+
+			#navbar-id a {
+				color: #b0b1a3;
+				text-align: center;
+			}
+
+			#Icons-1 {
+				margin-left: 10%;
+			}
+
+			#list-icons-1 {
+				margin-left: 10%;
+			}
+
+			#list-icons-2 {
+				margin-left: 10%;
+			}
+
+			#list-icons-3 {
+				margin-left: 10%;
+			}
+
+			#searchbar {
+				margin-left: 10%;
+				width: 100%;
+			}
+
+			#search-input {
+				width: 90px;
+			}
+
+			#search-button {
+				width: 70px;
+				font-size: 14px;
+				text-align: center;
+				margin-left: 5%;
+				padding: .75em 0em .75em 0em;
+			}
+
+			#drop-down-menu {
+				width: 30%;
+				margin-left: 0%;
+			}
+
+			#navbar-toggler-button {
+				width: 20%;
+				padding: 3% 5% 0% 0%;
+				background-color: #dedecd;
+				color: #001515;
+				border-radius: 5%;
+			}
+
+			#drop-down-hidden-menu a {
+				color: rgb(37, 33, 33) !important;
+			}
+
+			#drop-down-hidden-menu a:hover {
+				color: rgb(158, 226, 184) !important;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div id="page-container">
+		<div id="content-wrap">
+			<!-- Navigation bar -->
+			<nav class="navbar navbar-expand-sm fixed-top" id="navbar-id">
+				{{!-- button --}}
+				<button class="navbar-toggler" id="navbar-toggler-button" type="button" data-toggle="collapse"
+					data-target="#navbar-collapse-id">
+					<span class="navbar-toggler-icon" id="toggle-button">Menu</span>
+				</button>
+				{{!-- botton --}}
+				<div class="collapse navbar-collapse" id="navbar-collapse-id">
+					<a class="navbar-brand" href="/" id="Icons-1">
+						<img src="https://res.cloudinary.com/eagle-whitecollar/image/upload/v1574847247/Logo_dp505y.png"
+							width="30" height="30" class="d-inline-block align-top" id="brand-pic" alt="brand image">
+						White Collar
+					</a>
+					<ul class="navbar-nav" id="navbar-nav-ul">
+						<li class="nav-item active" id="list-icons-1">
+							<a class="nav-link item-1 link-item" href="/" id="Icons-2"><i class="material-icons">
+									home
+								</i><span>Home</span>
+							</a>
+						</li>
+						<li class="nav-item" id="list-icons-2">
+							<a class="nav-link link-item" href="/jobsearch" id="Icons-3"><i class="material-icons">
+									work_outline
+								</i><span>Jobs</span>
+							</a>
+						</li>
+						<li class="nav-item" id="list-icons-3">
+							<a class="nav-link link-item" href="/trending" id="Icons-4"><i class="material-icons"
+									id="Icons2">
+									trending_up
+								</i><span>Trending</span>
+							</a>
+						</li>
+					</ul>
+					<div id="searchbar">
+						<form action='/search-*' method="GET" class="form-inline">
+							<input class="form-control" name='term' id="search-input" type="search" placeholder="Search"
+								aria-label="Search">
+							<button class="btn btn-outline-success my-2 my-sm-0" id="search-button"
+								type="submit">Search</button>
+						</form>
+					</div>
+
+					<div class="nav-item dropdown" id="drop-down-menu">
+						<a class="nav-link dropdown-toggle link-item" href="#" id="navbarDropdownMenuLink" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="https://res.cloudinary.com/eagle-whitecollar/image/upload/v1574847247/Logo_dp505y.png"
+								width="20" height="20" class="d-inline-block align-top" id="profile-pic"
+								alt="brand image">
+						</a>
+						<div class="dropdown-menu" id="drop-down-hidden-menu" aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" style="text-align: left;" href="/profile">View Profile</a>
+							<a class="dropdown-item" style="text-align: left;" href="/profile-edit">Edit Profile</a>
+							<a class="dropdown-item" style="text-align: left;" href="/logout">Sign out</a>
+						</div>
+					</div>
+				</div>
+			</nav><br><br>
+
+			{{{body}}}
+		</div>
+		<!-- Footer -->
+		<footer class="footer" id="footer-id">
+			<span> ©White Collar </span>
+			<span> <a href="/about">About Us</a></span>
+			<span> <a href="/contact">Contact</a></span>
+		</footer>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"></script>
+		<script type="text/javascript" src={{script}}></script>
+	</div>
+</body>
+
+</html>
